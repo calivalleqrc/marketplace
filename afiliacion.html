@@ -312,6 +312,16 @@
             width: auto;
         }
         
+        .agreement-link {
+            color: var(--color-azul);
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .agreement-link:hover {
+            color: var(--color-negro);
+        }
+        
         .required-field::after {
             content: " *";
             color: var(--color-rojo);
@@ -536,7 +546,7 @@
                 <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Emprendedor?</h3>
                 <div class="features-grid">
                     <div class="feature-item"><i class="fas fa-check"></i> Página en framework React diseñada para recibir órdenes</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Integración con WhatsApp, SMS y correo electrónico</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Integración con WhatsApp, SMS и correo electrónico</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Subdominio corporativo (ej: sunegocio.qrcontraentrega.com)</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Diseño web responsive (adaptable a PC y móvil)</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Branding básico para empezar el negocio desde cero</div>
@@ -709,6 +719,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="agreementCheckbox" name="agreementCheckbox" required>
+                            <label for="agreementCheckbox" class="required-field">Acepto el <span class="agreement-link" id="agreementLink">Acuerdo Comercial</span></label>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="submit-buttons">
@@ -793,6 +810,11 @@
                 });
             });
             
+            // Agreement link functionality
+            document.getElementById('agreementLink').addEventListener('click', function() {
+                window.open('terminos-y-condiciones.html', '_blank');
+            });
+            
             // Form submission handlers
             const form = document.getElementById('affiliationForm');
             
@@ -855,6 +877,13 @@
                     showNotification('Por favor seleccione un color preferido', true);
                 }
                 
+                // Check if agreement checkbox is checked
+                const agreementChecked = document.getElementById('agreementCheckbox').checked;
+                if (!agreementChecked) {
+                    valid = false;
+                    showNotification('Debe aceptar el Acuerdo Comercial para continuar', true);
+                }
+                
                 if (!valid) {
                     showNotification('Por favor complete todos los campos obligatorios', true);
                     return false;
@@ -911,6 +940,7 @@
                 message += `• Teléfono: ${document.getElementById('contactPhone').value}\n`;
                 message += `• Email: ${document.getElementById('contactEmail').value}\n`;
                 message += `• Color preferido: ${document.querySelector('input[name="colorPreference"]:checked').value}\n`;
+                message += `• Acuerdo comercial: Aceptado\n`;
                 
                 return message;
             }
@@ -923,6 +953,7 @@
                 message += `Representante: ${document.getElementById('legalName').value}\n`;
                 message += `Tel: ${document.getElementById('contactPhone').value}\n`;
                 message += `Email: ${document.getElementById('contactEmail').value}`;
+                message += `Acuerdo: Aceptado`;
                 
                 return message;
             }
@@ -948,7 +979,8 @@
                 message += "INFORMACIÓN DE CONTACTO:\n";
                 message += `• Teléfono: ${document.getElementById('contactPhone').value}\n`;
                 message += `• Email: ${document.getElementById('contactEmail').value}\n`;
-                message += `• Color preferido: ${document.querySelector('input[name="colorPreference"]:checked').value}\n\n`;
+                message += `• Color preferido: ${document.querySelector('input[name="colorPreference"]:checked').value}\n`;
+                message += `• Acuerdo comercial: Aceptado\n\n`;
                 
                 message += "FECHA: " + new Date().toLocaleDateString('es-CO');
                 
