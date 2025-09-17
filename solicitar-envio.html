@@ -147,10 +147,40 @@
       background-color: #128C7E;
     }
     
-    .whatsapp-icon {
+    .btn-email {
+      background-color: #EA4335;
+    }
+    
+    .btn-email:hover {
+      background-color: #D33426;
+    }
+    
+    .btn-sms {
+      background-color: #34A853;
+    }
+    
+    .btn-sms:hover {
+      background-color: #2E944B;
+    }
+    
+    .whatsapp-icon, .email-icon, .sms-icon {
       width: 20px;
       height: 20px;
       filter: invert(1);
+    }
+    
+    .send-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .option-title {
+      text-align: center;
+      margin: 15px 0 5px;
+      font-weight: 500;
+      color: var(--secondary-color);
     }
     
     @media (max-width: 768px) {
@@ -251,16 +281,30 @@
           
           <div class="form-group">
             <label for="paquete-instructions">Instrucciones especiales (opcional)</label>
-            <input type="text" id="paquete-instructions" placeholder="Fragil, manejar con cuidado, etc.">
+            <input type="text" id="paquete-instructions" placeholder="Frágil, manejar con cuidado, etc.">
           </div>
         </div>
       </div>
       
-      <!-- Botón de envío -->
-      <button type="button" class="btn btn-whatsapp" id="enviar-whatsapp">
-        <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" class="whatsapp-icon" alt="WhatsApp">
-        Enviar solicitud por WhatsApp
-      </button>
+      <!-- Opciones de envío -->
+      <div class="send-options">
+        <p class="option-title">Seleccione cómo desea enviar su solicitud:</p>
+        
+        <button type="button" class="btn btn-whatsapp" id="enviar-whatsapp">
+          <img src="https://cdn-icons-png.flaticon.com/512/220/220236.png" class="whatsapp-icon" alt="WhatsApp">
+          Enviar por WhatsApp
+        </button>
+        
+        <button type="button" class="btn btn-email" id="enviar-email">
+          <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" class="email-icon" alt="Email">
+          Enviar por Correo Electrónico
+        </button>
+        
+        <button type="button" class="btn btn-sms" id="enviar-sms">
+          <img src="https://cdn-icons-png.flaticon.com/512/2040/2040505.png" class="sms-icon" alt="SMS">
+          Enviar por SMS
+        </button>
+      </div>
     </form>
   </div>
 
@@ -277,7 +321,7 @@
       siguienteHora.setHours(siguienteHora.getHours() + 1, 0, 0, 0);
       horaInput.value = siguienteHora.toTimeString().substring(0, 5);
       
-      // Manejar el envío del formulario
+      // Manejar el envío del formulario por WhatsApp
       document.getElementById('enviar-whatsapp').addEventListener('click', function() {
         if (!validarFormulario()) {
           alert('Por favor complete todos los campos obligatorios.');
@@ -285,6 +329,26 @@
         }
         
         enviarPorWhatsApp();
+      });
+      
+      // Manejar el envío del formulario por Email
+      document.getElementById('enviar-email').addEventListener('click', function() {
+        if (!validarFormulario()) {
+          alert('Por favor complete todos los campos obligatorios.');
+          return;
+        }
+        
+        enviarPorEmail();
+      });
+      
+      // Manejar el envío del formulario por SMS
+      document.getElementById('enviar-sms').addEventListener('click', function() {
+        if (!validarFormulario()) {
+          alert('Por favor complete todos los campos obligatorios.');
+          return;
+        }
+        
+        enviarPorSMS();
       });
     });
     
@@ -312,25 +376,25 @@
       return true;
     }
     
-    function enviarPorWhatsApp() {
-      // Número de WhatsApp de la empresa (cambiar por el número real)
-      const telefonoEmpresa = "573041146297";
-      
-      // Obtener valores del formulario
-      const remitenteNombre = document.getElementById('remitente-nombre').value;
-      const remitenteTelefono = document.getElementById('remitente-telefono').value;
-      const remitenteDireccion = document.getElementById('remitente-direccion').value;
-      const recogidaFecha = document.getElementById('recogida-fecha').value;
-      const recogidaHora = document.getElementById('recogida-hora').value;
-      const destinatarioNombre = document.getElementById('destinatario-nombre').value;
-      const destinatarioTelefono = document.getElementById('destinatario-telefono').value;
-      const destinatarioDireccion = document.getElementById('destinatario-direccion').value;
-      const paqueteDescripcion = document.getElementById('paquete-descripcion').value;
-      const paqueteValor = document.getElementById('paquete-valor').value;
-      const paqueteInstructions = document.getElementById('paquete-instructions').value;
-      
+    function obtenerDatosFormulario() {
+      return {
+        remitenteNombre: document.getElementById('remitente-nombre').value,
+        remitenteTelefono: document.getElementById('remitente-telefono').value,
+        remitenteDireccion: document.getElementById('remitente-direccion').value,
+        recogidaFecha: document.getElementById('recogida-fecha').value,
+        recogidaHora: document.getElementById('recogida-hora').value,
+        destinatarioNombre: document.getElementById('destinatario-nombre').value,
+        destinatarioTelefono: document.getElementById('destinatario-telefono').value,
+        destinatarioDireccion: document.getElementById('destinatario-direccion').value,
+        paqueteDescripcion: document.getElementById('paquete-descripcion').value,
+        paqueteValor: document.getElementById('paquete-valor').value,
+        paqueteInstructions: document.getElementById('paquete-instructions').value
+      };
+    }
+    
+    function formatearMensaje(datos) {
       // Formatear fecha
-      const fecha = new Date(recogidaFecha);
+      const fecha = new Date(datos.recogidaFecha);
       const fechaFormateada = fecha.toLocaleDateString('es-ES', {
         weekday: 'long',
         year: 'numeric',
@@ -338,29 +402,74 @@
         day: 'numeric'
       });
       
-      // Crear mensaje para WhatsApp
+      // Crear mensaje
       let mensaje = "¡Hola! Necesito solicitar un servicio de envío.\n\n";
       mensaje += "*INFORMACIÓN DEL REMITENTE:*\n";
-      mensaje += `📦 Nombre: ${remitenteNombre}\n`;
-      mensaje += `📞 Teléfono: ${remitenteTelefono}\n`;
-      mensaje += `🏠 Dirección: ${remitenteDireccion}\n`;
-      mensaje += `⏰ Fecha/Hora recogida: ${fechaFormateada} a las ${recogidaHora}\n\n`;
+      mensaje += `📦 Nombre: ${datos.remitenteNombre}\n`;
+      mensaje += `📞 Teléfono: ${datos.remitenteTelefono}\n`;
+      mensaje += `🏠 Dirección: ${datos.remitenteDireccion}\n`;
+      mensaje += `⏰ Fecha/Hora recogida: ${fechaFormateada} a las ${datos.recogidaHora}\n\n`;
       
       mensaje += "*INFORMACIÓN DEL DESTINATARIO:*\n";
-      mensaje += `👤 Nombre: ${destinatarioNombre}\n`;
-      mensaje += `📞 Teléfono: ${destinatarioTelefono}\n`;
-      mensaje += `🏠 Dirección: ${destinatarioDireccion}\n\n`;
+      mensaje += `👤 Nombre: ${datos.destinatarioNombre}\n`;
+      mensaje += `📞 Teléfono: ${datos.destinatarioTelefono}\n`;
+      mensaje += `🏠 Dirección: ${datos.destinatarioDireccion}\n\n`;
       
       mensaje += "*INFORMACIÓN DEL PAQUETE:*\n";
-      mensaje += `📋 Descripción: ${paqueteDescripcion}\n`;
-      if (paqueteValor) mensaje += `💰 Valor declarado: $${paqueteValor}\n`;
-      if (paqueteInstructions) mensaje += `⚡ Instrucciones: ${paqueteInstructions}\n`;
+      mensaje += `📋 Descripción: ${datos.paqueteDescripcion}\n`;
+      if (datos.paqueteValor) mensaje += `💰 Valor declarado: $${datos.paqueteValor}\n`;
+      if (datos.paqueteInstructions) mensaje += `⚡ Instrucciones: ${datos.paqueteInstructions}\n`;
+      
+      return mensaje;
+    }
+    
+    function enviarPorWhatsApp() {
+      // Número de WhatsApp de la empresa (cambiar por el número real)
+      const telefonoEmpresa = "573041146297";
+      
+      // Obtener datos y formatear mensaje
+      const datos = obtenerDatosFormulario();
+      const mensaje = formatearMensaje(datos);
       
       // Codificar el mensaje para URL
       const mensajeCodificado = encodeURIComponent(mensaje);
       
       // Abrir WhatsApp
       window.open(`https://wa.me/${telefonoEmpresa}?text=${mensajeCodificado}`, '_blank');
+    }
+    
+    function enviarPorEmail() {
+      // Dirección de correo de la empresa (cambiar por el correo real)
+      const emailEmpresa = "envios@contraentrega.com";
+      
+      // Obtener datos y formatear mensaje
+      const datos = obtenerDatosFormulario();
+      const mensaje = formatearMensaje(datos);
+      
+      // Asunto del correo
+      const asunto = "Solicitud de Servicio de Envío - " + datos.remitenteNombre;
+      
+      // Codificar para URL
+      const asuntoCodificado = encodeURIComponent(asunto);
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      
+      // Abrir cliente de correo
+      window.open(`mailto:${emailEmpresa}?subject=${asuntoCodificado}&body=${mensajeCodificado}`, '_blank');
+    }
+    
+    function enviarPorSMS() {
+      // Número para SMS (cambiar por el número real)
+      const numeroEmpresa = "573041146297";
+      
+      // Obtener datos y formatear mensaje
+      const datos = obtenerDatosFormulario();
+      const mensaje = formatearMensaje(datos);
+      
+      // Codificar para URL
+      const mensajeCodificado = encodeURIComponent(mensaje);
+      
+      // Abrir aplicación de mensajes
+      window.open(`sms:${numeroEmpresa}?body=${mensajeCodificado}`, '_blank');
     }
   </script>
 </body>
