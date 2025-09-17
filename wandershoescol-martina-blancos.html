@@ -14,6 +14,9 @@
             --color-gris-medio: #e0e0e0;
             --color-gris-oscuro: #333333;
             --color-verde: #25D366;
+            --color-azul: #3498db;
+            --color-rojo: #e74c3c;
+            --color-morado: #9b59b6;
         }
         
         * {
@@ -27,7 +30,7 @@
             background-color: var(--color-blanco);
             color: var(--color-negro);
             line-height: 1.6;
-            font-size: 16px; /* Tamaño de fuente base para evitar zoom */
+            font-size: 16px;
         }
         
         /* Header */
@@ -223,83 +226,6 @@
             background-color: var(--color-negro);
         }
         
-        /* Social Sharing */
-        .social-sharing {
-            margin-bottom: 2rem;
-        }
-        
-        .social-sharing h3 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
-            transition: transform 0.3s;
-        }
-        
-        .social-icon:hover {
-            transform: scale(1.1);
-        }
-        
-        .facebook {
-            background-color: #3b5998;
-        }
-        
-        .twitter {
-            background-color: #1da1f2;
-        }
-        
-        .whatsapp {
-            background-color: var(--color-verde);
-        }
-        
-        /* Video Section */
-        .video-section {
-            margin: 3rem 0;
-        }
-        
-        .video-section h2 {
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .video-container {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Related Products */
-        .related-products {
-            margin: 3rem 0;
-            display: none; /* Ocultar productos relacionados para enfocar en el formulario */
-        }
-        
         /* Cart Modal */
         .cart-modal {
             display: none;
@@ -430,7 +356,7 @@
             border: 1px solid var(--color-gris-medio);
             border-radius: 4px;
             font-family: 'Libre Baskerville', serif;
-            font-size: 16px; /* Prevenir zoom en iOS */
+            font-size: 16px;
         }
         
         .checkout-buttons {
@@ -462,7 +388,25 @@
             background-color: #128C7E;
         }
         
-        .whatsapp-btn:disabled {
+        .email-btn {
+            background-color: var(--color-rojo);
+            color: white;
+        }
+        
+        .email-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .sms-btn {
+            background-color: var(--color-azul);
+            color: white;
+        }
+        
+        .sms-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .whatsapp-btn:disabled, .email-btn:disabled, .sms-btn:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
@@ -541,6 +485,109 @@
             margin-bottom: 0;
         }
         
+        /* Modal de selección de cliente de correo */
+        .email-client-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1010;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .email-client-content {
+            background-color: var(--color-blanco);
+            width: 90%;
+            max-width: 400px;
+            border-radius: 8px;
+            padding: 2rem;
+        }
+        
+        .email-client-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .close-email-client {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .email-client-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .email-client-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .gmail-btn {
+            background-color: #DB4437;
+            color: white;
+        }
+        
+        .gmail-btn:hover {
+            background-color: #C1351D;
+        }
+        
+        .outlook-btn {
+            background-color: #0078D4;
+            color: white;
+        }
+        
+        .outlook-btn:hover {
+            background-color: #0063B1;
+        }
+        
+        .yahoo-btn {
+            background-color: #6001D2;
+            color: white;
+        }
+        
+        .yahoo-btn:hover {
+            background-color: #4E00B0;
+        }
+        
+        .zoho-btn {
+            background-color: #CB2027;
+            color: white;
+        }
+        
+        .zoho-btn:hover {
+            background-color: #A91B22;
+        }
+        
+        .other-btn {
+            background-color: var(--color-gris-oscuro);
+            color: white;
+        }
+        
+        .other-btn:hover {
+            background-color: var(--color-negro);
+        }
+        
         /* Footer */
         footer {
             background-color: var(--color-negro);
@@ -561,11 +608,11 @@
         .footer-section {
             flex: 1;
             min-width: 250px;
-            display: none; /* Ocultar secciones del footer para enfocar en el formulario */
+            display: none;
         }
         
         .footer-section:nth-child(2) {
-            display: block; /* Mostrar solo la sección de contacto */
+            display: block;
         }
         
         .footer-section h3 {
@@ -626,14 +673,9 @@
                 flex-direction: column;
             }
             
-            .cart-content, .direct-purchase-content {
+            .cart-content, .direct-purchase-content, .email-client-content {
                 width: 95%;
                 padding: 1rem;
-            }
-            
-            /* Ajustes para evitar zoom en formularios móviles */
-            input, select, textarea {
-                font-size: 16px !important;
             }
         }
         
@@ -669,10 +711,6 @@
             .item-quantity {
                 align-self: flex-end;
             }
-            
-            .social-sharing {
-                display: none; /* Ocultar compartir en redes en móvil para enfocar en formulario */
-            }
         }
         
         /* Notificación */
@@ -687,13 +725,6 @@
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
             transition: opacity 0.5s;
-        }
-        
-        /* Estilo específico para prevenir zoom en iOS */
-        @media screen and (max-width: 767px) {
-            input, textarea, select {
-                font-size: 16px !important;
-            }
         }
     </style>
 </head>
@@ -798,6 +829,12 @@
                 <button class="checkout-btn whatsapp-btn" id="whatsappBtn" disabled>
                     <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
                 </button>
+                <button class="checkout-btn email-btn" id="emailBtn" disabled>
+                    <i class="fas fa-envelope"></i> Enviar por Correo
+                </button>
+                <button class="checkout-btn sms-btn" id="smsBtn" disabled>
+                    <i class="fas fa-sms"></i> Enviar por SMS
+                </button>
                 <button class="checkout-btn continue-shopping" id="continueShopping">Seguir comprando</button>
             </div>
         </div>
@@ -836,7 +873,41 @@
                 <button class="checkout-btn whatsapp-btn" id="directWhatsappBtn" disabled>
                     <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
                 </button>
+                <button class="checkout-btn email-btn" id="directEmailBtn" disabled>
+                    <i class="fas fa-envelope"></i> Enviar por Correo
+                </button>
+                <button class="checkout-btn sms-btn" id="directSmsBtn" disabled>
+                    <i class="fas fa-sms"></i> Enviar por SMS
+                </button>
                 <button class="checkout-btn continue-shopping" id="cancelDirectPurchase">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Client Selection Modal -->
+    <div class="email-client-modal" id="emailClientModal">
+        <div class="email-client-content">
+            <div class="email-client-header">
+                <h2>Selecciona tu cliente de correo</h2>
+                <button class="close-email-client" id="closeEmailClient">&times;</button>
+            </div>
+            
+            <div class="email-client-options">
+                <button class="email-client-btn gmail-btn" id="gmailBtn">
+                    <i class="fab fa-google"></i> Gmail
+                </button>
+                <button class="email-client-btn outlook-btn" id="outlookBtn">
+                    <i class="fab fa-microsoft"></i> Outlook
+                </button>
+                <button class="email-client-btn yahoo-btn" id="yahooBtn">
+                    <i class="fab fa-yahoo"></i> Yahoo Mail
+                </button>
+                <button class="email-client-btn zoho-btn" id="zohoBtn">
+                    <i class="fas fa-envelope"></i> Zoho Mail
+                </button>
+                <button class="email-client-btn other-btn" id="otherEmailBtn">
+                    <i class="fas fa-envelope"></i> Otro cliente de correo
+                </button>
             </div>
         </div>
     </div>
@@ -871,7 +942,12 @@
         // Variables globales
         let cart = [];
         let currentDirectProduct = null;
+        let currentEmailData = {
+            subject: "",
+            body: ""
+        };
         
+        // Elementos del DOM
         const cartIcon = document.getElementById('cartIcon');
         const cartCount = document.getElementById('cartCount');
         const cartModal = document.getElementById('cartModal');
@@ -879,6 +955,8 @@
         const cartItems = document.getElementById('cartItems');
         const cartTotal = document.getElementById('cartTotal');
         const whatsappBtn = document.getElementById('whatsappBtn');
+        const emailBtn = document.getElementById('emailBtn');
+        const smsBtn = document.getElementById('smsBtn');
         const continueShopping = document.getElementById('continueShopping');
         const customerName = document.getElementById('customerName');
         const customerPhone = document.getElementById('customerPhone');
@@ -892,7 +970,18 @@
         const directCustomerPhone = document.getElementById('directCustomerPhone');
         const directCustomerAddress = document.getElementById('directCustomerAddress');
         const directWhatsappBtn = document.getElementById('directWhatsappBtn');
+        const directEmailBtn = document.getElementById('directEmailBtn');
+        const directSmsBtn = document.getElementById('directSmsBtn');
         const cancelDirectPurchase = document.getElementById('cancelDirectPurchase');
+        
+        // Elementos para selección de cliente de correo
+        const emailClientModal = document.getElementById('emailClientModal');
+        const closeEmailClient = document.getElementById('closeEmailClient');
+        const gmailBtn = document.getElementById('gmailBtn');
+        const outlookBtn = document.getElementById('outlookBtn');
+        const yahooBtn = document.getElementById('yahooBtn');
+        const zohoBtn = document.getElementById('zohoBtn');
+        const otherEmailBtn = document.getElementById('otherEmailBtn');
         
         // Botones de producto
         const addToCartButton = document.getElementById('addToCart');
@@ -1023,7 +1112,7 @@
             validateCheckoutButton();
         }
 
-        // Validar si se puede habilitar el botón de WhatsApp
+        // Validar si se puede habilitar los botones de envío
         function validateCheckoutButton() {
             const hasItems = cart.length > 0;
             const hasName = customerName.value.trim() !== '';
@@ -1031,15 +1120,19 @@
             const hasAddress = customerAddress.value.trim() !== '';
             
             whatsappBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
+            emailBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
+            smsBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
         }
 
-        // Validar si se puede habilitar el botón de WhatsApp para compra directa
+        // Validar si se puede habilitar los botones de envío para compra directa
         function validateDirectCheckoutButton() {
             const hasName = directCustomerName.value.trim() !== '';
             const hasPhone = directCustomerPhone.value.trim() !== '';
             const hasAddress = directCustomerAddress.value.trim() !== '';
             
             directWhatsappBtn.disabled = !(hasName && hasPhone && hasAddress);
+            directEmailBtn.disabled = !(hasName && hasPhone && hasAddress);
+            directSmsBtn.disabled = !(hasName && hasPhone && hasAddress);
         }
 
         // Mostrar notificación
@@ -1128,6 +1221,56 @@
             return encodeURIComponent(message);
         }
 
+        // Generar mensaje para correo electrónico
+        function generateEmailMessage(isDirect = false) {
+            const remitente = getRemitenteInfo();
+            
+            let message = "Solicitud de compra:\n\n";
+            
+            if (isDirect) {
+                message += `Producto: ${currentDirectProduct.title}\n`;
+                message += `Precio: $${currentDirectProduct.price.toFixed(2)}\n`;
+            } else {
+                message += "Productos en el carrito:\n";
+                cart.forEach(item => {
+                    message += `- ${item.title} x${item.quantity}: $${(item.price * item.quantity).toFixed(2)}\n`;
+                });
+                message += `\nTotal: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}`;
+            }
+            
+            message += `\nInformación del cliente:\n`;
+            message += `Nombre: ${isDirect ? directCustomerName.value : customerName.value}\n`;
+            message += `Teléfono: ${isDirect ? directCustomerPhone.value : customerPhone.value}\n`;
+            message += `Dirección: ${isDirect ? directCustomerAddress.value : customerAddress.value}`;
+            
+            message += `\n\nInformación del remitente:\n`;
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return message;
+        }
+
+        // Generar mensaje para SMS
+        function generateSmsMessage(isDirect = false) {
+            const remitente = getRemitenteInfo();
+            
+            let message = "Compra: ";
+            
+            if (isDirect) {
+                message += `${currentDirectProduct.title} - $${currentDirectProduct.price.toFixed(2)}. `;
+            } else {
+                message += `${cart.length} productos - $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}. `;
+            }
+            
+            message += `Cliente: ${isDirect ? directCustomerName.value : customerName.value}. `;
+            message += `Tel: ${isDirect ? directCustomerPhone.value : customerPhone.value}. `;
+            message += `Dir: ${isDirect ? directCustomerAddress.value : customerAddress.value}`;
+            
+            return encodeURIComponent(message);
+        }
+
         // Abrir modal para compra directa
         function openDirectPurchase(product) {
             currentDirectProduct = product;
@@ -1146,9 +1289,51 @@
             directCustomerPhone.value = '';
             directCustomerAddress.value = '';
             directWhatsappBtn.disabled = true;
+            directEmailBtn.disabled = true;
+            directSmsBtn.disabled = true;
             
             // Mostrar modal
             directPurchaseModal.style.display = 'flex';
+        }
+
+        // Abrir modal de selección de cliente de correo
+        function openEmailClientModal(isDirect = false) {
+            // Preparar datos para el correo
+            const subject = "Solicitud de compra - CaliValle";
+            const body = generateEmailMessage(isDirect);
+            
+            currentEmailData = {
+                subject: subject,
+                body: encodeURIComponent(body)
+            };
+            
+            // Mostrar modal
+            emailClientModal.style.display = 'flex';
+        }
+
+        // Abrir cliente de correo específico
+        function openEmailClient(client) {
+            let mailtoUrl;
+            
+            switch(client) {
+                case 'gmail':
+                    mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@calivalle.qrcontraentrega.com&su=${currentEmailData.subject}&body=${currentEmailData.body}`;
+                    break;
+                case 'outlook':
+                    mailtoUrl = `https://outlook.live.com/owa/?path=/mail/action/compose&to=info@calivalle.qrcontraentrega.com&subject=${currentEmailData.subject}&body=${currentEmailData.body}`;
+                    break;
+                case 'yahoo':
+                    mailtoUrl = `https://compose.mail.yahoo.com/?to=info@calivalle.qrcontraentrega.com&subject=${currentEmailData.subject}&body=${currentEmailData.body}`;
+                    break;
+                case 'zoho':
+                    mailtoUrl = `https://mail.zoho.com/zm/#mail/compose?to=info@calivalle.qrcontraentrega.com&subject=${currentEmailData.subject}&body=${currentEmailData.body}`;
+                    break;
+                default:
+                    mailtoUrl = `mailto:info@calivalle.qrcontraentrega.com?subject=${currentEmailData.subject}&body=${currentEmailData.body}`;
+            }
+            
+            window.open(mailtoUrl, '_blank');
+            emailClientModal.style.display = 'none';
         }
 
         // Event Listeners
@@ -1174,6 +1359,25 @@
             window.open(`https://wa.me/573123456789?text=${message}`, '_blank');
         });
 
+        emailBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            openEmailClientModal(false);
+        });
+
+        smsBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            const message = generateSmsMessage(false);
+            window.open(`sms:+571234567890?body=${message}`, '_blank');
+        });
+
         // Event Listeners para compra directa
         closeDirectPurchase.addEventListener('click', () => {
             directPurchaseModal.style.display = 'none';
@@ -1191,6 +1395,50 @@
             
             const message = generateDirectWhatsAppMessage();
             window.open(`https://wa.me/573123456789?text=${message}`, '_blank');
+        });
+
+        directEmailBtn.addEventListener('click', () => {
+            if (!currentDirectProduct) {
+                showNotification('No hay producto seleccionado');
+                return;
+            }
+            
+            openEmailClientModal(true);
+        });
+
+        directSmsBtn.addEventListener('click', () => {
+            if (!currentDirectProduct) {
+                showNotification('No hay producto seleccionado');
+                return;
+            }
+            
+            const message = generateSmsMessage(true);
+            window.open(`sms:+571234567890?body=${message}`, '_blank');
+        });
+
+        // Event Listeners para selección de cliente de correo
+        closeEmailClient.addEventListener('click', () => {
+            emailClientModal.style.display = 'none';
+        });
+
+        gmailBtn.addEventListener('click', () => {
+            openEmailClient('gmail');
+        });
+
+        outlookBtn.addEventListener('click', () => {
+            openEmailClient('outlook');
+        });
+
+        yahooBtn.addEventListener('click', () => {
+            openEmailClient('yahoo');
+        });
+
+        zohoBtn.addEventListener('click', () => {
+            openEmailClient('zoho');
+        });
+
+        otherEmailBtn.addEventListener('click', () => {
+            openEmailClient('other');
         });
 
         // Botones de producto
@@ -1224,6 +1472,9 @@
             }
             if (e.target === directPurchaseModal) {
                 directPurchaseModal.style.display = 'none';
+            }
+            if (e.target === emailClientModal) {
+                emailClientModal.style.display = 'none';
             }
         });
 
