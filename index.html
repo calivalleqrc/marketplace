@@ -14,6 +14,8 @@
             --color-gris-medio: #e0e0e0;
             --color-gris-oscuro: #333333;
             --color-verde: #25D366;
+            --color-azul: #007bff;
+            --color-rojo: #dc3545;
         }
         
         * {
@@ -464,6 +466,34 @@
             cursor: not-allowed;
         }
         
+        .sms-btn {
+            background-color: var(--color-azul);
+            color: white;
+        }
+        
+        .sms-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .sms-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .email-btn {
+            background-color: var(--color-rojo);
+            color: white;
+        }
+        
+        .email-btn:hover {
+            background-color: #bd2130;
+        }
+        
+        .email-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
         .continue-shopping {
             background-color: var(--color-gris-medio);
             color: var(--color-negro);
@@ -823,6 +853,12 @@
                 <button class="checkout-btn whatsapp-btn" id="whatsappBtn" disabled>
                     <i class="fab fa-whatsapp"></i> Finalizar compra por WhatsApp
                 </button>
+                <button class="checkout-btn sms-btn" id="smsBtn" disabled>
+                    <i class="fas fa-sms"></i> Enviar pedido por SMS
+                </button>
+                <button class="checkout-btn email-btn" id="emailBtn" disabled>
+                    <i class="fas fa-envelope"></i> Enviar pedido por Correo
+                </button>
                 <button class="checkout-btn continue-shopping" id="continueShopping">Seguir comprando</button>
             </div>
         </div>
@@ -860,6 +896,12 @@
             <div class="checkout-buttons">
                 <button class="checkout-btn whatsapp-btn" id="directWhatsappBtn" disabled>
                     <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                </button>
+                <button class="checkout-btn sms-btn" id="directSmsBtn" disabled>
+                    <i class="fas fa-sms"></i> Enviar pedido por SMS
+                </button>
+                <button class="checkout-btn email-btn" id="directEmailBtn" disabled>
+                    <i class="fas fa-envelope"></i> Enviar pedido por Correo
                 </button>
                 <button class="checkout-btn continue-shopping" id="cancelDirectPurchase">Cancelar</button>
             </div>
@@ -909,7 +951,7 @@
                 productUrl: "https://ejemplo.com/productos/auriculares-inalambricos",
                 images: [
                     "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80",
-                    "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=c crop&w=600&q=80"
+                    "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
                 ]
             },
             {
@@ -1009,6 +1051,8 @@
         const cartItems = document.getElementById('cartItems');
         const cartTotal = document.getElementById('cartTotal');
         const whatsappBtn = document.getElementById('whatsappBtn');
+        const smsBtn = document.getElementById('smsBtn');
+        const emailBtn = document.getElementById('emailBtn');
         const continueShopping = document.getElementById('continueShopping');
         const productsGrid = document.getElementById('productsGrid');
         const searchInput = document.getElementById('searchInput');
@@ -1025,6 +1069,8 @@
         const directCustomerPhone = document.getElementById('directCustomerPhone');
         const directCustomerAddress = document.getElementById('directCustomerAddress');
         const directWhatsappBtn = document.getElementById('directWhatsappBtn');
+        const directSmsBtn = document.getElementById('directSmsBtn');
+        const directEmailBtn = document.getElementById('directEmailBtn');
         const cancelDirectPurchase = document.getElementById('cancelDirectPurchase');
 
         // Cargar productos en la página
@@ -1097,6 +1143,8 @@
             directCustomerPhone.value = '';
             directCustomerAddress.value = '';
             directWhatsappBtn.disabled = true;
+            directSmsBtn.disabled = true;
+            directEmailBtn.disabled = true;
             
             // Mostrar modal
             directPurchaseModal.style.display = 'flex';
@@ -1218,7 +1266,7 @@
             validateCheckoutButton();
         }
 
-        // Validar si se puede habilitar el botón de WhatsApp
+        // Validar si se puede habilitar los botones de checkout
         function validateCheckoutButton() {
             const hasItems = cart.length > 0;
             const hasName = customerName.value.trim() !== '';
@@ -1226,15 +1274,19 @@
             const hasAddress = customerAddress.value.trim() !== '';
             
             whatsappBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
+            smsBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
+            emailBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
         }
 
-        // Validar si se puede habilitar el botón de WhatsApp para compra directa
+        // Validar si se puede habilitar los botones de checkout para compra directa
         function validateDirectCheckoutButton() {
             const hasName = directCustomerName.value.trim() !== '';
             const hasPhone = directCustomerPhone.value.trim() !== '';
             const hasAddress = directCustomerAddress.value.trim() !== '';
             
             directWhatsappBtn.disabled = !(hasName && hasPhone && hasAddress);
+            directSmsBtn.disabled = !(hasName && hasPhone && hasAddress);
+            directEmailBtn.disabled = !(hasName && hasPhone && hasAddress);
         }
 
         // Mostrar notificación
@@ -1300,6 +1352,49 @@
             return encodeURIComponent(message);
         }
 
+        // Generar mensaje de SMS para el carrito
+        function generateSmsMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = "Pedido:\n";
+            
+            cart.forEach(item => {
+                message += `- ${item.title} x${item.quantity}: $${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            message += `Total: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}\n`;
+            message += `Cliente: ${customerName.value}, Tel: ${customerPhone.value}`;
+            message += `, Dir: ${customerAddress.value}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Generar mensaje de correo para el carrito
+        function generateEmailMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = `Tienes un nuevo pedido de ${customerName.value}:\n\n`;
+            
+            message += "PRODUCTOS:\n";
+            cart.forEach(item => {
+                message += `- ${item.title} x${item.quantity}: $${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+            
+            message += `\nTOTAL: $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}\n\n`;
+            message += "INFORMACIÓN DEL CLIENTE:\n";
+            message += `Nombre: ${customerName.value}\n`;
+            message += `Teléfono: ${customerPhone.value}\n`;
+            message += `Dirección: ${customerAddress.value}\n\n`;
+            
+            message += "INFORMACIÓN DEL REMITENTE:\n";
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return encodeURIComponent(message);
+        }
+
         // Generar mensaje de WhatsApp para compra directa
         function generateDirectWhatsAppMessage() {
             const remitente = getRemitenteInfo();
@@ -1315,6 +1410,44 @@
             
             // Añadir información del remitente
             message += `\n\nInformación del remitente:\n`;
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Generar mensaje de SMS para compra directa
+        function generateDirectSmsMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = "Pedido Directo:\n";
+            
+            message += `- ${currentDirectProduct.title}: $${currentDirectProduct.price.toFixed(2)}\n`;
+            message += `Total: $${currentDirectProduct.price.toFixed(2)}\n`;
+            message += `Cliente: ${directCustomerName.value}, Tel: ${directCustomerPhone.value}`;
+            message += `, Dir: ${directCustomerAddress.value}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Generar mensaje de correo para compra directa
+        function generateDirectEmailMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = `Tienes un nuevo pedido directo de ${directCustomerName.value}:\n\n`;
+            
+            message += "PRODUCTO:\n";
+            message += `- ${currentDirectProduct.title}: $${currentDirectProduct.price.toFixed(2)}\n\n`;
+            
+            message += `TOTAL: $${currentDirectProduct.price.toFixed(2)}\n\n`;
+            message += "INFORMACIÓN DEL CLIENTE:\n";
+            message += `Nombre: ${directCustomerName.value}\n`;
+            message += `Teléfono: ${directCustomerPhone.value}\n`;
+            message += `Dirección: ${directCustomerAddress.value}\n\n`;
+            
+            message += "INFORMACIÓN DEL REMITENTE:\n";
             message += `Negocio: ${remitente.nombre}\n`;
             message += `Correo: ${remitente.correo}\n`;
             message += `Dirección: ${remitente.direccion}\n`;
@@ -1343,7 +1476,28 @@
             }
             
             const message = generateWhatsAppMessage();
-            window.open(`https://wa.me/573123456789?text=${message}`, '_blank');
+            window.open(`https://wa.me/573146824438?text=${message}`, '_blank');
+        });
+
+        smsBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            const message = generateSmsMessage();
+            window.open(`sms:+573146824438?body=${message}`, '_blank');
+        });
+
+        emailBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            const subject = encodeURIComponent(`Nuevo Pedido de ${customerName.value}`);
+            const message = generateEmailMessage();
+            window.open(`mailto:calivalle@qrcontraentrega.com?subject=${subject}&body=${message}`, '_blank');
         });
 
         // Event Listeners para compra directa
@@ -1362,7 +1516,28 @@
             }
             
             const message = generateDirectWhatsAppMessage();
-            window.open(`https://wa.me/573123456789?text=${message}`, '_blank');
+            window.open(`https://wa.me/573146824438?text=${message}`, '_blank');
+        });
+
+        directSmsBtn.addEventListener('click', () => {
+            if (!currentDirectProduct) {
+                showNotification('No hay producto seleccionado');
+                return;
+            }
+            
+            const message = generateDirectSmsMessage();
+            window.open(`sms:+573146824438?body=${message}`, '_blank');
+        });
+
+        directEmailBtn.addEventListener('click', () => {
+            if (!currentDirectProduct) {
+                showNotification('No hay producto seleccionado');
+                return;
+            }
+            
+            const subject = encodeURIComponent(`Nuevo Pedido Directo de ${directCustomerName.value}`);
+            const message = generateDirectEmailMessage();
+            window.open(`mailto:calivalle@qrcontraentrega.com?subject=${subject}&body=${message}`, '_blank');
         });
 
         searchInput.addEventListener('input', filterProducts);
