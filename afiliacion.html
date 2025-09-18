@@ -799,26 +799,22 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="checkbox-item" style="display: flex; align-items: flex-start; margin-top: 15px;">
-            <input type="checkbox" id="agreementCheckbox" name="agreementCheckbox" required 
-                   style="margin-top: 3px; margin-right: 10px;">
-            <label for="agreementCheckbox" class="required-field" style="line-height: 1.4;">
-                Acepto el <span class="agreement-link" id="agreementLink" 
-                style="color: #007bff; text-decoration: underline; cursor: pointer;">Acuerdo Comercial</span>
-            </label>
-        </div>
-    </div>
 </div>
 
-Cambios realizados:
-
-1. Alineación corregida: El texto "Acepto el Acuerdo Comercial" ahora aparece correctamente al lado del checkbox
-2. Estilos en línea añadidos: Para asegurar que se muestre correctamente dentro del contenedor
-3. Espaciado mejorado: Añadido margen superior para separar del campo anterior
-4. Interlineado ajustado: Para mejor legibilidad del texto
-
-Esta corrección asegura que el texto del acuerdo comercial se muestre correctamente alineado con el checkbox y dentro de los límites del contenedor del formulario, resolviendo el problema de visualización que se veía en la imagen.
+<div class="form-group">
+    <div class="checkbox-item" style="display: flex; align-items: flex-start;">
+        <input type="checkbox" id="agreementCheckbox" name="agreementCheckbox" required 
+               style="margin-top: 3px; margin-right: 10px;">
+        <label for="agreementCheckbox" class="required-field" style="line-height: 1.4;">
+            Acepto los términos y condiciones del 
+            <a href="https://calivalle.qrcontraentrega.com/acuerdo-comercial" 
+               target="_blank" 
+               style="color: #007bff; text-decoration: underline; cursor: pointer;">
+                Acuerdo
+            </a>
+        </label>
+    </div>
+</div>
                 
                 <div class="submit-buttons">
                     <button type="button" class="submit-btn whatsapp-btn" id="submitWhatsApp">
