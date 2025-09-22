@@ -397,16 +397,7 @@
             background-color: #c0392b;
         }
         
-        .sms-btn {
-            background-color: var(--color-azul);
-            color: white;
-        }
-        
-        .sms-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        .whatsapp-btn:disabled, .email-btn:disabled, .sms-btn:disabled {
+        .whatsapp-btn:disabled, .email-btn:disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
@@ -832,9 +823,6 @@
                 <button class="checkout-btn email-btn" id="emailBtn" disabled>
                     <i class="fas fa-envelope"></i> Enviar por Correo
                 </button>
-                <button class="checkout-btn sms-btn" id="smsBtn" disabled>
-                    <i class="fas fa-sms"></i> Enviar por SMS
-                </button>
                 <button class="checkout-btn continue-shopping" id="continueShopping">Seguir comprando</button>
             </div>
         </div>
@@ -875,9 +863,6 @@
                 </button>
                 <button class="checkout-btn email-btn" id="directEmailBtn" disabled>
                     <i class="fas fa-envelope"></i> Enviar por Correo
-                </button>
-                <button class="checkout-btn sms-btn" id="directSmsBtn" disabled>
-                    <i class="fas fa-sms"></i> Enviar por SMS
                 </button>
                 <button class="checkout-btn continue-shopping" id="cancelDirectPurchase">Cancelar</button>
             </div>
@@ -956,7 +941,6 @@
         const cartTotal = document.getElementById('cartTotal');
         const whatsappBtn = document.getElementById('whatsappBtn');
         const emailBtn = document.getElementById('emailBtn');
-        const smsBtn = document.getElementById('smsBtn');
         const continueShopping = document.getElementById('continueShopping');
         const customerName = document.getElementById('customerName');
         const customerPhone = document.getElementById('customerPhone');
@@ -971,7 +955,6 @@
         const directCustomerAddress = document.getElementById('directCustomerAddress');
         const directWhatsappBtn = document.getElementById('directWhatsappBtn');
         const directEmailBtn = document.getElementById('directEmailBtn');
-        const directSmsBtn = document.getElementById('directSmsBtn');
         const cancelDirectPurchase = document.getElementById('cancelDirectPurchase');
         
         // Elementos para selección de cliente de correo
@@ -1121,7 +1104,6 @@
             
             whatsappBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
             emailBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
-            smsBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
         }
 
         // Validar si se puede habilitar los botones de envío para compra directa
@@ -1132,7 +1114,6 @@
             
             directWhatsappBtn.disabled = !(hasName && hasPhone && hasAddress);
             directEmailBtn.disabled = !(hasName && hasPhone && hasAddress);
-            directSmsBtn.disabled = !(hasName && hasPhone && hasAddress);
         }
 
         // Mostrar notificación
@@ -1252,25 +1233,6 @@
             return message;
         }
 
-        // Generar mensaje para SMS
-        function generateSmsMessage(isDirect = false) {
-            const remitente = getRemitenteInfo();
-            
-            let message = "Compra: ";
-            
-            if (isDirect) {
-                message += `${currentDirectProduct.title} - $${currentDirectProduct.price.toFixed(2)}. `;
-            } else {
-                message += `${cart.length} productos - $${cart.reduce((total, item) => total + (item.price * item.quantity), 0).toFixed(2)}. `;
-            }
-            
-            message += `Cliente: ${isDirect ? directCustomerName.value : customerName.value}. `;
-            message += `Tel: ${isDirect ? directCustomerPhone.value : customerPhone.value}. `;
-            message += `Dir: ${isDirect ? directCustomerAddress.value : customerAddress.value}`;
-            
-            return encodeURIComponent(message);
-        }
-
         // Abrir modal para compra directa
         function openDirectPurchase(product) {
             currentDirectProduct = product;
@@ -1290,7 +1252,6 @@
             directCustomerAddress.value = '';
             directWhatsappBtn.disabled = true;
             directEmailBtn.disabled = true;
-            directSmsBtn.disabled = true;
             
             // Mostrar modal
             directPurchaseModal.style.display = 'flex';
@@ -1368,16 +1329,6 @@
             openEmailClientModal(false);
         });
 
-        smsBtn.addEventListener('click', () => {
-            if (cart.length === 0) {
-                showNotification('El carrito está vacío');
-                return;
-            }
-            
-            const message = generateSmsMessage(false);
-            window.open(`sms:+571234567890?body=${message}`, '_blank');
-        });
-
         // Event Listeners para compra directa
         closeDirectPurchase.addEventListener('click', () => {
             directPurchaseModal.style.display = 'none';
@@ -1404,16 +1355,6 @@
             }
             
             openEmailClientModal(true);
-        });
-
-        directSmsBtn.addEventListener('click', () => {
-            if (!currentDirectProduct) {
-                showNotification('No hay producto seleccionado');
-                return;
-            }
-            
-            const message = generateSmsMessage(true);
-            window.open(`sms:+571234567890?body=${message}`, '_blank');
         });
 
         // Event Listeners para selección de cliente de correo
