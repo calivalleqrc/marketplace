@@ -29,7 +29,7 @@
             background-color: var(--color-blanco);
             color: var(--color-negro);
             line-height: 1.6;
-            font-size: 16px; /* Tamaño de fuente base para evitar zoom */
+            font-size: 16px;
         }
         
         /* Header */
@@ -110,7 +110,7 @@
             border: 1px solid var(--color-gris-medio);
             border-radius: 4px;
             font-family: 'Libre Baskerville', serif;
-            font-size: 16px; /* Prevenir zoom en iOS */
+            font-size: 16px;
         }
         
         /* Afiliados Grid */
@@ -275,8 +275,6 @@
             .affiliates-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
-                overflow-x: auto;
-                padding-bottom: 1rem;
             }
             
             .filters {
@@ -295,7 +293,6 @@
                 flex-direction: column;
             }
             
-            /* Ajustes para evitar zoom en formularios móviles */
             input, select, textarea {
                 font-size: 16px !important;
             }
@@ -340,41 +337,18 @@
             transition: opacity 0.5s;
         }
         
-        /* Scroll horizontal en móviles */
-        .scroll-container {
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .scroll-content {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        @media (min-width: 769px) {
-            .scroll-container {
-                overflow-x: visible;
-            }
-            
-            .scroll-content {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-        }
-        
-        /* Estilo específico para prevenir zoom en iOS */
-        @media screen and (max-width: 767px) {
-            input, textarea, select {
-                font-size: 16px !important;
-            }
-        }
-        
         /* Mensaje cuando no hay resultados */
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
             padding: 2rem;
+            color: var(--color-gris-oscuro);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        
+        .results-count {
+            margin-bottom: 1rem;
             color: var(--color-gris-oscuro);
             font-style: italic;
         }
@@ -393,7 +367,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>CONTRAENTREGA MARKETPLACE</h1>
-        <p> CALI, VALLE DEL CAUCA, COLOMBIA</p>
+        <p>CALI, VALLE DEL CAUCA, COLOMBIA</p>
     </section>
 
     <!-- Main Content -->
@@ -405,11 +379,12 @@
             </div>
         </div>
 
+        <!-- Contador de resultados -->
+        <div class="results-count" id="resultsCount"></div>
+
         <!-- Afiliados Grid -->
-        <div class="scroll-container">
-            <div class="affiliates-grid" id="affiliatesGrid">
-                <!-- Los afiliados se cargarán dinámicamente con JavaScript -->
-            </div>
+        <div class="affiliates-grid" id="affiliatesGrid">
+            <!-- Los afiliados se cargarán dinámicamente con JavaScript -->
         </div>
     </div>
 
@@ -422,13 +397,13 @@
             </div>
             <div class="footer-section">
                 <h3>Contacto</h3>
-                <p><i class="fas fa-phone"></i> +57 3215343562</p>
+                <p><i class="fas fa-phone"></i> +57 3215843562</p>
                 <p><i class="fas fa-envelope"></i> calivalle@qrcontraentrega.com</p>
                 <p><i class="fas fa-map-marker-alt"></i> Carrera 16 # 9 - 44, Cali, Colombia</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/share/g/1A38o4m7Fg/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
                     <a href="https://instagram.com/colombia_qrcontraentrega"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/573215343562"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/573215843562"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -445,13 +420,13 @@
     </footer>
 
     <script>
-        // Base de datos de afiliados
+        // Base de datos de afiliados CORREGIDA
         const affiliates = [
             {
                 id: 1,
                 title: "@hermanosdreams",
                 description: "Belleza y Cuidado Personal",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@hermanosdreams",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@hermanosdreams",
                 infoUrl: "https://hermanosdreams.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
@@ -459,7 +434,7 @@
                 id: 2,
                 title: "@droceshop",
                 description: "Moda y Accesorios",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@droceshop",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@droceshop",
                 infoUrl: "https://droceshop.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
@@ -467,7 +442,7 @@
                 id: 3,
                 title: "@18toys",
                 description: "Juegos y Juguetes",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@18toys",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@18toys",
                 infoUrl: "https://18toys.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
@@ -475,7 +450,7 @@
                 id: 4,
                 title: "@barasurdito",
                 description: "Alimentos y Bebidas",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@barasurdito",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@barasurdito",
                 infoUrl: "https://barasurdito.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
@@ -483,7 +458,7 @@
                 id: 5,
                 title: "@distriyox",
                 description: "Tecnología y Electrónicos",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@distriyox",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@distriyox",
                 infoUrl: "https://distriyox.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
@@ -491,15 +466,15 @@
                 id: 6,
                 title: "@wandershoescol",
                 description: "Moda y Accesorios",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@wandershoescol",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@wandershoescol",
                 infoUrl: "https://wandershoescol.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
             {
                 id: 7,
-                title: "@18realdecolombia ",
+                title: "@18realdecolombia",
                 description: "Inmuebles",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@18realdecolombia",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@18realdecolombia",
                 infoUrl: "https://18realdecolombia.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             },
@@ -507,7 +482,7 @@
                 id: 8,
                 title: "@merchantcars",
                 description: "Automóviles y Motos",
-                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@merchantcars",
+                whatsappUrl: "https://wa.me/573215843562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@merchantcars",
                 infoUrl: "https://merchantcars.qrcontraentrega.com",
                 image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
             }
@@ -516,6 +491,7 @@
         // Variables globales
         const affiliatesGrid = document.getElementById('affiliatesGrid');
         const searchInput = document.getElementById('searchInput');
+        const resultsCount = document.getElementById('resultsCount');
 
         // Cargar afiliados en la página
         function loadAffiliates(affiliatesToLoad) {
@@ -523,15 +499,19 @@
             
             if (affiliatesToLoad.length === 0) {
                 affiliatesGrid.innerHTML = '<div class="no-results">No se encontraron afiliados que coincidan con tu búsqueda.</div>';
+                resultsCount.textContent = '0 afiliados encontrados';
                 return;
             }
+            
+            // Actualizar contador
+            resultsCount.textContent = `${affiliatesToLoad.length} afiliado${affiliatesToLoad.length !== 1 ? 's' : ''} encontrado${affiliatesToLoad.length !== 1 ? 's' : ''}`;
             
             affiliatesToLoad.forEach(affiliate => {
                 const affiliateCard = document.createElement('div');
                 affiliateCard.className = 'affiliate-card';
                 affiliateCard.innerHTML = `
                     <div class="affiliate-image-container">
-                        <img src="${affiliate.image}" alt="${affiliate.title}" class="affiliate-image">
+                        <img src="${affiliate.image}" alt="${affiliate.title}" class="affiliate-image" onerror="this.src='https://calivalle.qrcontraentrega.com/img/c.jpg'">
                     </div>
                     <div class="affiliate-info">
                         <h3 class="affiliate-title">${affiliate.title}</h3>
@@ -551,98 +531,54 @@
             });
         }
 
-        // // Filtrar afiliados Filtrar afiliados
-
-               function filterAffiliates() {
- function filterAffiliates() {
-            const searchText            const searchText = searchInput.value.toLowerCase(). = searchInput.valuetrim();
-            
-           .toLowerCase().trim();
+        // Filtrar afiliados
+        function filterAffiliates() {
+            const searchText = searchInput.value.toLowerCase().trim();
             
             if (searchText === '') {
- if (searchText === '')                loadAffiliates( {
-                loadAffiliaffiliates);
-                return;
-           ates(affiliates);
+                loadAffiliates(affiliates);
                 return;
             }
             
-            const filteredAffiliates }
-            
-            const filteredAffiliates = affiliates.filter(affiliate = affiliates.filter( => {
-                constaffiliate => {
-                const matchesTitle = matchesTitle = affiliate.title.toLowerCase().includes(searchText);
-                const matches affiliate.title.toLowerCase().includes(searchText);
-                const matchesDescription = affiliate.descriptionDescription = affiliate.description.toLowerCase().includes(searchText.toLowerCase().includes(searchText);
+            const filteredAffiliates = affiliates.filter(affiliate => {
+                const matchesTitle = affiliate.title.toLowerCase().includes(searchText);
+                const matchesDescription = affiliate.description.toLowerCase().includes(searchText);
                 
-               );
-                
-                return matches return matchesTitle ||Title || matchesDescription matchesDescription;
-            });
-            
-;
+                return matchesTitle || matchesDescription;
             });
             
             loadAffiliates(filteredAffiliates);
         }
 
-                   loadAffiliates(filteredAffili // Mostrar notificación
-ates);
-        }
-
         // Mostrar notificación
-        function showNotification(message)        function showNotification(message) {
-            const {
-            const existingNotification = document existingNotification = document.querySelector.querySelector('.notification');
-('.notification');
-            if            if (existingNotification) {
-                existing (existingNotification) {
-                existingNotificationNotification.remove();
-            }
-.remove();
+        function showNotification(message) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
             }
             
-                       
-            const notification const notification = document.createElement('div');
-            notification.className = = document.createElement('div');
-            notification.className = 'notification 'notification';
-            notification.textContent = message';
+            const notification = document.createElement('div');
+            notification.className = 'notification';
             notification.textContent = message;
-            
-;
             
             document.body.appendChild(notification);
             
-                       document.body.appendChild(notification);
-            
             setTimeout(() => {
-                notification.style.opacity setTimeout(() => {
                 notification.style.opacity = '0';
- = '0';
-                setTimeout(() =>                setTimeout(() => {
-                    document.body.removeChild {
+                setTimeout(() => {
                     document.body.removeChild(notification);
-               (notification);
                 }, 500);
-            }, }, 500);
-            }, 3000 3000);
-);
+            }, 3000);
         }
 
-        }
+        // Event Listeners
+        searchInput.addEventListener('input', filterAffiliates);
 
-        // Event        // Event Listeners
-        searchInput.addEventListener Listeners
-        searchInput.addEventListener('input('input', filter', filterAffiliAffiliates);
-
-       ates);
-
-        // Inicializar // Inicializar la página
-        load la página
-        loadAffAffiliates(iliates(affiliaffiliates);
-    </ates);
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAffiliates(affiliates);
+            console.log('Afiliados cargados:', affiliates.length);
+        });
     </script>
-</body>
-script>
 </body>
 </html>
