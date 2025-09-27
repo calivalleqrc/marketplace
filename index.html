@@ -113,28 +113,6 @@
             font-size: 16px; /* Prevenir zoom en iOS */
         }
         
-        .category-filter {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .category-btn {
-            background: none;
-            border: 1px solid var(--color-negro);
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-family: 'Libre Baskerville', serif;
-            transition: all 0.3s;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-        
-        .category-btn:hover, .category-btn.active {
-            background-color: var(--color-negro);
-            color: var(--color-blanco);
-        }
-        
         /* Afiliados Grid */
         .affiliates-grid {
             display: grid;
@@ -305,15 +283,6 @@
                 flex-direction: column;
             }
             
-            .category-filter {
-                justify-content: center;
-            }
-            
-            .category-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
-            
             .hero h1 {
                 font-size: 1.8rem;
             }
@@ -400,6 +369,15 @@
                 font-size: 16px !important;
             }
         }
+        
+        /* Mensaje cuando no hay resultados */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-gris-oscuro);
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -423,7 +401,7 @@
         <!-- Filtros -->
         <div class="filters">
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Buscar Afiliados...">
+                <input type="text" id="searchInput" placeholder="Buscar Afiliados por nombre o descripción...">
             </div>
         </div>
 
@@ -538,11 +516,15 @@
         // Variables globales
         const affiliatesGrid = document.getElementById('affiliatesGrid');
         const searchInput = document.getElementById('searchInput');
-        const categoryBtns = document.querySelectorAll('.category-btn');
 
         // Cargar afiliados en la página
         function loadAffiliates(affiliatesToLoad) {
             affiliatesGrid.innerHTML = '';
+            
+            if (affiliatesToLoad.length === 0) {
+                affiliatesGrid.innerHTML = '<div class="no-results">No se encontraron afiliados que coincidan con tu búsqueda.</div>';
+                return;
+            }
             
             affiliatesToLoad.forEach(affiliate => {
                 const affiliateCard = document.createElement('div');
@@ -569,57 +551,98 @@
             });
         }
 
-        // Filtrar afiliados
-        function filterAffiliates() {
-            const searchText = searchInput.value.toLowerCase();
-            const activeCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
+        // // Filtrar afiliados Filtrar afiliados
+
+               function filterAffiliates() {
+ function filterAffiliates() {
+            const searchText            const searchText = searchInput.value.toLowerCase(). = searchInput.valuetrim();
             
-            const filteredAffiliates = affiliates.filter(affiliate => {
-                const matchesSearch = affiliate.title.toLowerCase().includes(searchText) || 
-                                     affiliate.description.toLowerCase().includes(searchText);
-                const matchesCategory = activeCategory === 'all' || affiliate.category === activeCategory;
+           .toLowerCase().trim();
+            
+            if (searchText === '') {
+ if (searchText === '')                loadAffiliates( {
+                loadAffiliaffiliates);
+                return;
+           ates(affiliates);
+                return;
+            }
+            
+            const filteredAffiliates }
+            
+            const filteredAffiliates = affiliates.filter(affiliate = affiliates.filter( => {
+                constaffiliate => {
+                const matchesTitle = matchesTitle = affiliate.title.toLowerCase().includes(searchText);
+                const matches affiliate.title.toLowerCase().includes(searchText);
+                const matchesDescription = affiliate.descriptionDescription = affiliate.description.toLowerCase().includes(searchText.toLowerCase().includes(searchText);
                 
-                return matchesSearch && matchesCategory;
+               );
+                
+                return matches return matchesTitle ||Title || matchesDescription matchesDescription;
+            });
+            
+;
             });
             
             loadAffiliates(filteredAffiliates);
         }
 
+                   loadAffiliates(filteredAffili // Mostrar notificación
+ates);
+        }
+
         // Mostrar notificación
-        function showNotification(message) {
-            // Eliminar notificación existente si hay una
-            const existingNotification = document.querySelector('.notification');
-            if (existingNotification) {
-                existingNotification.remove();
+        function showNotification(message)        function showNotification(message) {
+            const {
+            const existingNotification = document existingNotification = document.querySelector.querySelector('.notification');
+('.notification');
+            if            if (existingNotification) {
+                existing (existingNotification) {
+                existingNotificationNotification.remove();
+            }
+.remove();
             }
             
-            const notification = document.createElement('div');
-            notification.className = 'notification';
+                       
+            const notification const notification = document.createElement('div');
+            notification.className = = document.createElement('div');
+            notification.className = 'notification 'notification';
+            notification.textContent = message';
             notification.textContent = message;
+            
+;
             
             document.body.appendChild(notification);
             
+                       document.body.appendChild(notification);
+            
             setTimeout(() => {
+                notification.style.opacity setTimeout(() => {
                 notification.style.opacity = '0';
-                setTimeout(() => {
+ = '0';
+                setTimeout(() =>                setTimeout(() => {
+                    document.body.removeChild {
                     document.body.removeChild(notification);
+               (notification);
                 }, 500);
-            }, 3000);
+            }, }, 500);
+            }, 3000 3000);
+);
         }
 
-        // Event Listeners
-        searchInput.addEventListener('input', filterAffiliates);
+        }
 
-        categoryBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                filterAffiliates();
-            });
-        });
+        // Event        // Event Listeners
+        searchInput.addEventListener Listeners
+        searchInput.addEventListener('input('input', filter', filterAffiliAffiliates);
 
-        // Inicializar la página
-        loadAffiliates(affiliates);
+       ates);
+
+        // Inicializar // Inicializar la página
+        load la página
+        loadAffAffiliates(iliates(affiliaffiliates);
+    </ates);
     </script>
+</body>
+script>
 </body>
 </html>
