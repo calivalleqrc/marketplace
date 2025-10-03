@@ -179,19 +179,22 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
-        .product-video-container {
+        .product-image-container {
             position: relative;
             width: 100%;
             height: 200px;
             overflow: hidden;
-            background-color: #000;
+            background-color: #f8f9fa;
         }
         
-        .product-video {
+        .product-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-bottom: 1px solid var(--color-gris-medio);
+            transition: opacity 0.3s;
+            padding: 10px;
+            background-color: white;
         }
         
         .product-info {
@@ -508,11 +511,14 @@
             border-bottom: 1px solid var(--color-gris-medio);
         }
         
-        .direct-purchase-product iframe {
-            width: 120px;
+        .direct-purchase-product img {
+            width: 80px;
             height: 80px;
+            object-fit: contain;
             margin-right: 1rem;
             border-radius: 4px;
+            background-color: white;
+            padding: 5px;
         }
         
         .direct-purchase-info h3 {
@@ -992,7 +998,7 @@
     </footer>
 
     <script>
-        // Base de datos de productos con videos de YouTube
+        // Base de datos de productos con imágenes estáticas de Google Drive
         const products = [
             {
                 "id": 142,
@@ -1003,7 +1009,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 8192,
                 "productUrl": "https://ejemplo.com/productos/ego-plant-200ml",
-                "video": "https://m.youtube.com/watch?v=NCjhdGqmsIM&pp=ygUQVG90YWwgZmVycmV0ZXJpYQ%3D%3D"
+                "image": "https://drive.google.com/uc?export=view&id=1rbnCE2wulrJTSRIm2QCHKyLlHuWhyguk"
             },
             {
                 "id": 143,
@@ -1014,7 +1020,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 86240,
                 "productUrl": "https://ejemplo.com/productos/omnilife-f-plus",
-                "video": "https://youtu.be/NCjhdGqmsIM"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 144,
@@ -1025,7 +1031,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 102112,
                 "productUrl": "https://ejemplo.com/productos/fiber-n-plus-supreme",
-                "video": "https://youtube.com/shorts/21rPlnKuWYw?si=C52s7qFCe5SpbdFI"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 145,
@@ -1036,7 +1042,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 160960,
                 "productUrl": "https://ejemplo.com/productos/estop-plus",
-                "video": "https://www.youtube.com/embed/NCjhdGqmsIM&pp"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 146,
@@ -1047,7 +1053,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 86240,
                 "productUrl": "https://ejemplo.com/productos/homo-plus",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 147,
@@ -1058,7 +1064,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 8192,
                 "productUrl": "https://ejemplo.com/productos/omnilife-kolina",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 148,
@@ -1069,7 +1075,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 76832,
                 "productUrl": "https://ejemplo.com/productos/biocros-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 149,
@@ -1080,7 +1086,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 118112,
                 "productUrl": "https://ejemplo.com/productos/omniplus-frutas-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 150,
@@ -1091,7 +1097,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 118112,
                 "productUrl": "https://ejemplo.com/productos/omniplus-naranja-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 151,
@@ -1102,7 +1108,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 80480,
                 "productUrl": "https://ejemplo.com/productos/cognos-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 152,
@@ -1113,7 +1119,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 132384,
                 "productUrl": "https://ejemplo.com/productos/power-maker-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 153,
@@ -1124,7 +1130,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 57920,
                 "productUrl": "https://ejemplo.com/productos/tmgn-coffee-olla-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 154,
@@ -1135,7 +1141,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 76000,
                 "productUrl": "https://ejemplo.com/productos/starbien-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 155,
@@ -1146,7 +1152,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 100512,
                 "productUrl": "https://ejemplo.com/productos/super-mix-supreme-vainilla",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 156,
@@ -1157,7 +1163,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 57920,
                 "productUrl": "https://ejemplo.com/productos/tmgn-coffee-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 157,
@@ -1168,7 +1174,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 86560,
                 "productUrl": "https://ejemplo.com/productos/thermogen-tea-limon",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 158,
@@ -1179,7 +1185,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 130528,
                 "productUrl": "https://ejemplo.com/productos/thermogen-tea-maracuya",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 159,
@@ -1190,7 +1196,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 206272,
                 "productUrl": "https://ejemplo.com/productos/uzo-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 160,
@@ -1201,7 +1207,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 123936,
                 "productUrl": "https://ejemplo.com/productos/aqua-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 161,
@@ -1212,7 +1218,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 4096,
                 "productUrl": "https://ejemplo.com/productos/agua-blu-supreme-1.5l",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 162,
@@ -1223,7 +1229,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 2080,
                 "productUrl": "https://ejemplo.com/productos/agua-blu-supreme-600ml",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 163,
@@ -1234,7 +1240,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 39808,
                 "productUrl": "https://ejemplo.com/productos/aloe-beta-pina-960ml",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 164,
@@ -1245,7 +1251,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 8192,
                 "productUrl": "https://ejemplo.com/productos/aloe-beta-pina-200ml",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 165,
@@ -1256,7 +1262,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 97568,
                 "productUrl": "https://ejemplo.com/productos/dolce-vita-supreme-toronja",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 166,
@@ -1267,7 +1273,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 8192,
                 "productUrl": "https://ejemplo.com/productos/ego-10-200ml",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 167,
@@ -1278,7 +1284,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 61024,
                 "productUrl": "https://ejemplo.com/productos/ego-frutas-bosque",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 168,
@@ -1289,7 +1295,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 53248,
                 "productUrl": "https://ejemplo.com/productos/ego-life-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 169,
@@ -1300,7 +1306,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 102464,
                 "productUrl": "https://ejemplo.com/productos/omnilife-vkids",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 170,
@@ -1311,7 +1317,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 71872,
                 "productUrl": "https://ejemplo.com/productos/cafeline-plus",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 171,
@@ -1322,7 +1328,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 21984,
                 "productUrl": "https://ejemplo.com/productos/fx-naranja-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 172,
@@ -1333,7 +1339,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 21984,
                 "productUrl": "https://ejemplo.com/productos/fx-manzana-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 173,
@@ -1344,7 +1350,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 97056,
                 "productUrl": "https://ejemplo.com/productos/omnilife-pump-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 174,
@@ -1355,7 +1361,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 80832,
                 "productUrl": "https://ejemplo.com/productos/omniviu-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 175,
@@ -1366,7 +1372,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 66368,
                 "productUrl": "https://ejemplo.com/productos/one-c-mix-plus",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 176,
@@ -1377,7 +1383,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 94176,
                 "productUrl": "https://ejemplo.com/productos/omniost-evolucion",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 177,
@@ -1388,7 +1394,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 100096,
                 "productUrl": "https://ejemplo.com/productos/omnilife-probiotic",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 178,
@@ -1399,7 +1405,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 102880,
                 "productUrl": "https://ejemplo.com/productos/omnilife-shake-supreme-fresa",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 179,
@@ -1410,7 +1416,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 102880,
                 "productUrl": "https://ejemplo.com/productos/omnilife-shake-supreme",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 180,
@@ -1421,7 +1427,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 64672,
                 "productUrl": "https://ejemplo.com/productos/flu-y-capsulas",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 181,
@@ -1432,7 +1438,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 567680,
                 "productUrl": "https://ejemplo.com/productos/kit-500-puntos-nutricional",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 182,
@@ -1443,7 +1449,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 88000,
                 "productUrl": "https://ejemplo.com/productos/kit-bimarca-2024",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 183,
@@ -1454,7 +1460,7 @@
                 "supplier": "Omnilife Colombia",
                 "warehousePrice": 3520,
                 "productUrl": "https://ejemplo.com/productos/guia-omnilife-seytu-2025",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 22,
@@ -1465,7 +1471,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 72256,
                 "productUrl": "https://ejemplo.com/productos/set-brochas-ojos-labios",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 23,
@@ -1476,7 +1482,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 25792,
                 "productUrl": "https://ejemplo.com/productos/esponja-maquillaje",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 24,
@@ -1487,7 +1493,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 10880,
                 "productUrl": "https://ejemplo.com/productos/sacapuntas-seytu",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 25,
@@ -1498,7 +1504,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 88000,
                 "productUrl": "https://ejemplo.com/productos/kit-bimarca-2024",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 26,
@@ -1509,7 +1515,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 3520,
                 "productUrl": "https://ejemplo.com/productos/guia-omnilife-seytu-2025",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 27,
@@ -1520,7 +1526,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-moka",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 28,
@@ -1531,7 +1537,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-rubio-claro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 29,
@@ -1542,7 +1548,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 44800,
                 "productUrl": "https://ejemplo.com/productos/espuma-limpiadora-facial",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 30,
@@ -1553,7 +1559,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 28480,
                 "productUrl": "https://ejemplo.com/productos/brocha-maquillaje-liquido",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 31,
@@ -1564,7 +1570,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 75264,
                 "productUrl": "https://ejemplo.com/productos/set-brochas-rostro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 32,
@@ -1575,7 +1581,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-castano-oscuro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 33,
@@ -1586,7 +1592,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-castano-claro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 34,
@@ -1597,7 +1603,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-negro-natural",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 35,
@@ -1608,7 +1614,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-rojo",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 36,
@@ -1619,7 +1625,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43328,
                 "productUrl": "https://ejemplo.com/productos/tinte-rubio-extra-claro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 37,
@@ -1630,7 +1636,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-kalahari",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 38,
@@ -1641,7 +1647,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-masai",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 39,
@@ -1652,7 +1658,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-sahara",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 40,
@@ -1663,7 +1669,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-nairobi",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 41,
@@ -1674,7 +1680,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-samburu",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 42,
@@ -1685,7 +1691,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-sweet-coral",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 43,
@@ -1696,7 +1702,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-seytu-red",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 44,
@@ -1707,7 +1713,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-flash-red",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 45,
@@ -1718,7 +1724,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-candy-red",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 46,
@@ -1729,7 +1735,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-icon-violet",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 47,
@@ -1740,7 +1746,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-hot-pink",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 48,
@@ -1751,7 +1757,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-light-pink",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 49,
@@ -1762,7 +1768,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-sand-nude",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 50,
@@ -1773,7 +1779,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-rose-nude",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 51,
@@ -1784,7 +1790,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37696,
                 "productUrl": "https://ejemplo.com/productos/labial-hidratante-flame-coral",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 52,
@@ -1795,7 +1801,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 45248,
                 "productUrl": "https://ejemplo.com/productos/brillo-labial-ambar",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 53,
@@ -1806,7 +1812,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 45248,
                 "productUrl": "https://ejemplo.com/productos/brillo-labial-topaz",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 54,
@@ -1817,7 +1823,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 45248,
                 "productUrl": "https://ejemplo.com/productos/brillo-labial-agata",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 55,
@@ -1828,7 +1834,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 45248,
                 "productUrl": "https://ejemplo.com/productos/brillo-labial-zafiro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 56,
@@ -1839,7 +1845,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 45248,
                 "productUrl": "https://ejemplo.com/productos/brillo-labial-rubi",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 57,
@@ -1850,7 +1856,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 94016,
                 "productUrl": "https://ejemplo.com/productos/paleta-sombras-rosas",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 58,
@@ -1861,7 +1867,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-wifey",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 59,
@@ -1872,7 +1878,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-thirties",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 60,
@@ -1883,7 +1889,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 47936,
                 "productUrl": "https://ejemplo.com/productos/labial-mate-90s-baby",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 61,
@@ -1894,7 +1900,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 45248,
                 "productUrl": "https://ejemplo.com/productos/brillo-labial-opalo",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 62,
@@ -1905,7 +1911,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-c-natural",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 63,
@@ -1916,7 +1922,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-sun-beige",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 64,
@@ -1927,7 +1933,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-caramel",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 65,
@@ -1938,7 +1944,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 40512,
                 "productUrl": "https://ejemplo.com/productos/mascara-pestanas",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 66,
@@ -1949,7 +1955,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 94016,
                 "productUrl": "https://ejemplo.com/productos/paleta-sombras-marrones",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 67,
@@ -1960,7 +1966,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-fair",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 68,
@@ -1971,7 +1977,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-l-sand",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 69,
@@ -1982,7 +1988,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-s-honey",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 70,
@@ -1993,7 +1999,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-nat-beige",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 71,
@@ -2004,7 +2010,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 64192,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-w-beige",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 72,
@@ -2015,7 +2021,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 36480,
                 "productUrl": "https://ejemplo.com/productos/rubor-compacto-peach",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 73,
@@ -2026,7 +2032,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 36480,
                 "productUrl": "https://ejemplo.com/productos/rubor-compacto-plum",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 74,
@@ -2037,7 +2043,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 96896,
                 "productUrl": "https://ejemplo.com/productos/fragancia-successi-him",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 75,
@@ -2048,7 +2054,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 96896,
                 "productUrl": "https://ejemplo.com/productos/fragancia-successi-her",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 76,
@@ -2059,7 +2065,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 88640,
                 "productUrl": "https://ejemplo.com/productos/fragancia-kenya-vergara",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 77,
@@ -2070,7 +2076,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-c-natural",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 78,
@@ -2081,7 +2087,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-sun-beige",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 79,
@@ -2092,7 +2098,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-caramel",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 80,
@@ -2103,7 +2109,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-cocoa",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 81,
@@ -2114,7 +2120,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 36480,
                 "productUrl": "https://ejemplo.com/productos/rubor-compacto-apricot",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 82,
@@ -2125,7 +2131,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-fair",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 83,
@@ -2136,7 +2142,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-l-sand",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 84,
@@ -2147,7 +2153,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-s-honey",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 85,
@@ -2158,7 +2164,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-nat-beige",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 86,
@@ -2169,7 +2175,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79680,
                 "productUrl": "https://ejemplo.com/productos/maquillaje-liq-w-beige",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 87,
@@ -2180,7 +2186,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 22656,
                 "productUrl": "https://ejemplo.com/productos/gel-fijador-cabello",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 88,
@@ -2191,7 +2197,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 28032,
                 "productUrl": "https://ejemplo.com/productos/acondicionador-herbal",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 89,
@@ -2202,7 +2208,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 30528,
                 "productUrl": "https://ejemplo.com/productos/delineador-penliner",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 90,
@@ -2213,7 +2219,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 35904,
                 "productUrl": "https://ejemplo.com/productos/delineador-liquido-negro",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 91,
@@ -2224,7 +2230,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 69568,
                 "productUrl": "https://ejemplo.com/productos/set-delineador-cejas",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 92,
@@ -2235,18 +2241,18 @@
                 "supplier": "Seytú",
                 "warehousePrice": 68736,
                 "productUrl": "https://ejemplo.com/productos/shampoo-fortificante",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 93,
                 "title": "ACONDICIONADOR CON EXTRACTOS HERBALES",
                 "price": 37400,
-                "description": "Opción de pago a 6 cuotas de 6.233 con 0% interés. ",
+                "description": "Opción de pago a 6 cuotas of 6.233 con 0% interés. ",
                 "category": "belleza",
                 "supplier": "Seytú",
                 "warehousePrice": 23936,
                 "productUrl": "https://ejemplo.com/productos/acondicionador-herbal-2",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 94,
@@ -2257,7 +2263,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37056,
                 "productUrl": "https://ejemplo.com/productos/shampoo-cabello-debil",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 95,
@@ -2268,7 +2274,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 37056,
                 "productUrl": "https://ejemplo.com/productos/shampoo-color-protect",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 96,
@@ -2279,7 +2285,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 79872,
                 "productUrl": "https://ejemplo.com/productos/complejo-multivitaminico-capilar",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 97,
@@ -2290,7 +2296,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 41472,
                 "productUrl": "https://ejemplo.com/productos/balsamo-labial-omniplus",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 98,
@@ -2301,7 +2307,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 42240,
                 "productUrl": "https://ejemplo.com/productos/micro-exfoliante-facial",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 99,
@@ -2312,7 +2318,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 55680,
                 "productUrl": "https://ejemplo.com/productos/protector-solar-facial",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 100,
@@ -2323,7 +2329,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 76032,
                 "productUrl": "https://ejemplo.com/productos/protector-solar-corporal",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 101,
@@ -2334,7 +2340,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 36992,
                 "productUrl": "https://ejemplo.com/productos/desmaquillante-ojos",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 102,
@@ -2345,7 +2351,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 53568,
                 "productUrl": "https://ejemplo.com/productos/mascarilla-facial",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 103,
@@ -2356,7 +2362,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 86720,
                 "productUrl": "https://ejemplo.com/productos/gel-anti-manchas",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 104,
@@ -2367,7 +2373,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 80448,
                 "productUrl": "https://ejemplo.com/productos/crema-manos-cuello-escote",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 105,
@@ -2378,7 +2384,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 78784,
                 "productUrl": "https://ejemplo.com/productos/tonico-hidratante",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 106,
@@ -2389,7 +2395,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 43584,
                 "productUrl": "https://ejemplo.com/productos/crema-limpiadora-facial",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 107,
@@ -2400,7 +2406,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 93760,
                 "productUrl": "https://ejemplo.com/productos/locion-capilar-fortificante",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 108,
@@ -2411,7 +2417,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 69504,
                 "productUrl": "https://ejemplo.com/productos/gel-crema-estrias",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 109,
@@ -2422,7 +2428,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 53760,
                 "productUrl": "https://ejemplo.com/productos/dermolimpiador-facial",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 110,
@@ -2433,7 +2439,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 53120,
                 "productUrl": "https://ejemplo.com/productos/gel-localizado",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 111,
@@ -2444,7 +2450,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 69760,
                 "productUrl": "https://ejemplo.com/productos/suero-perfeccionador",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 112,
@@ -2455,7 +2461,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 62016,
                 "productUrl": "https://ejemplo.com/productos/crema-hidratante-noche",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 113,
@@ -2466,7 +2472,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 62016,
                 "productUrl": "https://ejemplo.com/productos/crema-hidratante-dia",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 114,
@@ -2477,7 +2483,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 63616,
                 "productUrl": "https://ejemplo.com/productos/crema-contorno-ojos",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 115,
@@ -2488,7 +2494,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 98944,
                 "productUrl": "https://ejemplo.com/productos/crema-dia-fps30",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 116,
@@ -2499,7 +2505,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 99072,
                 "productUrl": "https://ejemplo.com/productos/suero-noche",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 117,
@@ -2510,7 +2516,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 28032,
                 "productUrl": "https://ejemplo.com/productos/shampoo-herbal",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 118,
@@ -2521,7 +2527,7 @@
                 "supplier": "be",
                 "warehousePrice": 35136,
                 "productUrl": "https://ejemplo.com/productos/corrector-liquido-fair",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 119,
@@ -2532,7 +2538,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 35136,
                 "productUrl": "https://ejemplo.com/productos/corrector-liquido-light",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 120,
@@ -2543,7 +2549,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 35136,
                 "productUrl": "https://ejemplo.com/productos/corrector-liquido-medium",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 121,
@@ -2554,7 +2560,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 35136,
                 "productUrl": "https://ejemplo.com/productos/corrector-liquido-deep",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 122,
@@ -2565,7 +2571,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 8768,
                 "productUrl": "https://ejemplo.com/productos/crema-manos-sandia-melon",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 123,
@@ -2576,7 +2582,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 55872,
                 "productUrl": "https://ejemplo.com/productos/suero-facial-aloe-vera",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 124,
@@ -2587,7 +2593,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 38528,
                 "productUrl": "https://ejemplo.com/productos/omniplus-gel-premium",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 125,
@@ -2598,7 +2604,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 43520,
                 "productUrl": "https://ejemplo.com/productos/mascarilla-reparadora-capilar",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 126,
@@ -2609,7 +2615,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 35776,
                 "productUrl": "https://ejemplo.com/productos/suero-contorno-ojos-aloe",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 127,
@@ -2620,7 +2626,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 33728,
                 "productUrl": "https://ejemplo.com/productos/jabon-corporal-frutos-rojos",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 128,
@@ -2631,7 +2637,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 567680,
                 "productUrl": "https://ejemplo.com/productos/kit-500-puntos-belleza",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 129,
@@ -2642,7 +2648,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 71680,
                 "productUrl": "https://ejemplo.com/productos/crema-corporal-piel-naranja",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 130,
@@ -2653,7 +2659,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 8768,
                 "productUrl": "https://ejemplo.com/productos/crema-manos-manzana-pera",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 131,
@@ -2664,7 +2670,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 8768,
                 "productUrl": "https://ejemplo.com/productos/crema-manos-vainilla",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 132,
@@ -2675,7 +2681,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 42944,
                 "productUrl": "https://ejemplo.com/productos/polvo-traslucido",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 133,
@@ -2686,7 +2692,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 13184,
                 "productUrl": "https://ejemplo.com/productos/crema-manos-coco-vainilla",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 134,
@@ -2697,7 +2703,7 @@
                 "supplier": "belleza ",
                 "warehousePrice": 13184,
                 "productUrl": "https://ejemplo.com/productos/crema-manos-frutos-rojos",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 135,
@@ -2708,7 +2714,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 36032,
                 "productUrl": "https://ejemplo.com/productos/locion-corporal-coco-vainilla",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 136,
@@ -2719,7 +2725,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 36032,
                 "productUrl": "https://ejemplo.com/productos/locion-corporal-frutos-rojos",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 137,
@@ -2730,7 +2736,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 30464,
                 "productUrl": "https://ejemplo.com/productos/polvo-iluminador-desert-sunset",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 138,
@@ -2741,7 +2747,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 30464,
                 "productUrl": "https://ejemplo.com/productos/polvo-iluminador-desert-rose",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 139,
@@ -2752,7 +2758,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 30464,
                 "productUrl": "https://ejemplo.com/productos/polvo-iluminador-desert-sand",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 140,
@@ -2763,7 +2769,7 @@
                 "supplier": "belleza",
                 "warehousePrice": 25152,
                 "productUrl": "https://ejemplo.com/productos/lapiz-cejas-universal",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             },
             {
                 "id": 141,
@@ -2774,7 +2780,7 @@
                 "supplier": "Seytú",
                 "warehousePrice": 25152,
                 "productUrl": "https://ejemplo.com/productos/lapiz-cejas-brown",
-                "video": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+                "image": "https://drive.google.com/uc?export=view&id=1abc123def456ghi789jkl"
             }
         ];
 
@@ -2830,15 +2836,8 @@
                 productCard.className = 'product-card';
                 productCard.innerHTML = `
                     <a href="${product.productUrl}" class="product-link" target="_blank">
-                        <div class="product-video-container">
-                            <iframe 
-                                src="${product.video}" 
-                                class="product-video"
-                                title="${product.title}"
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen>
-                            </iframe>
+                        <div class="product-image-container">
+                            <img src="${product.image}" alt="${product.title}" class="product-image">
                         </div>
                     </a>
                     <div class="product-info">
@@ -2886,13 +2885,7 @@
             
             // Mostrar información del producto en el modal
             directPurchaseProduct.innerHTML = `
-                <iframe 
-                    src="${product.video}" 
-                    title="${product.title}"
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
+                <img src="${product.image}" alt="${product.title}">
                 <div class="direct-purchase-info">
                     <h3>${product.title}</h3>
                     <p class="product-price">${formatPrice(product.price)}</p>
@@ -2939,7 +2932,7 @@
                     title: product.title,
                     price: product.price,
                     quantity: 1,
-                    video: product.video
+                    image: product.image
                 });
             }
             
@@ -2982,15 +2975,7 @@
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
                 cartItem.innerHTML = `
-                    <iframe 
-                        src="${item.video}" 
-                        width="50" 
-                        height="50"
-                        title="${item.title}"
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
+                    <img src="${item.image}" alt="${item.title}" width="50" height="50" style="object-fit: contain; background: white; padding: 5px;">
                     <div class="item-info">
                         <h4 class="item-title">${item.title}</h4>
                         <p class="item-price">${formatPrice(item.price)} c/u</p>
