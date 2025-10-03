@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contraentrega Cali - Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-blanco: #ffffff;
+            --color-negro: #000000;
+            --color-gris-claro: #f5f5f5;
+            --color-gris-medio: #e0e0e0;
+            --color-gris-oscuro: #333333;
+            --color-verde: #25D366;
+            --color-azul: #007bff;
+            --color-rojo: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--color-blanco);
+            color: var(--color-negro);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+            max-width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--color-gris-claro);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Filtros */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 16px;
+        }
+        
+        /* Afiliados Grid */
+        .affiliates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .affiliate-card {
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .affiliate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .affiliate-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .affiliate-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid var(--color-gris-medio);
+            transition: opacity 0.3s;
+        }
+        
+        .affiliate-info {
+            padding: 1rem;
+        }
+        
+        .affiliate-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            min-height: 2.8rem;
+        }
+        
+        .shipping-info {
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-verde);
+            min-height: 1.5rem;
+        }
+        
+        .affiliate-description {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-gris-oscuro);
+            min-height: 2.8rem;
+        }
+        
+        .affiliate-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .whatsapp-chat, .more-info {
+            padding: 0.7rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .whatsapp-chat {
+            background-color: var(--color-verde);
+            color: var(--color-blanco);
+        }
+        
+        .whatsapp-chat:hover {
+            background-color: #128C7E;
+        }
+        
+        .more-info {
+            background-color: var(--color-azul);
+            color: var(--color-blanco);
+        }
+        
+        .more-info:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            margin-bottom: 0.5rem;
+            color: var(--color-gris-medio);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .footer-section a:hover {
+            color: var(--color-blanco);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gris-oscuro);
+            color: var(--color-gris-medio);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .affiliates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .affiliate-actions {
+                flex-direction: column;
+            }
+            
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: row;
+                gap: 1rem;
+            }
+            
+            .affiliates-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .affiliate-card {
+                min-width: 160px;
+            }
+            
+            .affiliate-title {
+                font-size: 1rem;
+            }
+            
+            .whatsapp-chat, .more-info {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Notificación */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 10px 20px;
+            border-radius: 4px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.5s;
+        }
+        
+        /* Mensaje cuando no hay resultados */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: var(--color-gris-oscuro);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+        
+        .results-count {
+            margin-bottom: 1rem;
+            color: var(--color-gris-oscuro);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="https://qrcontraentrega.com/img/c.jpg" alt="Logo CaliValle" class="logo-img">
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>CONTRAENTREGA MARKETPLACE</h1>
+        <p>CALI, VALLE DEL CAUCA, COLOMBIA</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar Afiliados por nombre o descripción...">
+            </div>
+        </div>
+
+        <!-- Contador de resultados -->
+        <div class="results-count" id="resultsCount"></div>
+
+        <!-- Afiliados Grid -->
+        <div class="affiliates-grid" id="affiliatesGrid">
+            <!-- Los afiliados se cargarán dinámicamente con JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Acerca de Nosotros</h3>
+                <p>Somos Contraentrega. La revolución en logística y comercio electrónico de Colombia. Conectamos vendedores y compradores con una red de entrega confiable y el sistema de pago contraentrega más seguro.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-phone"></i> +57 3215343562</p>
+                <p><i class="fas fa-envelope"></i> calivalle@qrcontraentrega.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Carrera 16 # 9 - 44, Cali, Colombia</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/g/1A38o4m7Fg/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
+                    <a href="https://instagram.com/colombia_qrcontraentrega"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/573215343562"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <a href="https://qrcontraentrega.com/afiliacion-colombia">Afiliarse a Contraentrega</a>
+                <a href="https://qrcontraentrega.com/solicitar-envio-colombia">Solicitar envío Contraentrega</a>
+                <a href="https://calivalle.qrcontraentrega.com/terminos-y-condiciones">Términos y Condiciones</a>
+                <a href="https://calivalle.qrcontraentrega.com/mapa">Mapa de afiliados de Cali</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Contraentrega. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Base de datos de afiliados CORREGIDA
+        const affiliates = [
+            {
+                id: 1,
+                title: "@hermanosdreams",
+                description: "Belleza y Cuidado Personal",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@hermanosdreams%20Cali%20Valle",
+                infoUrl: "https://hermanosdreams.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 2,
+                title: "@droceshop",
+                description: "Moda y Accesorios",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@droceshop%20Cali%20Valle",
+                infoUrl: "https://droceshop.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 3,
+                title: "@18toys",
+                description: "Juegos y Juguetes",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@18toys%20Cali%20Valle",
+                infoUrl: "https://18toys.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 4,
+                title: "@barasurdito",
+                description: "Alimentos y Bebidas",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20de%20@barasurdito%20Cali%20Valle",
+                infoUrl: "https://barasurdito.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 5,
+                title: "@distriyox",
+                description: "Tecnología y Electrónicos",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@distriyox%20Cali%20Valle",
+                infoUrl: "https://distriyox.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 6,
+                title: "@wandershoescol",
+                description: "Moda y Accesorios",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@wandershoescol%20Cali%20Valle",
+                infoUrl: "https://wandershoescol.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 7,
+                title: "@18realdecolombia",
+                description: "Inmuebles",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@18realdecolombia%20Cali%20Valle",
+                infoUrl: "https://18realdecolombia.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            },
+            {
+                id: 8,
+                title: "@merchantcars",
+                description: "Automóviles y Motos",
+                whatsappUrl: "https://wa.me/573215343562?text=Hola,%20estoy%20interesado%20en%20más%20información%20@merchantcars%20Cali%20Valle",
+                infoUrl: "https://merchantcars.qrcontraentrega.com",
+                image: "https://calivalle.qrcontraentrega.com/img/c.jpg"
+            }
+        ];
+
+        // Variables globales
+        const affiliatesGrid = document.getElementById('affiliatesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const resultsCount = document.getElementById('resultsCount');
+
+        // Cargar afiliados en la página
+        function loadAffiliates(affiliatesToLoad) {
+            affiliatesGrid.innerHTML = '';
+            
+            if (affiliatesToLoad.length === 0) {
+                affiliatesGrid.innerHTML = '<div class="no-results">No se encontraron afiliados que coincidan con tu búsqueda.</div>';
+                resultsCount.textContent = '0 afiliados encontrados';
+                return;
+            }
+            
+            // Actualizar contador
+            resultsCount.textContent = `${affiliatesToLoad.length} afiliado${affiliatesToLoad.length !== 1 ? 's' : ''} encontrado${affiliatesToLoad.length !== 1 ? 's' : ''}`;
+            
+            affiliatesToLoad.forEach(affiliate => {
+                const affiliateCard = document.createElement('div');
+                affiliateCard.className = 'affiliate-card';
+                affiliateCard.innerHTML = `
+                    <div class="affiliate-image-container">
+                        <img src="${affiliate.image}" alt="${affiliate.title}" class="affiliate-image" onerror="this.src='https://calivalle.qrcontraentrega.com/img/c.jpg'">
+                    </div>
+                    <div class="affiliate-info">
+                        <h3 class="affiliate-title">${affiliate.title}</h3>
+                        <p class="shipping-info">Ofrece envío gratis en Cali</p>
+                        <p class="affiliate-description">${affiliate.description}</p>
+                        <div class="affiliate-actions">
+                            <a href="${affiliate.whatsappUrl}" class="whatsapp-chat" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Chatear por WhatsApp
+                            </a>
+                            <a href="${affiliate.infoUrl}" class="more-info" target="_blank">
+                                <i class="fas fa-info-circle"></i> Más información
+                            </a>
+                        </div>
+                    </div>
+                `;
+                affiliatesGrid.appendChild(affiliateCard);
+            });
+        }
+
+        // Filtrar afiliados
+        function filterAffiliates() {
+            const searchText = searchInput.value.toLowerCase().trim();
+            
+            if (searchText === '') {
+                loadAffiliates(affiliates);
+                return;
+            }
+            
+            const filteredAffiliates = affiliates.filter(affiliate => {
+                const matchesTitle = affiliate.title.toLowerCase().includes(searchText);
+                const matchesDescription = affiliate.description.toLowerCase().includes(searchText);
+                
+                return matchesTitle || matchesDescription;
+            });
+            
+            loadAffiliates(filteredAffiliates);
+        }
+
+        // Mostrar notificación
+        function showNotification(message) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', filterAffiliates);
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAffiliates(affiliates);
+            console.log('Afiliados cargados:', affiliates.length);
+        });
+    </script>
+</body>
+</html>
