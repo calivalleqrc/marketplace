@@ -2,570 +2,3663 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FZ1 - Contraentregaco</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Afiliado @hermanosdreams - Contraentrega</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --color-blanco: #ffffff;
+            --color-negro: #000000;
+            --color-gris-claro: #f5f5f5;
+            --color-gris-medio: #e0e0e0;
+            --color-gris-oscuro: #333333;
+            --color-verde: #25D366;
+            --color-azul: #007bff;
+            --color-rojo: #dc3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--color-blanco);
+            color: var(--color-negro);
+            line-height: 1.6;
+            font-size: 16px; /* Tamaño de fuente base para evitar zoom */
         }
-        .navbar-brand {
-            font-weight: 700;
+        
+        /* Header */
+        header {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .hero-section {
-            background-color: #212529;
-            color: white;
-            padding: 4rem 0;
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        .product-card {
-            transition: transform 0.3s;
-            margin-bottom: 20px;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-        .quantity-controls {
+        
+        .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 0.5rem;
+            text-decoration: none;
         }
-        .quantity-controls button {
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+            max-width: 100%;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--color-blanco);
+            color: var(--color-negro);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background-color: var(--color-gris-claro);
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Filtros */
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .search-box {
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 16px; /* Prevenir zoom en iOS */
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            background: none;
+            border: 1px solid var(--color-negro);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-family: 'Libre Baskerville', serif;
+            transition: all 0.3s;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+        }
+        
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .product-card {
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image-container {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom: 1px solid var(--color-gris-medio);
+            transition: opacity 0.3s;
+        }
+        
+        .image-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: none; /* Ocultar navegación de imágenes para simplificar */
+        }
+        
+        .product-image-container:hover .image-nav {
+            opacity: 1;
+        }
+        
+        .nav-btn {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
             width: 30px;
             height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            min-height: 2.8rem;
+        }
+        
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-gris-oscuro);
+        }
+        
+        .product-description {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--color-gris-oscuro);
+            min-height: 2.8rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .add-to-cart, .buy-now {
+            padding: 0.7rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+            flex: 1;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .add-to-cart {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--color-gris-oscuro);
+        }
+        
+        .buy-now {
+            background-color: var(--color-gris-oscuro);
+            color: var(--color-blanco);
+        }
+        
+        .buy-now:hover {
+            background-color: var(--color-negro);
+        }
+        
+        /* Enlaces de producto */
+        .product-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .product-link:hover .product-title {
+            text-decoration: underline;
+        }
+        
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .cart-content {
+            background-color: var(--color-blanco);
+            width: 90%;
+            max-width: 600px;
+            border-radius: 8px;
+            padding: 2rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .close-cart {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .cart-items {
+            margin-bottom: 1.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .item-info {
+            flex-grow: 1;
+        }
+        
+        .item-title {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+        }
+        
+        .item-price {
+            color: var(--color-gris-oscuro);
+            font-size: 0.9rem;
+        }
+        
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .quantity-btn {
+            background: none;
+            border: 1px solid var(--color-gris-medio);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .remove-item {
+            color: #ff0000;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--color-gris-medio);
+        }
+        
+        /* Customer Info Form */
+        .customer-info {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--color-gris-claro);
+            border-radius: 8px;
+        }
+        
+        .customer-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 16px; /* Prevenir zoom en iOS */
+        }
+        
+        .checkout-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .checkout-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 0.5rem;
         }
-        .checkout-section {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            margin-top: 20px;
+        
+        .whatsapp-btn {
+            background-color: var(--color-verde);
+            color: white;
         }
-        .payment-instructions {
-            background-color: #e3f2fd;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
         }
-        .cop-details {
-            background-color: #d4edda;
-            border: 1px solid #c3e6cb;
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 15px;
+        
+        .whatsapp-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
         }
-        .loading-spinner {
+        
+        .email-btn {
+            background-color: var(--color-rojo);
+            color: white;
+        }
+        
+        .email-btn:hover {
+            background-color: #bd2130;
+        }
+        
+        .email-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .continue-shopping {
+            background-color: var(--color-gris-medio);
+            color: var(--color-negro);
+        }
+        
+        .continue-shopping:hover {
+            background-color: var(--color-gris-oscuro);
+            color: var(--color-blanco);
+        }
+        
+        /* Modal para compra directa */
+        .direct-purchase-modal {
             display: none;
-            width: 3rem;
-            height: 3rem;
-            margin: 20px auto;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
         }
-        .clickable {
+        
+        .direct-purchase-content {
+            background-color: var(--color-blanco);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            padding: 2rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .direct-purchase-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .close-direct-purchase {
+            font-size: 1.5rem;
             cursor: pointer;
-            color: #0d6efd;
+            background: none;
+            border: none;
         }
-        .clickable:hover {
-            text-decoration: underline;
+        
+        .direct-purchase-product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gris-medio);
         }
-        #qrCode {
+        
+        .direct-purchase-product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border-radius: 4px;
+        }
+        
+        .direct-purchase-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .direct-purchase-info .product-price {
+            margin-bottom: 0;
+        }
+        
+        /* Admin Access Section */
+        .admin-access {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: var(--color-gris-claro);
+            border-radius: 8px;
             text-align: center;
-            margin: 15px 0;
         }
-        .badge-sale {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 0.8rem;
+        
+        .admin-access h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
-        .inventory-badge {
-            font-size: 0.75rem;
+        
+        .admin-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .admin-form input {
+            padding: 0.8rem;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 16px;
+        }
+        
+        .admin-form button {
+            padding: 0.8rem;
+            background-color: var(--color-negro);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .admin-form button:hover {
+            background-color: var(--color-gris-oscuro);
+        }
+        
+        /* Supplier Table */
+        .supplier-table-container {
+            display: none;
+            margin: 2rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .supplier-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+        
+        .supplier-table th,
+        .supplier-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .supplier-table th {
+            background-color: var(--color-gris-claro);
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+        }
+        
+        .supplier-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .supplier-table tr:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            margin-bottom: 0.5rem;
+            color: var(--color-gris-medio);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .footer-section a:hover {
+            color: var(--color-blanco);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gris-oscuro);
+            color: var(--color-gris-medio);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                overflow-x: auto;
+                padding-bottom: 1rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+            }
+            
+            .category-filter {
+                justify-content: center;
+            }
+            
+            .category-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .cart-content, .direct-purchase-content {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            /* Ajustes para evitar zoom en formularios móviles */
+            input, select, textarea {
+                font-size: 16px !important;
+            }
+            
+            .checkout-buttons {
+                gap: 0.5rem;
+            }
+            
+            .checkout-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: row;
+                gap: 1rem;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .item-quantity {
+                align-self: flex-end;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .product-card {
+                min-width: 160px;
+            }
+            
+            .product-title {
+                font-size: 1rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .add-to-cart, .buy-now {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Notificación */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 10px 20px;
+            border-radius: 4px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.5s;
+        }
+        
+        /* Scroll horizontal en móviles */
+        .scroll-container {
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .scroll-content {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 769px) {
+            .scroll-container {
+                overflow-x: visible;
+            }
+            
+            .scroll-content {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        /* Estilo específico para prevenir zoom en iOS */
+        @media screen and (max-width: 767px) {
+            input, textarea, select {
+                font-size: 16px !important;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">FZ1</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="https://www.facebook.com/share/g/1LeZfR3zJ2/">Facebook</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Whatsapp</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Celular</a></li>
-                </ul>
-                <div class="d-flex">
-                    <button class="btn btn-outline-dark position-relative" onclick="showOrderModal()">
-                        <i class="bi bi-cart-fill"></i>
-                        <span id="cartCounter" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark">0</span>
-                    </button>
-                </div>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="https://qrcontraentrega.com/img/c.jpg" alt="Logo CaliValle" class="logo-img">
+            </a>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
             </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero-section">
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold mb-3">9Guarapo</h1>
-            <p class="lead">Los mejores productos al mejor precio</p>
         </div>
     </header>
 
-    <!-- Product Section -->
-    <section class="py-5">
-        <div class="container">
-            <div class="row g-4" id="productsContainer">
-                <!-- Productos se cargarán aquí -->
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>@HERMANOSDREAMS</h1>
+        <p>PAGA AL RECIBIR CON ENVÍO GRATIS A TODO COLOMBIA</p>
+    </section>
+        
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar por categoría...">
+            </div>
+            <div class="category-filter">
+                <button class="category-btn active" data-category="nutricion">Nutrición</button>
+                <button class="category-btn" data-category="belleza">Belleza</button>
             </div>
         </div>
-    </section>
 
-    <!-- Order Modal -->
-    <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tu Pedido</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Product Grid -->
+        <div class="scroll-container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Los productos se cargarán dinámicamente con JavaScript -->
+            </div>
+        </div>
+
+        <!-- Admin Access Section -->
+        <div class="admin-access">
+            <h2></h2>
+            <div class="admin-form">
+                <input type="password" id="adminKey" placeholder="Ingreso del afiliado">
+                <button id="adminAccessBtn">Acceder</button>
+            </div>
+        </div>
+
+        <!-- Supplier Table -->
+        <div class="supplier-table-container" id="supplierTableContainer">
+            <table class="supplier-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Precio Proveedor</th>
+                        <th>Precio Venta</th>
+                        <th>Proveedor</th>
+                        <th>Margen</th>
+                    </tr>
+                </thead>
+                <tbody id="supplierTableBody">
+                    <!-- Los datos se cargarán dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Tu Carrito de Compras</h2>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Los items del carrito se cargarán dinámicamente -->
+            </div>
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            
+            <!-- Customer Information Form -->
+            <div class="customer-info">
+                <h3>Información de Envío</h3>
+                <div class="form-group">
+                    <label for="customerName">Nombre Completo *</label>
+                    <input type="text" id="customerName" placeholder="Ingresa tu nombre completo" required>
                 </div>
-                <div class="modal-body">
-                    <div id="orderSummary"></div>
-                    
-                    <div id="checkoutFormSection">
-                        <div class="checkout-section">
-                            <h5>Método de Entrega</h5>
-                            <div class="form-check mb-2">
-                                <input class="form-check-input" type="radio" name="deliveryMethod" id="pickup" value="pickup" checked>
-                                <label class="form-check-label" for="pickup">Recoger en tienda</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deliveryMethod" id="delivery" value="delivery">
-                                <label class="form-check-label" for="delivery">Envío a domicilio (+$5,000)</label>
-                            </div>
-                            
-                            <form id="customerForm" class="mt-3">
-                                <div class="mb-3">
-                                    <label for="customerName" class="form-label">Nombre completo</label>
-                                    <input type="text" class="form-control" id="customerName" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="customerPhone" class="form-label">Teléfono</label>
-                                    <input type="tel" class="form-control" id="customerPhone" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="customerEmail" class="form-label">Correo electrónico</label>
-                                    <input type="email" class="form-control" id="customerEmail" required>
-                                </div>
-                                <div class="mb-3" id="addressField" style="display: none;">
-                                    <label for="customerAddress" class="form-label">Dirección completa</label>
-                                    <input type="text" class="form-control" id="customerAddress">
-                                </div>
-                                
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
-                                    <button type="button" class="btn btn-primary me-md-2" onclick="processPayment('COP')">
-                                        <i class="bi bi-cash-coin"></i> Pagar con COP
-                                    </button>
-                                    <button type="button" class="btn btn-warning" onclick="processPayment('Lightning')">
-                                        <i class="bi bi-lightning-charge-fill"></i> Pagar con Lightning
-                                    </button>
-                                </div>
-                            </form>
-                            
-                            <div class="text-center mt-3">
-                                <div id="loadingSpinner" class="spinner-border text-primary loading-spinner" role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                <div id="errorMessage" class="alert alert-danger mt-3" style="display: none;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- COP Payment Instructions -->
-                    <div id="copPaymentSection" class="cop-details" style="display: none;">
-                        <h4><i class="bi bi-cash-coin"></i> Pago con COP</h4>
-                        <p>✅ Total a pagar: <strong id="copTotalAmount"></strong></p>
-                        <p>📝 Número de pedido: <strong id="copOrderNumber"></strong></p>
-                        <p>💰 Por favor prepara el monto exacto en efectivo</p>
-                        <p>📦 Tu pedido será procesado inmediatamente</p>
-                        
-                        <div class="d-grid mt-3">
-                            <button class="btn btn-success" onclick="completeOrder()">
-                                <i class="bi bi-check-circle"></i> He realizado el pago
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Lightning Payment Instructions -->
-                    <div id="lightningPaymentSection" class="payment-instructions" style="display: none;">
-                        <h4><i class="bi bi-lightning-charge-fill"></i> Pago con Lightning</h4>
-                        <p>✅ Total a pagar: <strong id="lightningTotalAmount"></strong></p>
-                        <p>🔗 Dirección Lightning: <strong>tu@lightningaddress.com</strong></p>
-                        <p>📝 Referencia de pago: <strong id="lightningOrderNumber"></strong></p>
-                        
-                        <div id="qrCode" class="mb-3"></div>
-                        <p>Escanea el código QR o copia la dirección manualmente</p>
-                        
-                        <div class="d-grid mt-3">
-                            <button class="btn btn-success" onclick="completeOrder()">
-                                <i class="bi bi-check-circle"></i> He realizado el pago
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div id="successMessage" class="alert alert-success mt-3" style="display: none;">
-                        ¡Pedido realizado con éxito! Nos comunicaremos contigo pronto.
-                    </div>
+                <div class="form-group">
+                    <label for="customerPhone">Teléfono *</label>
+                    <input type="tel" id="customerPhone" placeholder="Ingresa tu número de teléfono" required>
                 </div>
+                <div class="form-group">
+                    <label for="customerAddress">Dirección de Envío *</label>
+                    <input type="text" id="customerAddress" placeholder="Ingresa tu dirección completa" required>
+                </div>
+            </div>
+            
+            <div class="checkout-buttons">
+                <button class="checkout-btn whatsapp-btn" id="whatsappBtn" disabled>
+                    <i class="fab fa-whatsapp"></i> Finalizar compra por WhatsApp
+                </button>
+                <button class="checkout-btn email-btn" id="emailBtn" disabled>
+                    <i class="fas fa-envelope"></i> Enviar pedido por Correo
+                </button>
+                <button class="checkout-btn continue-shopping" id="continueShopping">Seguir comprando</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Direct Purchase Modal -->
+    <div class="direct-purchase-modal" id="directPurchaseModal">
+        <div class="direct-purchase-content">
+            <div class="direct-purchase-header">
+                <h2>Comprar Producto</h2>
+                <button class="close-direct-purchase" id="closeDirectPurchase">&times;</button>
+            </div>
+            
+            <div class="direct-purchase-product" id="directPurchaseProduct">
+                <!-- Información del producto se cargará dinámicamente -->
+            </div>
+            
+            <!-- Customer Information Form -->
+            <div class="customer-info">
+                <h3>Información de Envío</h3>
+                <div class="form-group">
+                    <label for="directCustomerName">Nombre Completo *</label>
+                    <input type="text" id="directCustomerName" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="directCustomerPhone">Teléfono *</label>
+                    <input type="tel" id="directCustomerPhone" placeholder="Ingresa tu número de teléfono" required>
+                </div>
+                <div class="form-group">
+                    <label for="directCustomerAddress">Dirección de Envío *</label>
+                    <input type="text" id="directCustomerAddress" placeholder="Ingresa tu dirección completa" required>
+                </div>
+            </div>
+            
+            <div class="checkout-buttons">
+                <button class="checkout-btn whatsapp-btn" id="directWhatsappBtn" disabled>
+                    <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                </button>
+                <button class="checkout-btn email-btn" id="directEmailBtn" disabled>
+                    <i class="fas fa-envelope"></i> Enviar pedido por Correo
+                </button>
+                <button class="checkout-btn continue-shopping" id="cancelDirectPurchase">Cancelar</button>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">© 2023 Mi Tienda. Todos los derechos reservados.</p>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Acerca de Nosotros</h3>
+                <p>Somos Contraentrega. La revolución en logística y comercio electrónico de Colombia. Conectamos vendedores y compradores con una red de entrega confiable y el sistema de pago contraentrega más seguro.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-phone"></i> +57 3215343562</p>
+                <p><i class="fas fa-envelope"></i> calivalle@qrcontraentrega.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Carrera 16 # 9 - 44, Cali, Colombia</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/17Dmzvi5ei/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
+                    <a href="https://instagram.com/calivalle_qrcontraentrega"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/573215343562"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <a href="https://qrcontraentrega.com/afilicion-colombia">Afiliarse</a>
+                <a href="https://qrcontraentrega.com/solicitar-envio-colombia">Solicitar envío</a>
+                <a href="https://hermanosdreams.qrcontraentrega.com/terminos-y-condiciones">Términos y Condiciones</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Contraentrega. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- QR Code Generator -->
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    
     <script>
-        // Datos de productos
+        // Base de datos de productos (simulada)
         const products = [
-            {
-                id: 1,
-                name: "Producto Premium",
-                price: 120000,
-                inventory: 15,
-                image: "https://via.placeholder.com/300",
-                description: "Producto de alta calidad con garantía de 1 año.",
-                onSale: true
-            },
-            {
-                id: 2,
-                name: "Producto Estándar",
-                price: 80000,
-                inventory: 30,
-                image: "https://via.placeholder.com/300",
-                description: "Producto confiable para uso diario.",
-                onSale: false
-            },
-            {
-                id: 3,
-                name: "Producto Económico",
-                price: 50000,
-                inventory: 50,
-                image: "https://via.placeholder.com/300",
-                description: "Solución económica sin perder calidad.",
-                onSale: true
-            },
-            {
-                id: 4,
-                name: "Producto Deluxe",
-                price: 150000,
-                inventory: 10,
-                image: "https://via.placeholder.com/300",
-                description: "Edición especial con características exclusivas.",
-                onSale: false
-            },
-            {
-                id: 5,
-                name: "Producto Básico",
-                price: 40000,
-                inventory: 40,
-                image: "https://via.placeholder.com/300",
-                description: "Lo esencial para empezar.",
-                onSale: true
-            },
-            {
-                id: 6,
-                name: "Producto Profesional",
-                price: 180000,
-                inventory: 8,
-                image: "https://via.placeholder.com/300",
-                description: "Para usuarios avanzados y profesionales.",
-                onSale: false
-            }
-        ];
+    {
+        "id": 142,
+        "title": "EGO PLANT BOTELLA 200 ML",
+        "price": 12800,
+        "description": "Opción de pago a 6 cuotas de 2.133 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 8192,
+        "productUrl": "https://ejemplo.com/productos/ego-plant-200ml",
+        "images": [
+            "img/ego-plant.png"
+        ]
+    },
+    {
+        "id": 143,
+        "title": "OMNILIFE F PLUS",
+        "price": 134750,
+        "description": "Opción de pago a 6 cuotas de 22.458 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 86240,
+        "productUrl": "https://ejemplo.com/productos/omnilife-f-plus",
+        "images": [
+            "img/omnilife-f-plus.png"
+        ]
+    },
+    {
+        "id": 144,
+        "title": "FIBER'N PLUS SUPREME SACHET 450 G",
+        "price": 159550,
+        "description": "Opción de pago a 6 cuotas de 26.592 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 102112,
+        "productUrl": "https://ejemplo.com/productos/fiber-n-plus-supreme",
+        "images": [
+            "img/fiber-n-plus-supreme.png"
+        ]
+    },
+    {
+        "id": 145,
+        "title": "ESTOP PLUS CAJA 30 SACHETS 450G",
+        "price": 251500,
+        "description": "Opción de pago a 6 cuotas de 41.917 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 160960,
+        "productUrl": "https://ejemplo.com/productos/estop-plus",
+        "images": [
+            "img/estop-plus.png"
+        ]
+    },
+    {
+        "id": 146,
+        "title": "HOMO PLUS CAJA 30 SACHETS 195 G",
+        "price": 134750,
+        "description": "Opción de pago a 6 cuotas de 22.458 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 86240,
+        "productUrl": "https://ejemplo.com/productos/homo-plus",
+        "images": [
+            "img/homo-plus.png"
+        ]
+    },
+    {
+        "id": 147,
+        "title": "OMNILIFE KOLINA BOTELLA 200 ML",
+        "price": 12800,
+        "description": "Opción de pago a 6 cuotas de 2.133 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 8192,
+        "productUrl": "https://ejemplo.com/productos/omnilife-kolina",
+        "images": [
+            "img/omnilife-kolina.png"
+        ]
+    },
+    {
+        "id": 148,
+        "title": "BIOCROS SUPREME CAJA 30 SOBRES 240G",
+        "price": 120050,
+        "description": "Opción de pago a 6 cuotas de 20.008 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 76832,
+        "productUrl": "https://ejemplo.com/productos/biocros-supreme",
+        "images": [
+            "img/biocros-supreme.png"
+        ]
+    },
+    {
+        "id": 149,
+        "title": "OMNIPLUS FRUTAS EVOLUCION 30 SACHES",
+        "price": 184550,
+        "description": "Opción de pago a 6 cuotas de 30.758 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 118112,
+        "productUrl": "https://ejemplo.com/productos/omniplus-frutas-evolucion",
+        "images": [
+            "img/omniplus-frutas-evolucion.png"
+        ]
+    },
+    {
+        "id": 150,
+        "title": "OMNIPLUS NARANJA SUPREME CAJA 30 SOBRES",
+        "price": 184550,
+        "description": "Opción de pago a 6 cuotas de 30.758 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 118112,
+        "productUrl": "https://ejemplo.com/productos/omniplus-naranja-supreme",
+        "images": [
+            "img/omniplus-naranja-supreme.png"
+        ]
+    },
+    {
+        "id": 151,
+        "title": "COGNOS EVOLUCION CAJA",
+        "price": 125750,
+        "description": "Opción de pago a 6 cuotas de 20.958 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 80480,
+        "productUrl": "https://ejemplo.com/productos/cognos-evolucion",
+        "images": [
+            "img/cognos-evolucion.png"
+        ]
+    },
+    {
+        "id": 152,
+        "title": "POWER MAKER EVOLUCION",
+        "price": 206850,
+        "description": "Opción de pago a 6 cuotas de 34.475 con 0% interés. Código 2603201 - Puntos 110",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 132384,
+        "productUrl": "https://ejemplo.com/productos/power-maker-evolucion",
+        "images": [
+            "img/power-maker-evolucion.png"
+        ]
+    },
+    {
+        "id": 153,
+        "title": "TMGN COFFEE DE OLLA EVOLUCION",
+        "price": 90500,
+        "description": "Opción de pago a 6 cuotas de 15.083 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 57920,
+        "productUrl": "https://ejemplo.com/productos/tmgn-coffee-olla-evolucion",
+        "images": [
+            "img/tmgn-coffee-olla-evolucion.png"
+        ]
+    },
+    {
+        "id": 154,
+        "title": "STARBIEN EVOLUCIÓN CAJA 30 SOBRES 615 GRS",
+        "price": 118750,
+        "description": "Opción de pago a 6 cuotas de 19.792 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 76000,
+        "productUrl": "https://ejemplo.com/productos/starbien-evolucion",
+        "images": [
+            "img/starbien-evolucion.png"
+        ]
+    },
+    {
+        "id": 155,
+        "title": "SUPER MIX SUPREME VAINILLA CAJA 510",
+        "price": 157050,
+        "description": "Opción de pago a 6 cuotas de 26.175 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 100512,
+        "productUrl": "https://ejemplo.com/productos/super-mix-supreme-vainilla",
+        "images": [
+            "img/super-mix-supreme-vainilla.png"
+        ]
+    },
+    {
+        "id": 156,
+        "title": "TMGN COFFEE EVOLUCION",
+        "price": 90500,
+        "description": "Opción de pago a 6 cuotas de 15.083 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 57920,
+        "productUrl": "https://ejemplo.com/productos/tmgn-coffee-evolucion",
+        "images": [
+            "img/tmgn-coffee-evolucion.png"
+        ]
+    },
+    {
+        "id": 157,
+        "title": "THERMOGEN TEA LIMÓN SUPREME C/30 SACHET",
+        "price": 135250,
+        "description": "Opción de pago a 6 cuotas de 22.542 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 86560,
+        "productUrl": "https://ejemplo.com/productos/thermogen-tea-limon",
+        "images": [
+            "img/thermogen-tea-limon.png"
+        ]
+    },
+    {
+        "id": 158,
+        "title": "THERMOGEN TEA MARACUYA SUPREME 30 SACHES",
+        "price": 203950,
+        "description": "Opción de pago a 6 cuotas de 33.992 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 130528,
+        "productUrl": "https://ejemplo.com/productos/thermogen-tea-maracuya",
+        "images": [
+            "img/thermogen-tea-maracuya.png"
+        ]
+    },
+    {
+        "id": 159,
+        "title": "UZO EVOLUCION 240 GR",
+        "price": 322300,
+        "description": "Opción de pago a 6 cuotas de 53.717 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 206272,
+        "productUrl": "https://ejemplo.com/productos/uzo-evolucion",
+        "images": [
+            "img/uzo-evolucion.png"
+        ]
+    },
+    {
+        "id": 160,
+        "title": "AQUA SUPREME CAJA 30 SACHETS",
+        "price": 193650,
+        "description": "Opción de pago a 6 cuotas de 32.275 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 123936,
+        "productUrl": "https://ejemplo.com/productos/aqua-supreme",
+        "images": [
+            "img/aqua-supreme.png"
+        ]
+    },
+    {
+        "id": 161,
+        "title": "AGUA BLU SUPREME 1.5 LTS",
+        "price": 6400,
+        "description": "Opción de pago a 6 cuotas de 1.067 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 4096,
+        "productUrl": "https://ejemplo.com/productos/agua-blu-supreme-1.5l",
+        "images": [
+            "img/agua-blu-supreme-1.5l.png"
+        ]
+    },
+    {
+        "id": 162,
+        "title": "AGUA BLU SUPREME 600 ML",
+        "price": 3250,
+        "description": "Opción de pago a 6 cuotas de 542 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 2080,
+        "productUrl": "https://ejemplo.com/productos/agua-blu-supreme-600ml",
+        "images": [
+            "img/agua-blu-supreme-600ml.png"
+        ]
+    },
+    {
+        "id": 163,
+        "title": "ALOE BETA PIÑA 960 ML",
+        "price": 62200,
+        "description": "Opción de pago a 6 cuotas de 10.367 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 39808,
+        "productUrl": "https://ejemplo.com/productos/aloe-beta-pina-960ml",
+        "images": [
+            "img/aloe-beta-pina-960ml.png"
+        ]
+    },
+    {
+        "id": 164,
+        "title": "ALOE BETA PIÑA 200 ML",
+        "price": 12800,
+        "description": "Opción de pago a 6 cuotas de 2.133 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 8192,
+        "productUrl": "https://ejemplo.com/productos/aloe-beta-pina-200ml",
+        "images": [
+            "img/aloe-beta-pina-200ml.png"
+        ]
+    },
+    {
+        "id": 165,
+        "title": "DOLCE VITA SUPREME TORONJA CAJA 30 SACHETS",
+        "price": 152450,
+        "description": "Opción de pago a 6 cuotas de 25.408 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 97568,
+        "productUrl": "https://ejemplo.com/productos/dolce-vita-supreme-toronja",
+        "images": [
+            "img/dolce-vita-supreme-toronja.png"
+        ]
+    },
+    {
+        "id": 166,
+        "title": "EGO 10 BOTELLA 200 ML",
+        "price": 12800,
+        "description": "Opción de pago a 6 cuotas de 2.133 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 8192,
+        "productUrl": "https://ejemplo.com/productos/ego-10-200ml",
+        "images": [
+            "img/ego-10-200ml.png"
+        ]
+    },
+    {
+        "id": 167,
+        "title": "EGO FRUTAS DEL BOSQUE EVOLUCIÓN LATA 355 ML",
+        "price": 95350,
+        "description": "Opción de pago a 6 cuotas de 15.892 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 61024,
+        "productUrl": "https://ejemplo.com/productos/ego-frutas-bosque",
+        "images": [
+            "img/ego-frutas-bosque.png"
+        ]
+    },
+    {
+        "id": 168,
+        "title": "EGO LIFE SUPREME CAJA 30 SOBRES",
+        "price": 83200,
+        "description": "Opción de pago a 6 cuotas de 13.867 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 53248,
+        "productUrl": "https://ejemplo.com/productos/ego-life-supreme",
+        "images": [
+            "img/ego-life-supreme.png"
+        ]
+    },
+    {
+        "id": 169,
+        "title": "OMNILIFE VKIDS DOYPACK 400G",
+        "price": 160100,
+        "description": "Opción de pago a 6 cuotas de 26.683 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 102464,
+        "productUrl": "https://ejemplo.com/productos/omnilife-vkids",
+        "images": [
+            "img/omnilife-vkids.png"
+        ]
+    },
+    {
+        "id": 170,
+        "title": "CAFELIFE PLUS CAJA 30 SOBRES 150 G",
+        "price": 112300,
+        "description": "Opción de pago a 6 cuotas de 18.717 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 71872,
+        "productUrl": "https://ejemplo.com/productos/cafeline-plus",
+        "images": [
+            "img/cafeline-plus.png"
+        ]
+    },
+    {
+        "id": 171,
+        "title": "FX NARANJA EVOLUCIÓN",
+        "price": 34350,
+        "description": "Opción de pago a 6 cuotas de 5.725 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 21984,
+        "productUrl": "https://ejemplo.com/productos/fx-naranja-evolucion",
+        "images": [
+            "img/fx-naranja-evolucion.png"
+        ]
+    },
+    {
+        "id": 172,
+        "title": "FX MANZANA EVOLUCIÓN",
+        "price": 34350,
+        "description": "Opción de pago a 6 cuotas de 5.725 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 21984,
+        "productUrl": "https://ejemplo.com/productos/fx-manzana-evolucion",
+        "images": [
+            "img/fx-manzana-evolucion.png"
+        ]
+    },
+    {
+        "id": 173,
+        "title": "OMNILIFE PUMP SUPREME CAJA 12 SOBRES",
+        "price": 151650,
+        "description": "Opción de pago a 6 cuotas de 25.275 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 97056,
+        "productUrl": "https://ejemplo.com/productos/omnilife-pump-supreme",
+        "images": [
+            "img/omnilife-pump-supreme.png"
+        ]
+    },
+    {
+        "id": 174,
+        "title": "OMNIVIU SUPREME CAJA C/30 SACHETS",
+        "price": 126300,
+        "description": "Opción de pago a 6 cuotas de 21.050 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 80832,
+        "productUrl": "https://ejemplo.com/productos/omniviu-supreme",
+        "images": [
+            "img/omniviu-supreme.png"
+        ]
+    },
+    {
+        "id": 175,
+        "title": "ONE C MIX PLUS CAJA",
+        "price": 103700,
+        "description": "Opción de pago a 6 cuotas de 17.283 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 66368,
+        "productUrl": "https://ejemplo.com/productos/one-c-mix-plus",
+        "images": [
+            "img/one-c-mix-plus.png"
+        ]
+    },
+    {
+        "id": 176,
+        "title": "OMNIOST EVOLUCION 300GR",
+        "price": 147150,
+        "description": "Opción de pago a 6 cuotas de 24.525 con 0% interés.",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 94176,
+        "productUrl": "https://ejemplo.com/productos/omniost-evolucion",
+        "images": [
+            "img/omniost-evolucion.png"
+        ]
+    },
+    {
+        "id": 177,
+        "title": "OMNILIFE PROBIOTIC CAJA 30 SOBRES",
+        "price": 156400,
+        "description": "Opción de pago a 6 cuotas de 26.067 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 100096,
+        "productUrl": "https://ejemplo.com/productos/omnilife-probiotic",
+        "images": [
+            "img/omnilife-probiotic.png"
+        ]
+    },
+    {
+        "id": 178,
+        "title": "OMNILIFE SHAKE SUPREME FRESA",
+        "price": 160750,
+        "description": "Opción de pago a 6 cuotas de 26.792 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 102880,
+        "productUrl": "https://ejemplo.com/productos/omnilife-shake-supreme-fresa",
+        "images": [
+            "img/omnilife-shake-supreme-fresa.png"
+        ]
+    },
+    {
+        "id": 179,
+        "title": "OMNILIFE SHAKE SUPREME CAJA 12 SOBRES",
+        "price": 160750,
+        "description": "Opción de pago a 6 cuotas de 26.792 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 102880,
+        "productUrl": "https://ejemplo.com/productos/omnilife-shake-supreme",
+        "images": [
+            "img/omnilife-shake-supreme.png"
+        ]
+    },
+    {
+        "id": 180,
+        "title": "FLU-Y BOTE 60 CAPSULAS",
+        "price": 101050,
+        "description": "Opción de pago a 6 cuotas de 16.842 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 64672,
+        "productUrl": "https://ejemplo.com/productos/flu-y-capsulas",
+        "images": [
+            "img/flu-y-capsulas.png"
+        ]
+    },
+    {
+        "id": 181,
+        "title": "KIT 500 PUNTOS NUTRICIONAL",
+        "price": 887000,
+        "description": "Opción de pago a 6 cuotas de 147.833 con 0% interés. ",
+        "category": "kits",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 567680,
+        "productUrl": "https://ejemplo.com/productos/kit-500-puntos-nutricional",
+        "images": [
+            "img/kit-500-puntos-nutricional.png"
+        ]
+    },
+    {
+        "id": 182,
+        "title": "KIT BIMARCA 2024",
+        "price": 137500,
+        "description": "Opción de pago a 6 cuotas de 22.917 con 0% interés. ",
+        "category": "nutricion",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 88000,
+        "productUrl": "https://ejemplo.com/productos/kit-bimarca-2024",
+        "images": [
+            "img/kit-bimarca-2024.png"
+        ]
+    },
+    {
+        "id": 183,
+        "title": "GUIA OMNILIFE-SEYTU 2025",
+        "price": 5500,
+        "description": "Opción de pago a 6 cuotas de 917 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Omnilife Colombia",
+        "warehousePrice": 3520,
+        "productUrl": "https://ejemplo.com/productos/guia-omnilife-seytu-2025",
+        "images": [
+            "img/guia-omnilife-seytu-2025.png"
+        ]
+    },
+    {
+        "id": 22,
+        "title": "SET DE BROCHAS PARA OJOS Y LABIOS",
+        "price": 112900,
+        "description": "Opción de pago a 6 cuotas de 18.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 72256,
+        "productUrl": "https://ejemplo.com/productos/set-brochas-ojos-labios",
+        "images": [
+            "img/set-brochas-ojos-labios.png"
+        ]
+    },
+    {
+        "id": 23,
+        "title": "ESPONJA PARA MAQUILLAJE LANZAMIENTO",
+        "price": 40300,
+        "description": "Opción de pago a 6 cuotas de 6.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 25792,
+        "productUrl": "https://ejemplo.com/productos/esponja-maquillaje",
+        "images": [
+            "img/esponja-maquillaje.png"
+        ]
+    },
+    {
+        "id": 24,
+        "title": "SACAPUNTAS SEYTU",
+        "price": 17000,
+        "description": "Opción de pago a 6 cuotas de 2.833 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 10880,
+        "productUrl": "https://ejemplo.com/productos/sacapuntas-seytu",
+        "images": [
+            "img/sacapuntas-seytu.png"
+        ]
+    },
+    {
+        "id": 25,
+        "title": "KIT BIMARCA 2024",
+        "price": 137500,
+        "description": "Opción de pago a 6 cuotas de 22.917 con 0% interés.",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 88000,
+        "productUrl": "https://ejemplo.com/productos/kit-bimarca-2024",
+        "images": [
+            "img/kit-bimarca-2024.png"
+        ]
+    },
+    {
+        "id": 26,
+        "title": "GUIA OMNILIFE-SEYTU 2025",
+        "price": 5500,
+        "description": "Opción de pago a 6 cuotas de 917 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 3520,
+        "productUrl": "https://ejemplo.com/productos/guia-omnilife-seytu-2025",
+        "images": [
+            "img/guia-omnilife-seytu.png"
+        ]
+    },
+    {
+        "id": 27,
+        "title": "TINTE PERMANENTE MOKA 6.34",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-moka",
+        "images": [
+            "img/tinte-moka.png"
+        ]
+    },
+    {
+        "id": 28,
+        "title": "TINTE PERMANENTE RUBIO CLARO 7",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-rubio-claro",
+        "images": [
+            "img/tinte-rubio-claro.png"
+        ]
+    },
+    {
+        "id": 29,
+        "title": "ESPUMA LIMPIADORA FACIAL",
+        "price": 70000,
+        "description": "Opción de pago a 6 cuotas de 11.667 con 0% interés.",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 44800,
+        "productUrl": "https://ejemplo.com/productos/espuma-limpiadora-facial",
+        "images": [
+            "img/espuma-limpiadora-facial.png"
+        ]
+    },
+    {
+        "id": 30,
+        "title": "BROCHA MAQUILLAJE LIQUIDO",
+        "price": 44500,
+        "description": "Opción de pago a 6 cuotas de 7.417 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 28480,
+        "productUrl": "https://ejemplo.com/productos/brocha-maquillaje-liquido",
+        "images": [
+            "img/brocha-maquillaje-liquido.png"
+        ]
+    },
+    {
+        "id": 31,
+        "title": "SET DE BROCHAS PARA ROSTRO",
+        "price": 117600,
+        "description": "Opción de pago a 6 cuotas de 19.600 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 75264,
+        "productUrl": "https://ejemplo.com/productos/set-brochas-rostro",
+        "images": [
+            "img/set-brochas-rostro.png"
+        ]
+    },
+    {
+        "id": 32,
+        "title": "TINTE PERMANENTE CASTAÑO OSCURO",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-castano-oscuro",
+        "images": [
+            "img/tinte-castano-oscuro.png"
+        ]
+    },
+    {
+        "id": 33,
+        "title": "TINTE PERMANENTE CASTAÑO CLARO",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-castano-claro",
+        "images": [
+            "img/tinte-castano-claro.png"
+        ]
+    },
+    {
+        "id": 34,
+        "title": "TINTE PERMANENTE NEGRO NATURAL",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-negro-natural",
+        "images": [
+            "img/tinte-negro-natural.png"
+        ]
+    },
+    {
+        "id": 35,
+        "title": "TINTE PERMANENTE ROJO",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-rojo",
+        "images": [
+            "img/tinte-rojo.png"
+        ]
+    },
+    {
+        "id": 36,
+        "title": "TINTE PERMANENTE RUBIO EXTRA CLARO 9",
+        "price": 67700,
+        "description": "Opción de pago a 6 cuotas de 11.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43328,
+        "productUrl": "https://ejemplo.com/productos/tinte-rubio-extra-claro",
+        "images": [
+            "img/tinte-rubio-extra-claro.png"
+        ]
+    },
+    {
+        "id": 37,
+        "title": "LABIAL LIQUIDO MATE KALAHARI",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-kalahari",
+        "images": [
+            "img/labial-mate-kalahari.png"
+        ]
+    },
+    {
+        "id": 38,
+        "title": "LABIAL LIQUIDO MATE MASAI",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-masai",
+        "images": [
+            "img/labial-mate-masai.png"
+        ]
+    },
+    {
+        "id": 39,
+        "title": "LABIAL LIQUIDO MATE SAHARA",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-sahara",
+        "images": [
+            "img/labial-mate-sahara.png"
+        ]
+    },
+    {
+        "id": 40,
+        "title": "LABIAL LIQUIDO MATE NAIROBI",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-nairobi",
+        "images": [
+            "img/labial-mate-nairobi.png"
+        ]
+    },
+    {
+        "id": 41,
+        "title": "LABIAL LIQUIDO MATE SAMBURU",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-samburu",
+        "images": [
+            "img/labial-mate-samburu.png"
+        ]
+    },
+    {
+        "id": 42,
+        "title": "LABIAL HIDRATANTE SWEET CORAL FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-sweet-coral",
+        "images": [
+            "img/labial-hidratante-sweet-coral.png"
+        ]
+    },
+    {
+        "id": 43,
+        "title": "LABIAL HIDRATANTE SEYTÚ RED FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-seytu-red",
+        "images": [
+            "img/labial-hidratante-seytu-red.png"
+        ]
+    },
+    {
+        "id": 44,
+        "title": "LABIAL HIDRATANTE FLASH RED FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-flash-red",
+        "images": [
+            "img/labial-hidratante-flash-red.png"
+        ]
+    },
+    {
+        "id": 45,
+        "title": "LABIAL HIDRATANTE CANDY RED FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-candy-red",
+        "images": [
+            "img/labial-hidratante-candy-red.png"
+        ]
+    },
+    {
+        "id": 46,
+        "title": "LABIAL HIDRATANTE ICON VIOLET FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-icon-violet",
+        "images": [
+            "img/labial-hidratante-icon-violet.png"
+        ]
+    },
+    {
+        "id": 47,
+        "title": "LABIAL HIDRATANTE HOT PINK FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-hot-pink",
+        "images": [
+            "img/labial-hidratante-hot-pink.png"
+        ]
+    },
+    {
+        "id": 48,
+        "title": "LABIAL HIDRATANTE LIGHT PINK FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-light-pink",
+        "images": [
+            "img/labial-hidratante-light-pink.png"
+        ]
+    },
+    {
+        "id": 49,
+        "title": "LABIAL HIDRATANTE SAND NUDE FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-sand-nude",
+        "images": [
+            "img/labial-hidratante-sand-nude.png"
+        ]
+    },
+    {
+        "id": 50,
+        "title": "LABIAL HIDRATANTE ROSE NUDE FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-rose-nude",
+        "images": [
+            "img/labial-hidratante-rose-nude.png"
+        ]
+    },
+    {
+        "id": 51,
+        "title": "LABIAL HIDRATANTE FLAME CORAL FPS15",
+        "price": 58900,
+        "description": "Opción de pago a 6 cuotas de 9.817 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37696,
+        "productUrl": "https://ejemplo.com/productos/labial-hidratante-flame-coral",
+        "images": [
+            "img/labial-hidratante-flame-coral.png"
+        ]
+    },
+    {
+        "id": 52,
+        "title": "BRILLO LABIAL AMBAR",
+        "price": 70700,
+        "description": "Opción de pago a 6 cuotas de 11.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 45248,
+        "productUrl": "https://ejemplo.com/productos/brillo-labial-ambar",
+        "images": [
+            "img/brillo-labial-ambar.png"
+        ]
+    },
+    {
+        "id": 53,
+        "title": "BRILLO LABIAL TOPAZ",
+        "price": 70700,
+        "description": "Opción de pago a 6 cuotas de 11.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 45248,
+        "productUrl": "https://ejemplo.com/productos/brillo-labial-topaz",
+        "images": [
+            "img/brillo-labial-topaz.png"
+        ]
+    },
+    {
+        "id": 54,
+        "title": "BRILLO LABIAL AGATA",
+        "price": 70700,
+        "description": "Opción de pago a 6 cuotas de 11.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 45248,
+        "productUrl": "https://ejemplo.com/productos/brillo-labial-agata",
+        "images": [
+            "img/brillo-labial-agata.png"
+        ]
+    },
+    {
+        "id": 55,
+        "title": "BRILLO LABIAL ZAFIRO",
+        "price": 70700,
+        "description": "Opción de pago a 6 cuotas de 11.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 45248,
+        "productUrl": "https://ejemplo.com/productos/brillo-labial-zafiro",
+        "images": [
+            "img/brillo-labial-zafiro.png"
+        ]
+    },
+    {
+        "id": 56,
+        "title": "BRILLO LABIAL RUBI",
+        "price": 70700,
+        "description": "Opción de pago a 6 cuotas de 11.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 45248,
+        "productUrl": "https://ejemplo.com/productos/brillo-labial-rubi",
+        "images": [
+            "img/brillo-labial-rubi.png"
+        ]
+    },
+    {
+        "id": 57,
+        "title": "PALETA DE SOMBRAS ROSAS 2023",
+        "price": 146900,
+        "description": "Opción de pago a 6 cuotas de 24.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 94016,
+        "productUrl": "https://ejemplo.com/productos/paleta-sombras-rosas",
+        "images": [
+            "img/paleta-sombras-rosas.png"
+        ]
+    },
+    {
+        "id": 58,
+        "title": "LABIAL LIQUIDO MATE WIFEY",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-wifey",
+        "images": [
+            "img/labial-mate-wifey.png"
+        ]
+    },
+    {
+        "id": 59,
+        "title": "LABIAL LIQUIDO MATE THIRTIES",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-thirties",
+        "images": [
+            "img/labial-mate-thirties.png"
+        ]
+    },
+    {
+        "id": 60,
+        "title": "LABIAL LIQUIDO MATE 90'S BABY",
+        "price": 74900,
+        "description": "Opción de pago a 6 cuotas de 12.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 47936,
+        "productUrl": "https://ejemplo.com/productos/labial-mate-90s-baby",
+        "images": [
+            "img/labial-mate-90s-baby.png"
+        ]
+    },
+    {
+        "id": 61,
+        "title": "BRILLO LABIAL OPALO",
+        "price": 70700,
+        "description": "Opción de pago a 6 cuotas de 11.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 45248,
+        "productUrl": "https://ejemplo.com/productos/brillo-labial-opalo",
+        "images": [
+            "img/brillo-labial-opalo.png"
+        ]
+    },
+    {
+        "id": 62,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 C NATURAL",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-c-natural",
+        "images": [
+            "img/maquillaje-compacto-c-natural.png"
+        ]
+    },
+    {
+        "id": 63,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 SUN BEIGE",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-sun-beige",
+        "images": [
+            "img/maquillaje-compacto-sun-beige.png"
+        ]
+    },
+    {
+        "id": 64,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 CARAMEL",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-caramel",
+        "images": [
+            "img/maquillaje-compacto-caramel.png"
+        ]
+    },
+    {
+        "id": 65,
+        "title": "MASCARA PARA PESTAÑAS",
+        "price": 63300,
+        "description": "Opción de pago a 6 cuotas de 10.550 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 40512,
+        "productUrl": "https://ejemplo.com/productos/mascara-pestanas",
+        "images": [
+            "img/mascara-pestanas.png"
+        ]
+    },
+    {
+        "id": 66,
+        "title": "PALETA DE SOMBRAS MARRONES 2023",
+        "price": 146900,
+        "description": "Opción de pago a 6 cuotas de 24.483 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 94016,
+        "productUrl": "https://ejemplo.com/productos/paleta-sombras-marrones",
+        "images": [
+            "img/paleta-sombras-marrones.png"
+        ]
+    },
+    {
+        "id": 67,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 FAIR",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-fair",
+        "images": [
+            "img/maquillaje-compacto-fair.png"
+        ]
+    },
+    {
+        "id": 68,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 L SAND",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-l-sand",
+        "images": [
+            "img/maquillaje-compacto-l-sand.png"
+        ]
+    },
+    {
+        "id": 69,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 S HONEY",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-s-honey",
+        "images": [
+            "img/maquillaje-compacto-s-honey.png"
+        ]
+    },
+    {
+        "id": 70,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 NAT BEIGE",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-nat-beige",
+        "images": [
+            "img/maquillaje-compacto-nat-beige.png"
+        ]
+    },
+    {
+        "id": 71,
+        "title": "MAQUILLAJE COMPACTO 2 EN1 W BEIGE",
+        "price": 100300,
+        "description": "Opción de pago a 6 cuotas de 16.717 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 64192,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-compacto-w-beige",
+        "images": [
+            "img/maquillaje-compacto-w-beige.png"
+        ]
+    },
+    {
+        "id": 72,
+        "title": "RUBOR COMPACTO PEACH",
+        "price": 57000,
+        "description": "Opción de pago a 6 cuotas de 9.500 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 36480,
+        "productUrl": "https://ejemplo.com/productos/rubor-compacto-peach",
+        "images": [
+            "img/rubor-compacto-peach.png"
+        ]
+    },
+    {
+        "id": 73,
+        "title": "RUBOR COMPACTO PLUM",
+        "price": 57000,
+        "description": "Opción de pago a 6 cuotas de 9.500 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 36480,
+        "productUrl": "https://ejemplo.com/productos/rubor-compacto-plum",
+        "images": [
+            "img/rubor-compacto-plum.png"
+        ]
+    },
+    {
+        "id": 74,
+        "title": "FRAGANCIA SUCCESI FOR HIM",
+        "price": 151400,
+        "description": "Opción de pago a 6 cuotas de 25.233 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 96896,
+        "productUrl": "https://ejemplo.com/productos/fragancia-successi-him",
+        "images": [
+            "img/fragancia-successi-him.png"
+        ]
+    },
+    {
+        "id": 75,
+        "title": "FRAGANCIA SUCCESI FOR HER",
+        "price": 151400,
+        "description": "Opción de pago a 6 cuotas de 25.233 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 96896,
+        "productUrl": "https://ejemplo.com/productos/fragancia-successi-her",
+        "images": [
+            "img/fragancia-successi-her.png"
+        ]
+    },
+    {
+        "id": 76,
+        "title": "FRAGANCIA KENYA VERGARA",
+        "price": 138500,
+        "description": "Opción de pago a 6 cuotas de 23.083 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 88640,
+        "productUrl": "https://ejemplo.com/productos/fragancia-kenya-vergara",
+        "images": [
+            "img/fragancia-kenya-vergara.png"
+        ]
+    },
+    {
+        "id": 77,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G C NATURAL",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-c-natural",
+        "images": [
+            "img/maquillaje-liq-c-natural.png"
+        ]
+    },
+    {
+        "id": 78,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G SUN BEIGE",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-sun-beige",
+        "images": [
+            "img/maquillaje-liq-sun-beige.png"
+        ]
+    },
+    {
+        "id": 79,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G CARAMEL",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-caramel",
+        "images": [
+            "img/maquillaje-liq-caramel.png"
+        ]
+    },
+    {
+        "id": 80,
+        "title": "MAQUILLAJE LIQUIDO UP+ FPS 15 COCOA",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-cocoa",
+        "images": [
+            "img/maquillaje-liq-cocoa.png"
+        ]
+    },
+    {
+        "id": 81,
+        "title": "RUBOR COMPACTO APRICOT",
+        "price": 57000,
+        "description": "Opción de pago a 6 cuotas de 9.500 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 36480,
+        "productUrl": "https://ejemplo.com/productos/rubor-compacto-apricot",
+        "images": [
+            "img/rubor-compacto-apricot.png"
+        ]
+    },
+    {
+        "id": 82,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G FAIR",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-fair",
+        "images": [
+            "img/maquillaje-liq-fair.png"
+        ]
+    },
+    {
+        "id": 83,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G L SAND",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-l-sand",
+        "images": [
+            "img/maquillaje-liq-l-sand.png"
+        ]
+    },
+    {
+        "id": 84,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G S HONEY",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-s-honey",
+        "images": [
+            "img/maquillaje-liq-s-honey.png"
+        ]
+    },
+    {
+        "id": 85,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G NAT BEIGE",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-nat-beige",
+        "images": [
+            "img/maquillaje-liq-nat-beige.png"
+        ]
+    },
+    {
+        "id": 86,
+        "title": "MAQUILLAJE LIQ UP+ FPS15 40G W BEIGE",
+        "price": 124500,
+        "description": "Opción de pago a 6 cuotas de 20.750 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79680,
+        "productUrl": "https://ejemplo.com/productos/maquillaje-liq-w-beige",
+        "images": [
+            "img/maquillaje-liq-w-beige.png"
+        ]
+    },
+    {
+        "id": 87,
+        "title": "GEL FIJADOR PARA EL CABELLO",
+        "price": 35400,
+        "description": "Opción de pago a 6 cuotas de 5.900 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 22656,
+        "productUrl": "https://ejemplo.com/productos/gel-fijador-cabello",
+        "images": [
+            "img/gel-fijador-cabello.png"
+        ]
+    },
+    {
+        "id": 88,
+        "title": "ACONDICIONADOR CON EXTRACTOS HERBALES 300 ML",
+        "price": 43800,
+        "description": "Opción de pago a 6 cuotas de 7.300 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 28032,
+        "productUrl": "https://ejemplo.com/productos/acondicionador-herbal",
+        "images": [
+            "img/acondicionador-herbal.png"
+        ]
+    },
+    {
+        "id": 89,
+        "title": "DELINEADOR PARA OJOS PENLINER",
+        "price": 47700,
+        "description": "Opción de pago a 6 cuotas de 7.950 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 30528,
+        "productUrl": "https://ejemplo.com/productos/delineador-penliner",
+        "images": [
+            "img/delineador-penliner.png"
+        ]
+    },
+    {
+        "id": 90,
+        "title": "DELINEADOR LIQUIDO PARA OJOS NEGRO MATE",
+        "price": 56100,
+        "description": "Opción de pago a 6 cuotas de 9.350 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 35904,
+        "productUrl": "https://ejemplo.com/productos/delineador-liquido-negro",
+        "images": [
+            "img/delineador-liquido-negro.png"
+        ]
+    },
+    {
+        "id": 91,
+        "title": "SET DELINEADOR COMPACTO DE CEJAS",
+        "price": 108700,
+        "description": "Opción de pago a 6 cuotas de 18.117 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 69568,
+        "productUrl": "https://ejemplo.com/productos/set-delineador-cejas",
+        "images": [
+            "img/set-delineador-cejas.png"
+        ]
+    },
+    {
+        "id": 92,
+        "title": "SHAMPOO FORTIFICANTE",
+        "price": 107400,
+        "description": "Opción de pago a 6 cuotas de 17.900 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 68736,
+        "productUrl": "https://ejemplo.com/productos/shampoo-fortificante",
+        "images": [
+            "img/shampoo-fortificante.png"
+        ]
+    },
+    {
+        "id": 93,
+        "title": "ACONDICIONADOR CON EXTRACTOS HERBALES",
+        "price": 37400,
+        "description": "Opción de pago a 6 cuotas de 6.233 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 23936,
+        "productUrl": "https://ejemplo.com/productos/acondicionador-herbal-2",
+        "images": [
+            "img/acondicionador-herbal-2.png"
+        ]
+    },
+    {
+        "id": 94,
+        "title": "SHAMPOO CUIDADO ESPECIAL CABELLO DÉBIL",
+        "price": 57900,
+        "description": "Opción de pago a 6 cuotas de 9.650 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37056,
+        "productUrl": "https://ejemplo.com/productos/shampoo-cabello-debil",
+        "images": [
+            "img/shampoo-cabello-debil.png"
+        ]
+    },
+    {
+        "id": 95,
+        "title": "SHAMPOO COLOR PROTECT",
+        "price": 57900,
+        "description": "Opción de pago a 6 cuotas de 9.650 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 37056,
+        "productUrl": "https://ejemplo.com/productos/shampoo-color-protect",
+        "images": [
+            "img/shampoo-color-protect.png"
+        ]
+    },
+    {
+        "id": 96,
+        "title": "COMPLEJO MULTIVITAMÍNICO CAPILAR",
+        "price": 124800,
+        "description": "Opción de pago a 6 cuotas de 20.800 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 79872,
+        "productUrl": "https://ejemplo.com/productos/complejo-multivitaminico-capilar",
+        "images": [
+            "img/complejo-multivitaminico-capilar.png"
+        ]
+    },
+    {
+        "id": 97,
+        "title": "BALSAMO LABIAL OMNIPLUS FPS 15",
+        "price": 64800,
+        "description": "Opción de pago a 6 cuotas de 10.800 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 41472,
+        "productUrl": "https://ejemplo.com/productos/balsamo-labial-omniplus",
+        "images": [
+            "img/balsamo-labial-omniplus.png"
+        ]
+    },
+    {
+        "id": 98,
+        "title": "MICRO-EXFOLIANTE FACIAL",
+        "price": 66000,
+        "description": "Opción de pago a 6 cuotas de 11.000 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 42240,
+        "productUrl": "https://ejemplo.com/productos/micro-exfoliante-facial",
+        "images": [
+            "img/micro-exfoliante-facial.png"
+        ]
+    },
+    {
+        "id": 99,
+        "title": "PROTECTOR SOLAR FACIAL FPS 50+",
+        "price": 87000,
+        "description": "Opción de pago a 6 cuotas de 14.500 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 55680,
+        "productUrl": "https://ejemplo.com/productos/protector-solar-facial",
+        "images": [
+            "img/protector-solar-facial.png"
+        ]
+    },
+    {
+        "id": 100,
+        "title": "PROTECTOR SOLAR CORPORAL FPS 50+",
+        "price": 118800,
+        "description": "Opción de pago a 6 cuotas de 19.800 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 76032,
+        "productUrl": "https://ejemplo.com/productos/protector-solar-corporal",
+        "images": [
+            "img/protector-solar-corporal.png"
+        ]
+    },
+    {
+        "id": 101,
+        "title": "DESMAQUILLANTE PARA OJOS",
+        "price": 57800,
+        "description": "Opción de pago a 6 cuotas de 9.633 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 36992,
+        "productUrl": "https://ejemplo.com/productos/desmaquillante-ojos",
+        "images": [
+            "img/desmaquillante-ojos.png"
+        ]
+    },
+    {
+        "id": 102,
+        "title": "MASCARILLA FACIAL",
+        "price": 83700,
+        "description": "Opción de pago a 6 cuotas de 13.950 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 53568,
+        "productUrl": "https://ejemplo.com/productos/mascarilla-facial",
+        "images": [
+            "img/mascarilla-facial.png"
+        ]
+    },
+    {
+        "id": 103,
+        "title": "GEL ANTI-MANCHAS",
+        "price": 135500,
+        "description": "Opción de pago a 6 cuotas de 22.583 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 86720,
+        "productUrl": "https://ejemplo.com/productos/gel-anti-manchas",
+        "images": [
+            "img/gel-anti-manchas.png"
+        ]
+    },
+    {
+        "id": 104,
+        "title": "CREMA PARA MANOS CUELLO Y ESCOTE",
+        "price": 125700,
+        "description": "Opción de pago a 6 cuotas de 20.950 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 80448,
+        "productUrl": "https://ejemplo.com/productos/crema-manos-cuello-escote",
+        "images": [
+            "img/crema-manos-cuello-escote.png"
+        ]
+    },
+    {
+        "id": 105,
+        "title": "TÓNICO HIDRATANTE",
+        "price": 123100,
+        "description": "Opción de pago a 6 cuotas de 20.517 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 78784,
+        "productUrl": "https://ejemplo.com/productos/tonico-hidratante",
+        "images": [
+            "img/tonico-hidratante.png"
+        ]
+    },
+    {
+        "id": 106,
+        "title": "CREMA LIMPIADORA FACIAL",
+        "price": 68100,
+        "description": "Opción de pago a 6 cuotas de 11.350 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 43584,
+        "productUrl": "https://ejemplo.com/productos/crema-limpiadora-facial",
+        "images": [
+            "img/crema-limpiadora-facial.png"
+        ]
+    },
+    {
+        "id": 107,
+        "title": "LOCION CAPILAR FORTIFICANTE",
+        "price": 146500,
+        "description": "Opción de pago a 6 cuotas de 24.417 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 93760,
+        "productUrl": "https://ejemplo.com/productos/locion-capilar-fortificante",
+        "images": [
+            "img/locion-capilar-fortificante.png"
+        ]
+    },
+    {
+        "id": 108,
+        "title": "GEL-CREMA PARA ESTRIAS",
+        "price": 108600,
+        "description": "Opción de pago a 6 cuotas de 18.100 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 69504,
+        "productUrl": "https://ejemplo.com/productos/gel-crema-estrias",
+        "images": [
+            "img/gel-crema-estrias.png"
+        ]
+    },
+    {
+        "id": 109,
+        "title": "DERMOLIMPIADOR FACIAL",
+        "price": 84000,
+        "description": "Opción de pago a 6 cuotas de 14.000 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 53760,
+        "productUrl": "https://ejemplo.com/productos/dermolimpiador-facial",
+        "images": [
+            "img/dermolimpiador-facial.png"
+        ]
+    },
+    {
+        "id": 110,
+        "title": "GEL LOCALIZADO",
+        "price": 83000,
+        "description": "Opción de pago a 6 cuotas de 13.833 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 53120,
+        "productUrl": "https://ejemplo.com/productos/gel-localizado",
+        "images": [
+            "img/gel-localizado.png"
+        ]
+    },
+    {
+        "id": 111,
+        "title": "SUERO PERFECCIONADOR",
+        "price": 109000,
+        "description": "Opción de pago a 6 cuotas de 18.167 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 69760,
+        "productUrl": "https://ejemplo.com/productos/suero-perfeccionador",
+        "images": [
+            "img/suero-perfeccionador.png"
+        ]
+    },
+    {
+        "id": 112,
+        "title": "CREMA HIDRATANTE DE NOCHE",
+        "price": 96900,
+        "description": "Opción de pago a 6 cuotas de 16.150 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 62016,
+        "productUrl": "https://ejemplo.com/productos/crema-hidratante-noche",
+        "images": [
+            "img/crema-hidratante-noche.png"
+        ]
+    },
+    {
+        "id": 113,
+        "title": "CREMA HIDRATANTE DE DÍA FPS20",
+        "price": 96900,
+        "description": "Opción de pago a 6 cuotas de 16.150 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 62016,
+        "productUrl": "https://ejemplo.com/productos/crema-hidratante-dia",
+        "images": [
+            "img/crema-hidratante-dia.png"
+        ]
+    },
+    {
+        "id": 114,
+        "title": "CREMA PARA CONTORNO DE OJOS SYSTEM 15ml",
+        "price": 99400,
+        "description": "Opción de pago a 6 cuotas de 16.567 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 63616,
+        "productUrl": "https://ejemplo.com/productos/crema-contorno-ojos",
+        "images": [
+            "img/crema-contorno-ojos.png"
+        ]
+    },
+    {
+        "id": 115,
+        "title": "CREMA DE DIA FPS30 SYSTEM 50ml",
+        "price": 154600,
+        "description": "Opción de pago a 6 cuotas de 25.767 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 98944,
+        "productUrl": "https://ejemplo.com/productos/crema-dia-fps30",
+        "images": [
+            "img/crema-dia-fps30.png"
+        ]
+    },
+    {
+        "id": 116,
+        "title": "SUERO DE NOCHE SYSTEM 30ml",
+        "price": 154800,
+        "description": "Opción de pago a 6 cuotas de 25.800 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 99072,
+        "productUrl": "https://ejemplo.com/productos/suero-noche",
+        "images": [
+            "img/suero-noche.png"
+        ]
+    },
+    {
+        "id": 117,
+        "title": "SHAMPOO CON EXTRACTOS HERBALES 300 ML",
+        "price": 43800,
+        "description": "Opción de pago a 6 cuotas de 7.300 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 28032,
+        "productUrl": "https://ejemplo.com/productos/shampoo-herbal",
+        "images": [
+            "img/shampoo-herbal.png"
+        ]
+    },
+    {
+        "id": 118,
+        "title": "CORRECTOR LIQUIDO FAIR",
+        "price": 54900,
+        "description": "Opción de pago a 6 cuotas de 9.150 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "be",
+        "warehousePrice": 35136,
+        "productUrl": "https://ejemplo.com/productos/corrector-liquido-fair",
+        "images": [
+            "img/corrector-liquido-fair.png"
+        ]
+    },
+    {
+        "id": 119,
+        "title": "CORRECTOR LIQUIDO LIGHT",
+        "price": 54900,
+        "description": "Opción de pago a 6 cuotas de 9.150 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 35136,
+        "productUrl": "https://ejemplo.com/productos/corrector-liquido-light",
+        "images": [
+            "img/corrector-liquido-light.png"
+        ]
+    },
+    {
+        "id": 120,
+        "title": "CORRECTOR LIQUIDO MEDIUM",
+        "price": 54900,
+        "description": "Opción de pago a 6 cuotas de 9.150 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 35136,
+        "productUrl": "https://ejemplo.com/productos/corrector-liquido-medium",
+        "images": [
+            "img/corrector-liquido-medium.png"
+        ]
+    },
+    {
+        "id": 121,
+        "title": "CORRECTOR LIQUIDO DEEP",
+        "price": 54900,
+        "description": "Opción de pago a 6 cuotas de 9.150 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 35136,
+        "productUrl": "https://ejemplo.com/productos/corrector-liquido-deep",
+        "images": [
+            "img/corrector-liquido-deep.png"
+        ]
+    },
+    {
+        "id": 122,
+        "title": "CREMA DE MANOS ANTIBACTERIAL SANDÍA-MELÓN",
+        "price": 13700,
+        "description": "Opción de pago a 6 cuotas de 2.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 8768,
+        "productUrl": "https://ejemplo.com/productos/crema-manos-sandia-melon",
+        "images": [
+            "img/crema-manos-sandia-melon.png"
+        ]
+    },
+    {
+        "id": 123,
+        "title": "SUERO FACIAL HIDRATACIÓN PROFUNDA CON ALOE VERA",
+        "price": 87300,
+        "description": "Opción de pago a 6 cuotas de 14.550 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 55872,
+        "productUrl": "https://ejemplo.com/productos/suero-facial-aloe-vera",
+        "images": [
+            "img/suero-facial-aloe-vera.png"
+        ]
+    },
+    {
+        "id": 124,
+        "title": "OMNIPLUS GEL PREMIUM",
+        "price": 60200,
+        "description": "Opción de pago a 6 cuotas de 10.033 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 38528,
+        "productUrl": "https://ejemplo.com/productos/omniplus-gel-premium",
+        "images": [
+            "img/omniplus-gel-premium.png"
+        ]
+    },
+    {
+        "id": 125,
+        "title": "MASCARILLA REPARADORA CAPILAR",
+        "price": 68000,
+        "description": "Opción de pago a 6 cuotas de 11.333 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 43520,
+        "productUrl": "https://ejemplo.com/productos/mascarilla-reparadora-capilar",
+        "images": [
+            "img/mascarilla-reparadora-capilar.png"
+        ]
+    },
+    {
+        "id": 126,
+        "title": "SUERO CONTORNO DE OJOS HIDRATACIÓN PROFUNDA CON ALOE VERA",
+        "price": 55900,
+        "description": "Opción de pago a 6 cuotas de 9.317 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 35776,
+        "productUrl": "https://ejemplo.com/productos/suero-contorno-ojos-aloe",
+        "images": [
+            "img/suero-contorno-ojos-aloe.png"
+        ]
+    },
+    {
+        "id": 127,
+        "title": "JABON CORPORAL FRUTOS ROJOS",
+        "price": 52700,
+        "description": "Opción de pago a 6 cuotas de 8.783 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 33728,
+        "productUrl": "https://ejemplo.com/productos/jabon-corporal-frutos-rojos",
+        "images": [
+            "img/jabon-corporal-frutos-rojos.png"
+        ]
+    },
+    {
+        "id": 128,
+        "title": "KIT 500 PUNTOS BELLEZA",
+        "price": 887000,
+        "description": "Opción de pago a 6 cuotas de 147.833 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 567680,
+        "productUrl": "https://ejemplo.com/productos/kit-500-puntos-belleza",
+        "images": [
+            "img/kit-500-puntos-belleza.png"
+        ]
+    },
+    {
+        "id": 129,
+        "title": "CREMA CORPORAL PARA PIEL DE NARANJA",
+        "price": 112000,
+        "description": "Opción de pago a 6 cuotas de 18.667 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 71680,
+        "productUrl": "https://ejemplo.com/productos/crema-corporal-piel-naranja",
+        "images": [
+            "img/crema-corporal-piel-naranja.png"
+        ]
+    },
+    {
+        "id": 130,
+        "title": "CREMA DE MANOS ANTIBACTERIAL MANZANA-PERA",
+        "price": 13700,
+        "description": "Opción de pago a 6 cuotas de 2.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 8768,
+        "productUrl": "https://ejemplo.com/productos/crema-manos-manzana-pera",
+        "images": [
+            "img/crema-manos-manzana-pera.png"
+        ]
+    },
+    {
+        "id": 131,
+        "title": "CREMA DE MANOS ANTIBACTERIAL VAINILLA",
+        "price": 13700,
+        "description": "Opción de pago a 6 cuotas de 2.283 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 8768,
+        "productUrl": "https://ejemplo.com/productos/crema-manos-vainilla",
+        "images": [
+            "img/crema-manos-vainilla.png"
+        ]
+    },
+    {
+        "id": 132,
+        "title": "POLVO TRASLUCIDO",
+        "price": 67100,
+        "description": "Opción de pago a 6 cuotas de 11.183 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 42944,
+        "productUrl": "https://ejemplo.com/productos/polvo-traslucido",
+        "images": [
+            "img/polvo-traslucido.png"
+        ]
+    },
+    {
+        "id": 133,
+        "title": "CREMA MANOS COCO VAINILLA",
+        "price": 20600,
+        "description": "Opción de pago a 6 cuotas de 3.433 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 13184,
+        "productUrl": "https://ejemplo.com/productos/crema-manos-coco-vainilla",
+        "images": [
+            "img/crema-manos-coco-vainilla.png"
+        ]
+    },
+    {
+        "id": 134,
+        "title": "CREMA MANOS FRUTOS ROJOS",
+        "price": 20600,
+        "description": "Opción de pago a 6 cuotas de 3.433 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza ",
+        "warehousePrice": 13184,
+        "productUrl": "https://ejemplo.com/productos/crema-manos-frutos-rojos",
+        "images": [
+            "img/crema-manos-frutos-rojos.png"
+        ]
+    },
+    {
+        "id": 135,
+        "title": "LOCION CORPORAL COCO VAINILLA",
+        "price": 56300,
+        "description": "Opción de pago a 6 cuotas de 9.383 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 36032,
+        "productUrl": "https://ejemplo.com/productos/locion-corporal-coco-vainilla",
+        "images": [
+            "img/locion-corporal-coco-vainilla.png"
+        ]
+    },
+    {
+        "id": 136,
+        "title": "LOCION CORPORAL FRUTOS ROJOS",
+        "price": 56300,
+        "description": "Opción de pago a 6 cuotas de 9.383 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 36032,
+        "productUrl": "https://ejemplo.com/productos/locion-corporal-frutos-rojos",
+        "images": [
+            "img/locion-corporal-frutos-rojos.png"
+        ]
+    },
+    {
+        "id": 137,
+        "title": "POLVO ILUMINADOR DESERT SUNSET",
+        "price": 47600,
+        "description": "Opción de pago a 6 cuotas de 7.933 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 30464,
+        "productUrl": "https://ejemplo.com/productos/polvo-iluminador-desert-sunset",
+        "images": [
+            "img/polvo-iluminador-desert-sunset.png"
+        ]
+    },
+    {
+        "id": 138,
+        "title": "POLVO ILUMINADOR DESERT ROSE",
+        "price": 47600,
+        "description": "Opción de pago a 6 cuotas de 7.933 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 30464,
+        "productUrl": "https://ejemplo.com/productos/polvo-iluminador-desert-rose",
+        "images": [
+            "img/polvo-iluminador-desert-rose.png"
+        ]
+    },
+    {
+        "id": 139,
+        "title": "POLVO ILUMINADOR DESERT SAND",
+        "price": 47600,
+        "description": "Opción de pago a 6 cuotas de 7.933 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 30464,
+        "productUrl": "https://ejemplo.com/productos/polvo-iluminador-desert-sand",
+        "images": [
+            "img/polvo-iluminador-desert-sand.png"
+        ]
+    },
+    {
+        "id": 140,
+        "title": "LAPIZ PARA CEJAS UNIVERSAL",
+        "price": 39300,
+        "description": "Opción de pago a 6 cuotas de 6.550 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "belleza",
+        "warehousePrice": 25152,
+        "productUrl": "https://ejemplo.com/productos/lapiz-cejas-universal",
+        "images": [
+            "img/lapiz-cejas-universal.png"
+        ]
+    },
+    {
+        "id": 141,
+        "title": "LAPIZ PARA CEJAS BROWN",
+        "price": 39300,
+        "description": "Opción de pago a 6 cuotas de 6.550 con 0% interés. ",
+        "category": "belleza",
+        "supplier": "Seytú",
+        "warehousePrice": 25152,
+        "productUrl": "https://ejemplo.com/productos/lapiz-cejas-brown",
+        "images": [
+            "img/lapiz-cejas-brown.png"
+        ]
+    }
+];
 
-        // Carrito de compras
-        let cart = {};
-        let currentOrderId = "";
+        // Función para formatear precios en formato COP
+        function formatPrice(price) {
+            return 'COP $' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
 
-        // Inicializar la tienda
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            setupEventListeners();
-        });
+        // Variables globales
+        let cart = [];
+        let currentDirectProduct = null;
+        const ADMIN_KEY = "proveedor2024"; // Clave estática para acceso a precios de proveedor
+        
+        const cartIcon = document.getElementById('cartIcon');
+        const cartCount = document.getElementById('cartCount');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.getElementById('closeCart');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        const emailBtn = document.getElementById('emailBtn');
+        const continueShopping = document.getElementById('continueShopping');
+        const productsGrid = document.getElementById('productsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const customerName = document.getElementById('customerName');
+        const customerPhone = document.getElementById('customerPhone');
+        const customerAddress = document.getElementById('customerAddress');
+        
+        // Elementos para compra directa
+        const directPurchaseModal = document.getElementById('directPurchaseModal');
+        const directPurchaseProduct = document.getElementById('directPurchaseProduct');
+        const closeDirectPurchase = document.getElementById('closeDirectPurchase');
+        const directCustomerName = document.getElementById('directCustomerName');
+        const directCustomerPhone = document.getElementById('directCustomerPhone');
+        const directCustomerAddress = document.getElementById('directCustomerAddress');
+        const directWhatsappBtn = document.getElementById('directWhatsappBtn');
+        const directEmailBtn = document.getElementById('directEmailBtn');
+        const cancelDirectPurchase = document.getElementById('cancelDirectPurchase');
+        
+        // Elementos para acceso de administrador
+        const adminKeyInput = document.getElementById('adminKey');
+        const adminAccessBtn = document.getElementById('adminAccessBtn');
+        const supplierTableContainer = document.getElementById('supplierTableContainer');
+        const supplierTableBody = document.getElementById('supplierTableBody');
 
-        // Renderizar productos
-        function renderProducts() {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
+        // Cargar productos en la página
+        function loadProducts(productsToLoad) {
+            productsGrid.innerHTML = '';
             
-            products.forEach(product => {
+            productsToLoad.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.className = 'col-md-4 col-lg-3';
+                productCard.className = 'product-card';
                 productCard.innerHTML = `
-                    <div class="card product-card h-100">
-                        ${product.onSale ? '<span class="badge bg-danger badge-sale">SALE</span>' : ''}
-                        <img src="${product.image}" class="card-img-top p-3" alt="${product.name}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text text-muted small">${product.description}</p>
-                            <p class="fw-bold">$${product.price.toLocaleString()}</p>
-                            <div class="quantity-controls">
-                                <button class="btn btn-sm btn-outline-secondary" onclick="adjustQuantity(${product.id}, -1)">-</button>
-                                <span id="quantity-${product.id}">${cart[product.id] || 0}</span>
-                                <button class="btn btn-sm btn-outline-secondary" onclick="adjustQuantity(${product.id}, 1)">+</button>
-                            </div>
-                            <span class="badge bg-secondary inventory-badge mt-2">Disponibles: ${product.inventory}</span>
+                    <a href="${product.productUrl}" class="product-link" target="_blank">
+                        <div class="product-image-container">
+                            <img src="${product.images[0]}" alt="${product.title}" class="product-image" data-product-id="${product.id}" data-image-index="0">
                         </div>
-                        <div class="card-footer bg-transparent">
-                            <button class="btn btn-sm btn-dark w-100" onclick="adjustQuantity(${product.id}, 1)">
-                                Añadir al carrito
+                    </a>
+                    <div class="product-info">
+                        <a href="${product.productUrl}" class="product-link" target="_blank">
+                            <h3 class="product-title">${product.title}</h3>
+                        </a>
+                        <p class="product-price">${formatPrice(product.price)}</p>
+                        <p class="product-description">${product.description}</p>
+                        <div class="product-actions">
+                            <button class="add-to-cart" data-id="${product.id}">
+                                <i class="fas fa-cart-plus"></i> Añadir al Carrito
+                            </button>
+                            <button class="buy-now" data-id="${product.id}">
+                                <i class="fas fa-shopping-bag"></i> Comprar Ahora
                             </button>
                         </div>
                     </div>
                 `;
-                container.appendChild(productCard);
+                productsGrid.appendChild(productCard);
             });
             
-            updateCartCounter();
+            // Agregar event listeners a los botones de agregar al carrito
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.closest('.add-to-cart').getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Agregar event listeners a los botones de comprar ahora
+            document.querySelectorAll('.buy-now').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = parseInt(e.target.closest('.buy-now').getAttribute('data-id'));
+                    openDirectPurchase(productId);
+                });
+            });
         }
 
-        // Ajustar cantidades
-        function adjustQuantity(productId, change) {
+        // Abrir modal para compra directa
+        function openDirectPurchase(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
             
-            const currentQuantity = cart[productId] || 0;
-            let newQuantity = currentQuantity + change;
+            currentDirectProduct = product;
             
-            // Validar que no sea negativo ni exceda el inventario
-            newQuantity = Math.max(0, Math.min(newQuantity, product.inventory));
-            
-            if (newQuantity === 0) {
-                delete cart[productId];
-            } else {
-                cart[productId] = newQuantity;
-            }
-            
-            // Actualizar la vista
-            document.getElementById(`quantity-${productId}`).textContent = cart[productId] || 0;
-            updateCartCounter();
-        }
-
-        // Actualizar contador del carrito
-        function updateCartCounter() {
-            const totalItems = Object.values(cart).reduce((sum, qty) => sum + qty, 0);
-            document.getElementById('cartCounter').textContent = totalItems;
-        }
-
-        // Mostrar modal de pedido
-        function showOrderModal() {
-            if (Object.keys(cart).length === 0) {
-                alert('Tu carrito está vacío');
-                return;
-            }
-            
-            const modal = new bootstrap.Modal(document.getElementById('orderModal'));
-            
-            // Resetear el modal
-            document.getElementById('checkoutFormSection').style.display = 'block';
-            document.getElementById('copPaymentSection').style.display = 'none';
-            document.getElementById('lightningPaymentSection').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'none';
-            document.getElementById('errorMessage').style.display = 'none';
-            
-            updateOrderSummary();
-            modal.show();
-        }
-
-        // Actualizar resumen del pedido
-        function updateOrderSummary() {
-            let html = '<h5 class="mb-3">Resumen de tu pedido</h5>';
-            let subtotal = 0;
-            
-            Object.entries(cart).forEach(([productId, quantity]) => {
-                const product = products.find(p => p.id == productId);
-                if (product) {
-                    const productTotal = product.price * quantity;
-                    subtotal += productTotal;
-                    
-                    html += `
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>${product.name} x${quantity}</span>
-                            <span>$${productTotal.toLocaleString()}</span>
-                        </div>
-                    `;
-                }
-            });
-            
-            const deliveryFee = document.querySelector('input[name="deliveryMethod"]:checked').value === 'delivery' ? 5000 : 0;
-            const total = subtotal + deliveryFee;
-            
-            html += `
-                <hr>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Subtotal:</span>
-                    <span>$${subtotal.toLocaleString()}</span>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                    <span>Costo de envío:</span>
-                    <span>$${deliveryFee.toLocaleString()}</span>
-                </div>
-                <div class="d-flex justify-content-between fw-bold">
-                    <span>Total:</span>
-                    <span>$${total.toLocaleString()}</span>
+            // Mostrar información del producto en el modal
+            directPurchaseProduct.innerHTML = `
+                <img src="${product.images[0]}" alt="${product.title}">
+                <div class="direct-purchase-info">
+                    <h3>${product.title}</h3>
+                    <p class="product-price">${formatPrice(product.price)}</p>
                 </div>
             `;
             
-            document.getElementById('orderSummary').innerHTML = html;
+            // Limpiar formulario
+            directCustomerName.value = '';
+            directCustomerPhone.value = '';
+            directCustomerAddress.value = '';
+            directWhatsappBtn.disabled = true;
+            directEmailBtn.disabled = true;
+            
+            // Mostrar modal
+            directPurchaseModal.style.display = 'flex';
         }
 
-        // Configurar event listeners
-        function setupEventListeners() {
-            // Cambiar método de entrega
-            document.querySelectorAll('input[name="deliveryMethod"]').forEach(radio => {
-                radio.addEventListener('change', function() {
-                    document.getElementById('addressField').style.display = 
-                        this.value === 'delivery' ? 'block' : 'none';
-                    updateOrderSummary();
+        // Filtrar productos
+        function filterProducts() {
+            const searchText = searchInput.value.toLowerCase();
+            const activeCategory = document.querySelector('.category-btn.active').getAttribute('data-category');
+            
+            const filteredProducts = products.filter(product => {
+                const matchesSearch = product.title.toLowerCase().includes(searchText) || 
+                                     product.description.toLowerCase().includes(searchText);
+                const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            loadProducts(filteredProducts);
+        }
+
+        // Agregar producto al carrito
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price,
+                    quantity: 1,
+                    image: product.images[0]
+                });
+            }
+            
+            updateCart();
+            showNotification(`${product.title} agregado al carrito`);
+        }
+
+        // Eliminar producto del carrito
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        // Actualizar cantidad de producto en el carrito
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            
+            if (item) {
+                item.quantity += change;
+                
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        // Actualizar visualización del carrito
+        function updateCart() {
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" width="50">
+                    <div class="item-info">
+                        <h4 class="item-title">${item.title}</h4>
+                        <p class="item-price">${formatPrice(item.price)} c/u</p>
+                    </div>
+                    <div class="item-quantity">
+                        <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        <span class="remove-item" data-id="${item.id}"><i class="fas fa-trash"></i></span>
+                    </div>
+                    <div class="item-total">${formatPrice(itemTotal)}</div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            cartTotal.textContent = formatPrice(total);
+            
+            // Agregar event listeners a los botones de cantidad y eliminar
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('.quantity-btn').getAttribute('data-id'));
+                    updateQuantity(id, -1);
                 });
             });
-        }
-
-        // Procesar pago
-        async function processPayment(paymentMethod) {
-            // Validar formulario
-            const form = document.getElementById('customerForm');
-            if (!form.checkValidity()) {
-                form.classList.add('was-validated');
-                return;
-            }
             
-            // Validar dirección si es envío
-            const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked').value;
-            if (deliveryMethod === 'delivery' && !document.getElementById('customerAddress').value) {
-                alert('Por favor ingresa una dirección de envío');
-                return;
-            }
-            
-            // Mostrar spinner
-            document.getElementById('loadingSpinner').style.display = 'block';
-            document.getElementById('errorMessage').style.display = 'none';
-            
-            // Generar ID de pedido
-            currentOrderId = 'ORD-' + Date.now().toString().slice(-8);
-            
-            // Calcular total
-            const subtotal = Object.entries(cart).reduce((sum, [productId, quantity]) => {
-                const product = products.find(p => p.id == productId);
-                return sum + (product ? product.price * quantity : 0);
-            }, 0);
-            
-            const deliveryFee = deliveryMethod === 'delivery' ? 5000 : 0;
-            const total = subtotal + deliveryFee;
-            
-            try {
-                // Enviar datos a Formspree (reemplaza con tu ID real)
-                const formspreeResponse = await fetch('https://formsfz.fz-533.workers.dev', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        _subject: `Nuevo pedido ${currentOrderId}`,
-                        name: document.getElementById('customerName').value,
-                        phone: document.getElementById('customerPhone').value,
-                        email: document.getElementById('customerEmail').value,
-                        address: deliveryMethod === 'delivery' ? document.getElementById('customerAddress').value : 'Recoger en tienda',
-                        paymentMethod: paymentMethod,
-                        items: Object.entries(cart).map(([productId, quantity]) => {
-                            const product = products.find(p => p.id == productId);
-                            return {
-                                id: productId,
-                                name: product.name,
-                                quantity: quantity,
-                                price: product.price,
-                                subtotal: product.price * quantity
-                            };
-                        }),
-                        subtotal: subtotal,
-                        deliveryFee: deliveryFee,
-                        total: total,
-                        orderId: currentOrderId
-                    })
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('.quantity-btn').getAttribute('data-id'));
+                    updateQuantity(id, 1);
                 });
-                
-                if (!formspreeResponse.ok) {
-                    throw new Error('Error al enviar el pedido');
-                }
-                
-                // Mostrar instrucciones de pago según el método
-                document.getElementById('checkoutFormSection').style.display = 'none';
-                
-                if (paymentMethod === 'COP') {
-                    document.getElementById('copTotalAmount').textContent = `$${total.toLocaleString()}`;
-                    document.getElementById('copOrderNumber').textContent = currentOrderId;
-                    document.getElementById('copPaymentSection').style.display = 'block';
-                } else {
-                    document.getElementById('lightningTotalAmount').textContent = `$${total.toLocaleString()}`;
-                    document.getElementById('lightningOrderNumber').textContent = currentOrderId;
-                    document.getElementById('lightningPaymentSection').style.display = 'block';
-                    
-                    // Generar QR code
-                    document.getElementById('qrCode').innerHTML = '';
-                    new QRCode(document.getElementById('qrCode'), {
-                        text: `lightning:tu@lightningaddress.com?amount=${total}&message=Pedido ${currentOrderId}`,
-                        width: 200,
-                        height: 200
-                    });
-                }
-                
-            } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('errorMessage').textContent = 'Error al procesar el pedido: ' + error.message;
-                document.getElementById('errorMessage').style.display = 'block';
-            } finally {
-                document.getElementById('loadingSpinner').style.display = 'none';
-            }
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('.remove-item').getAttribute('data-id'));
+                    removeFromCart(id);
+                });
+            });
+            
+            // Habilitar o deshabilitar el botón de WhatsApp según si hay productos y datos completos
+            validateCheckoutButton();
         }
 
-        // Completar pedido
-        function completeOrder() {
-            // Mostrar mensaje de éxito
-            document.getElementById('copPaymentSection').style.display = 'none';
-            document.getElementById('lightningPaymentSection').style.display = 'none';
-            document.getElementById('successMessage').style.display = 'block';
+        // Validar si se puede habilitar los botones de checkout
+        function validateCheckoutButton() {
+            const hasItems = cart.length > 0;
+            const hasName = customerName.value.trim() !== '';
+            const hasPhone = customerPhone.value.trim() !== '';
+            const hasAddress = customerAddress.value.trim() !== '';
             
-            // Limpiar carrito
-            cart = {};
-            updateCartCounter();
-            renderProducts();
+            whatsappBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
+            emailBtn.disabled = !(hasItems && hasName && hasPhone && hasAddress);
+        }
+
+        // Validar si se puede habilitar los botones de checkout para compra directa
+        function validateDirectCheckoutButton() {
+            const hasName = directCustomerName.value.trim() !== '';
+            const hasPhone = directCustomerPhone.value.trim() !== '';
+            const hasAddress = directCustomerAddress.value.trim() !== '';
             
-            // Cerrar el modal después de 3 segundos
+            directWhatsappBtn.disabled = !(hasName && hasPhone && hasAddress);
+            directEmailBtn.disabled = !(hasName && hasPhone && hasAddress);
+        }
+
+        // Mostrar notificación
+        function showNotification(message) {
+            // Eliminar notificación existente si hay una
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
             setTimeout(() => {
-                const modal = bootstrap.Modal.getInstance(document.getElementById('orderModal'));
-                modal.hide();
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
             }, 3000);
         }
+
+        // Obtener información del remitente desde el footer
+        function getRemitenteInfo() {
+            const contactoSection = document.querySelector('.footer-section:nth-child(2)');
+            const telefono = contactoSection.querySelector('p:nth-child(2)').textContent.replace('+57 ', '');
+            const correo = contactoSection.querySelector('p:nth-child(3)').textContent;
+            const direccion = contactoSection.querySelector('p:nth-child(4)').textContent;
+            
+            return {
+                nombre: "@hermanosdreams",
+                correo: correo,
+                direccion: direccion,
+                telefono: telefono
+            };
+        }
+
+        // Generar mensaje de WhatsApp para el carrito
+        function generateWhatsAppMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = "¡Hola! Quiero realizar la siguiente compra:\n\n";
+            
+            cart.forEach(item => {
+                message += `- ${item.title} x${item.quantity}: ${formatPrice(item.price * item.quantity)}\n`;
+            });
+            
+            message += `\nTotal: ${formatPrice(cart.reduce((total, item) => total + (item.price * item.quantity), 0))}`;
+            message += `\n\nMi información de envío es:\n`;
+            message += `Nombre: ${customerName.value}\n`;
+            message += `Teléfono: ${customerPhone.value}\n`;
+            message += `Dirección: ${customerAddress.value}`;
+            
+            // Añadir información del remitente
+            message += `\n\nInformación del remitente:\n`;
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Generar mensaje de correo para el carrito
+        function generateEmailMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = `Tienes un nuevo pedido de ${customerName.value}:\n\n`;
+            
+            message += "PRODUCTOS:\n";
+            cart.forEach(item => {
+                message += `- ${item.title} x${item.quantity}: ${formatPrice(item.price * item.quantity)}\n`;
+            });
+            
+            message += `\nTOTAL: ${formatPrice(cart.reduce((total, item) => total + (item.price * item.quantity), 0))}\n\n`;
+            message += "INFORMACIÓN DEL CLIENTE:\n";
+            message += `Nombre: ${customerName.value}\n`;
+            message += `Teléfono: ${customerPhone.value}\n`;
+            message += `Dirección: ${customerAddress.value}\n\n`;
+            
+            message += "INFORMACIÓN DEL REMITENTE:\n";
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Generar mensaje de WhatsApp para compra directa
+        function generateDirectWhatsAppMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = "¡Hola! Quiero comprar el siguiente producto:\n\n";
+            
+            message += `- ${currentDirectProduct.title}: ${formatPrice(currentDirectProduct.price)}\n`;
+            message += `\nTotal: ${formatPrice(currentDirectProduct.price)}`;
+            message += `\n\nMi información de envío es:\n`;
+            message += `Nombre: ${directCustomerName.value}\n`;
+            message += `Teléfono: ${directCustomerPhone.value}\n`;
+            message += `Dirección: ${directCustomerAddress.value}`;
+            
+            // Añadir información del remitente
+            message += `\n\nInformación del remitente:\n`;
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Generar mensaje de correo para compra directa
+        function generateDirectEmailMessage() {
+            const remitente = getRemitenteInfo();
+            
+            let message = `Tienes un nuevo pedido directo de ${directCustomerName.value}:\n\n`;
+            
+            message += "PRODUCTO:\n";
+            message += `- ${currentDirectProduct.title}: ${formatPrice(currentDirectProduct.price)}\n\n`;
+            
+            message += `TOTAL: ${formatPrice(currentDirectProduct.price)}\n\n`;
+            message += "INFORMACIÓN DEL CLIENTE:\n";
+            message += `Nombre: ${directCustomerName.value}\n`;
+            message += `Teléfono: ${directCustomerPhone.value}\n`;
+            message += `Dirección: ${directCustomerAddress.value}\n\n`;
+            
+            message += "INFORMACIÓN DEL REMITENTE:\n";
+            message += `Negocio: ${remitente.nombre}\n`;
+            message += `Correo: ${remitente.correo}\n`;
+            message += `Dirección: ${remitente.direccion}\n`;
+            message += `Teléfono: ${remitente.telefono}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Cargar tabla de precios de proveedor
+        function loadSupplierTable() {
+            supplierTableBody.innerHTML = '';
+            
+            products.forEach(product => {
+                const margin = ((product.price - product.warehousePrice) / product.warehousePrice * 100).toFixed(2);
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.id}</td>
+                    <td>${product.title}</td>
+                    <td>${product.category}</td>
+                    <td>${formatPrice(product.warehousePrice)}</td>
+                    <td>${formatPrice(product.price)}</td>
+                    <td>${product.supplier}</td>
+                    <td>${margin}%</td>
+                `;
+                supplierTableBody.appendChild(row);
+            });
+            
+            supplierTableContainer.style.display = 'block';
+        }
+
+        // Event Listeners
+        cartIcon.addEventListener('click', () => {
+            cartModal.style.display = 'flex';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        continueShopping.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        whatsappBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            const message = generateWhatsAppMessage();
+            window.open(`https://wa.me/573215343562?text=${message}`, '_blank');
+        });
+
+        emailBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('El carrito está vacío');
+                return;
+            }
+            
+            const subject = encodeURIComponent(`Nuevo Pedido de ${customerName.value}`);
+            const message = generateEmailMessage();
+            window.open(`mailto:calivalle@qrcontraentrega.com?subject=${subject}&body=${message}`, '_blank');
+        });
+
+        // Event Listeners para compra directa
+        closeDirectPurchase.addEventListener('click', () => {
+            directPurchaseModal.style.display = 'none';
+        });
+
+        cancelDirectPurchase.addEventListener('click', () => {
+            directPurchaseModal.style.display = 'none';
+        });
+
+        directWhatsappBtn.addEventListener('click', () => {
+            if (!currentDirectProduct) {
+                showNotification('No hay producto seleccionado');
+                return;
+            }
+            
+            const message = generateDirectWhatsAppMessage();
+            window.open(`https://wa.me/573215343562?text=${message}`, '_blank');
+        });
+
+        directEmailBtn.addEventListener('click', () => {
+            if (!currentDirectProduct) {
+                showNotification('No hay producto seleccionado');
+                return;
+            }
+            
+            const subject = encodeURIComponent(`Nuevo Pedido Directo de ${directCustomerName.value}`);
+            const message = generateDirectEmailMessage();
+            window.open(`mailto:calivalle@qrcontraentrega.com?subject=${subject}&body=${message}`, '_blank');
+        });
+
+        searchInput.addEventListener('input', filterProducts);
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterProducts();
+            });
+        });
+
+        // Validar formulario cuando cambian los campos
+        customerName.addEventListener('input', validateCheckoutButton);
+        customerPhone.addEventListener('input', validateCheckoutButton);
+        customerAddress.addEventListener('input', validateCheckoutButton);
+
+        // Validar formulario de compra directa cuando cambian los campos
+        directCustomerName.addEventListener('input', validateDirectCheckoutButton);
+        directCustomerPhone.addEventListener('input', validateDirectCheckoutButton);
+        directCustomerAddress.addEventListener('input', validateDirectCheckoutButton);
+
+        // Acceso de administrador
+        adminAccessBtn.addEventListener('click', () => {
+            if (adminKeyInput.value === ADMIN_KEY) {
+                loadSupplierTable();
+                showNotification('Acceso concedido. Tabla de proveedores cargada.');
+            } else {
+                showNotification('Clave incorrecta. Intenta nuevamente.');
+            }
+        });
+
+        adminKeyInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                adminAccessBtn.click();
+            }
+        });
+
+        // Cerrar modal al hacer clic fuera de él
+        window.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+            if (e.target === directPurchaseModal) {
+                directPurchaseModal.style.display = 'none';
+            }
+        });
+
+        // Inicializar la página
+        loadProducts(products);
     </script>
 </body>
 </html>
