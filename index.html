@@ -311,6 +311,16 @@
       }
     ];
 
+    // Función para normalizar texto (eliminar tildes, convertir a minúsculas, eliminar espacios extra)
+    function normalizarTexto(texto) {
+      return texto
+        .normalize("NFD") // Descomponer caracteres con acentos
+        .replace(/[\u0300-\u036f]/g, "") // Eliminar diacríticos (tildes)
+        .toLowerCase() // Convertir a minúsculas
+        .trim() // Eliminar espacios al inicio y final
+        .replace(/\s+/g, ' '); // Reemplazar múltiples espacios por uno solo
+    }
+
     // Inicializar el mapa cuando el DOM esté listo
     document.addEventListener('DOMContentLoaded', function() {
       initializeMap();
@@ -417,7 +427,8 @@
         
         // Guardar todos los datos de la ubicación en el marcador
         marcador.datosUbicacion = loc;
-        marcador.datosBusqueda = `${loc.nombre} ${loc.direccion} ${loc.telefono || ''} ${loc.servicios || ''}`.toLowerCase();
+        // Normalizar datos para búsqueda
+        marcador.datosBusqueda = normalizarTexto(`${loc.nombre} ${loc.direccion} ${loc.telefono || ''} ${loc.servicios || ''}`);
         marcadoresOriginales.push(marcador);
       });
 
@@ -463,10 +474,11 @@
     // Función para manejar la búsqueda
     function handleSearchInput(e) {
       clearTimeout(buscadorTimeout);
-      const termino = e.target.value.trim();
+      const termino = e.target.value;
+      const terminoNormalizado = normalizarTexto(termino);
       const sugerenciasContainer = document.getElementById('sugerencias-busqueda');
       
-      if (termino.length < 3) {
+      if (terminoNormalizado.length < 3) {
         sugerenciasContainer.style.display = 'none';
         return;
       }
@@ -476,7 +488,7 @@
       sugerenciasContainer.style.display = 'block';
       
       buscadorTimeout = setTimeout(() => {
-        buscarConGoogle(termino);
+        buscarConGoogle(terminoNormalizado);
       }, 500);
     }
 
@@ -605,9 +617,8 @@
     // Función para buscar en los puntos locales
     function buscarEnPuntosLocales(consulta) {
       const sugerenciasContainer = document.getElementById('sugerencias-busqueda');
-      const termino = consulta.toLowerCase();
       const resultados = marcadoresOriginales.filter(m => 
-        m.datosBusqueda.includes(termino)
+        m.datosBusqueda.includes(consulta)
       );
       
       if (resultados.length > 0) {
@@ -667,7 +678,7 @@
         e.preventDefault();
         const termino = document.getElementById('buscador').value.trim();
         if (termino) {
-          buscarConGoogle(termino);
+          buscarConGoogle(normalizarTexto(termino));
         }
       }
     }
