@@ -264,7 +264,7 @@
         <div id="sugerencias-busqueda" class="sugerencias-busqueda"></div>
       </div>
       <button class="btn" id="centrar-btn">CENTRAR</button>
-      <button class="btn" id="afiliarse-btn" onclick="window.open('https://qrcontraentrega.com/afiliacion-colombia', '_blank')">AFILIARSE</button>
+      <button class="btn" id="afiliarse-btn">AFILIARSE</button>
     </div>
     <div id="mapa"></div>
     <div class="map-type-selector">
@@ -285,6 +285,7 @@
     let googleMapsLayer;
     let googleSatelliteLayer;
     let currentLayer;
+    let clusters;
 
     // Datos de ubicaciones en Cali (solo socios)
     const UBICACIONES = [
@@ -349,9 +350,20 @@
           document.getElementById('sugerencias-busqueda').style.display = 'none';
         }
       });
+      
+      // Evento para el botón afiliarse
+      document.getElementById('afiliarse-btn').addEventListener('click', function() {
+        // Abrir en una nueva pestaña para evitar problemas con el mapa
+        window.open('https://qrcontraentrega.com/afiliacion-colombia', '_blank');
+      });
     });
 
     function initializeMap() {
+      // Limpiar mapa existente si hay uno
+      if (mapa) {
+        mapa.remove();
+      }
+      
       // Inicializar mapa
       mapa = L.map('mapa', {
         center: [3.43722, -76.5225], // Coordenadas de Cali
@@ -382,10 +394,10 @@
       // Asegurar que el mapa ocupe todo el espacio disponible
       setTimeout(() => {
         mapa.invalidateSize();
-      }, 0);
+      }, 100);
 
       // Sistema de marcadores
-      const clusters = L.markerClusterGroup({
+      clusters = L.markerClusterGroup({
         iconCreateFunction: cluster => L.divIcon({
           html: `<div>${cluster.getChildCount()}</div>`,
           className: 'cluster-marcadores',
@@ -420,7 +432,7 @@
               </div>
               <div class="popup-button-row">
                 <button class="btn" onclick="abrirGoogleMapsConDireccion('${loc.latlng[0]}', '${loc.latlng[1]}', '${loc.nombre}')">Cómo llegar</button>
-                <button class="btn" onclick="window.open('${loc.url}', '_blank')">Ver Afiliado</button>
+                <button class="btn" onclick="abrirAfiliadoEnNuevaPestana('${loc.url}')">Ver Afiliado</button>
               </div>
             </div>
           </div>
@@ -444,6 +456,11 @@
 
       // Solicitar ubicación al cargar la página
       obtenerUbicacionUsuario();
+    }
+
+    // Función para abrir afiliado en nueva pestaña
+    function abrirAfiliadoEnNuevaPestana(url) {
+      window.open(url, '_blank');
     }
 
     // Función para cambiar a vista de mapa
@@ -764,6 +781,16 @@
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
       return R * c;
     }
+    
+    // Re-inicializar el mapa cuando la página se vuelve visible (después de volver de otra pestaña)
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        // Pequeño retraso para asegurar que el DOM esté listo
+        setTimeout(() => {
+          mapa.invalidateSize();
+        }, 300);
+      }
+    });
   </script>
 </body>
 </html>
