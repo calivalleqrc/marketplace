@@ -17,6 +17,11 @@
             --color-azul: #007bff;
             --color-rojo: #dc3545;
             --color-dorado: #FFD700;
+            --color-naranja: #FF8C00;
+            --color-bronce: #CD7F32;
+            --color-plata: #C0C0C0;
+            --color-oro: #FFD700;
+            --color-platino: #E5E4E2;
         }
         
         * {
@@ -99,7 +104,7 @@
         .plan-selection {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-bottom: 3rem;
             flex-wrap: wrap;
         }
@@ -111,7 +116,7 @@
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            width: 280px;
+            width: 250px;
             position: relative;
             overflow: hidden;
         }
@@ -135,6 +140,26 @@
             padding: 0.3rem 0.8rem;
             font-weight: bold;
             font-size: 0.8rem;
+        }
+        
+        .plan-badge.bronce {
+            background-color: var(--color-bronce);
+            color: var(--color-blanco);
+        }
+        
+        .plan-badge.plata {
+            background-color: var(--color-plata);
+            color: var(--color-negro);
+        }
+        
+        .plan-badge.oro {
+            background-color: var(--color-oro);
+            color: var(--color-negro);
+        }
+        
+        .plan-badge.platino {
+            background-color: var(--color-platino);
+            color: var(--color-negro);
         }
         
         .plan-price {
@@ -351,26 +376,6 @@
             transform: translateY(-2px);
         }
         
-        .sms-btn {
-            background-color: var(--color-azul);
-            color: white;
-        }
-        
-        .sms-btn:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-        
-        .email-btn {
-            background-color: var(--color-rojo);
-            color: white;
-        }
-        
-        .email-btn:hover {
-            background-color: #bd2130;
-            transform: translateY(-2px);
-        }
-        
         /* Notification */
         .notification {
             position: fixed;
@@ -513,46 +518,77 @@
     <div class="container">
         <!-- Plan Selection -->
         <div class="plan-selection">
-            <div class="plan-option" data-plan="emprendedor">
-                <div class="plan-badge">Popular</div>
-                <h2>Plan Emprendedor</h2>
-                <div class="plan-price">$250.000<span>/año</span></div>
-                <p class="plan-description">Solución básica para comenzar tu negocio online</p>
+            <div class="plan-option" data-plan="bronce">
+                <div class="plan-badge bronce">Básico</div>
+                <h2>Plan Bronce</h2>
+                <div class="plan-price">$100.000<span>/año</span></div>
+                <p class="plan-description">Solución ideal para emprendedores que inician su negocio online</p>
                 <button class="select-plan">Seleccionar</button>
             </div>
             
-            <div class="plan-option" data-plan="empresa">
-                <div class="plan-badge">Recomendado</div>
-                <h2>Plan Empresa</h2>
-                <div class="plan-price">$750.000<span>/año</span></div>
+            <div class="plan-option" data-plan="plata">
+                <div class="plan-badge plata">Popular</div>
+                <h2>Plan Plata</h2>
+                <div class="plan-price">$300.000<span>/año</span></div>
                 <p class="plan-description">Solución completa para potenciar su negocio</p>
+                <button class="select-plan">Seleccionar</button>
+            </div>
+            
+            <div class="plan-option" data-plan="oro">
+                <div class="plan-badge oro">Premium</div>
+                <h2>Plan Oro</h2>
+                <div class="plan-price">$800.000<span>/año</span></div>
+                <p class="plan-description">Solución avanzada para empresas en crecimiento</p>
+                <button class="select-plan">Seleccionar</button>
+            </div>
+            
+            <div class="plan-option" data-plan="platino">
+                <div class="plan-badge platino">Elite</div>
+                <h2>Plan Platino</h2>
+                <div class="plan-price">A cotizar</div>
+                <p class="plan-description">Solución personalizada según necesidades de su empresa</p>
                 <button class="select-plan">Seleccionar</button>
             </div>
         </div>
 
-        <!-- Plan Emprendedor Details -->
-        <div class="plan-details" id="emprendedor-details">
+        <!-- Plan Bronce Details -->
+        <div class="plan-details" id="bronce-details">
             <div class="plan-section">
-                <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Emprendedor?</h3>
+                <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Bronce?</h3>
                 <div class="features-grid">
-                    <div class="feature-item"><i class="fas fa-check"></i> Página en framework React diseñada para recibir órdenes</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Integración con WhatsApp, SMS y correo electrónico</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Subdominio corporativo (ej: sunegocio.qrcontraentrega.com)</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Diseño web responsive (adaptable a PC y móvil)</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Branding básico para empezar el negocio desde cero</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Publicidad orgánica en nuestra plataforma</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Presencia mapeada en nuestra plataforma</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Servicio de negocios verificados</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Capacitación inicial en video sobre el uso de la plataforma</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> Soporte técnico especializado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Página web tipo catálogo activa x 365 días</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Dominio web incluido (ej: sunegocio.com)</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Hosting + certificado SSL de seguridad</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Plataforma en React para gestión de contenido</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Catálogo de productos con imágenes y descripciones</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Carrito de compras funcional</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Redirección a WhatsApp y correo electrónico para finalizar compras</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Correo electrónico corporativo </div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Diseño responsive (adaptable a móviles)</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Formulario de contacto integrado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Integración con Contraentrega Marketplace</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Soporte técnico dedicado por todo el año</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Guía básica de uso de la plataforma</div>
+                </div>
+            </div>
+            
+            <div class="plan-section">
+                <h3><i class="fas fa-star"></i> Ventajas del Plan</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fas fa-check"></i> Ideal para emprendedores que inician en el e-commerce</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Sin comisiones adicionales por ventas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Fácil administración sin conocimientos técnicos</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Proceso de compra simplificado vía WhatsApp o Correo Electrónico </div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Costo accesible para pequeños negocios</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Presencia profesional en internet</div>
                 </div>
             </div>
         </div>
 
-        <!-- Plan Empresa Details -->
-        <div class="plan-details" id="empresa-details">
+        <!-- Plan Plata Details -->
+        <div class="plan-details" id="plata-details">
             <div class="plan-section">
-                <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Empresa?</h3>
+                <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Plata?</h3>
                 <div class="features-grid">
                     <div class="feature-item"><i class="fas fa-check"></i> Tienda Profesional Activa x 365 días</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Dominio propio personalizado incluido (ej: sunegocio.com)</div>
@@ -583,13 +619,96 @@
                 <div class="features-grid">
                     <div class="feature-item"><i class="fas fa-check"></i> 0% de comisión de nuestra plataforma por cada venta generada</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Configuración sin costo de todas las pasarelas de pago y servicios adicionales</div>
-                    <div class="feature-item"><i class="fas fa-check"></i> ERP integrado para gestión de envíos y logística con aliados comerciales</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> ERP integrado para generación  de guías de transporte y logística con aliados comerciales</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Servicio de dropshipping con diversos productos si no cuenta con stock propio</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Branding completo incluido para quienes empiezan desde cero</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Publicidad constante que da un plus en ventas y visibilidad</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Soporte técnico especializado disponible para resolver dudas y problemas</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Informes mensuales de analytics con métricas de desempeño</div>
                     <div class="feature-item"><i class="fas fa-check"></i> Blog integrado para estrategias de contenido SEO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plan Oro Details -->
+        <div class="plan-details" id="oro-details">
+            <div class="plan-section">
+                <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Oro?</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fas fa-check"></i> Todo lo del Plan Plata</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Tienda Profesional Avanzada Activa x 365 días</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Dominio premium personalizado incluido</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Hosting empresarial de alta disponibilidad</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Plataforma eCommerce personalizada</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Apps nativas para Android e iOS con funciones avanzadas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Múltiples pasarelas de pago integradas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Sistema de facturación electrónica avanzado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> ERP completo integrado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> CRM para gestión de clientes</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Almacenamiento premium incluido (3 meses gratis)</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Logística y envíos nacionales e internacionales</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Sistema de inventario avanzado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Branding y diseño corporativo completo</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Campañas de marketing digital incluidas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Integración con múltiples marketplaces</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Asesoría empresarial mensual de 1 hora</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Reportes analíticos avanzados</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> SEO avanzado y posicionamiento web</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Soporte técnico prioritario 24/7</div>
+                </div>
+            </div>
+            
+            <div class="plan-section">
+                <h3><i class="fas fa-star"></i> Ventajas Premium</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fas fa-check"></i> Solución integral para empresas en crecimiento</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Tecnología de punta para optimizar operaciones</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Asesoramiento estratégico personalizado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Herramientas avanzadas de analytics y business intelligence</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Integraciones con sistemas empresariales</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Maximización del ROI con estrategias probadas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Escalabilidad garantizada para el crecimiento</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plan Platino Details -->
+        <div class="plan-details" id="platino-details">
+            <div class="plan-section">
+                <h3><i class="fas fa-check-circle"></i> ¿Qué incluye el Plan Platino?</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fas fa-check"></i> Todo lo del Plan Oro</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Solución completamente personalizada según necesidades</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Desarrollo a medida de plataforma eCommerce</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Infraestructura tecnológica dedicada</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Apps nativas personalizadas para Android e iOS</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Integraciones específicas con sistemas existentes</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Desarrollo de funcionalidades exclusivas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Consultoría estratégica de eCommerce</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Plan de marketing digital completo</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Gestión de campañas publicitarias</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Análisis de mercado y competencia</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Optimización continua de conversiones</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Asesoría legal y fiscal para eCommerce</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Servicio de atención al cliente white-label</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Equipo dedicado de desarrollo y soporte</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> SLA (Acuerdo de Nivel de Servicio) garantizado</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Capacitación personalizada para equipos</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Reportes ejecutivos personalizados</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Reuniones estratégicas trimestrales</div>
+                </div>
+            </div>
+            
+            <div class="plan-section">
+                <h3><i class="fas fa-star"></i> Ventajas Elite</h3>
+                <div class="features-grid">
+                    <div class="feature-item"><i class="fas fa-check"></i> Solución 100% adaptada a sus necesidades específicas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Asesoramiento de nivel ejecutivo</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Desarrollo ágil con metodologías modernas</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Ventaja competitiva con tecnología exclusiva</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Escalabilidad ilimitada según crecimiento</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Partnership estratégico con nuestro equipo</div>
+                    <div class="feature-item"><i class="fas fa-check"></i> Maximización de resultados y rentabilidad</div>
                 </div>
             </div>
         </div>
@@ -686,11 +805,6 @@
                         <label for="contactEmail" class="required-field">Correo electrónico</label>
                         <input type="email" id="contactEmail" name="contactEmail" required placeholder="Ej: info@sunegocio.com">
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="contactPassword" class="required-field">Crear contraseña</label>
-                        <input type="password" id="contactPassword" name="contactPassword" required placeholder="Cree una contraseña segura">
-                    </div>
                 </div>
                 
                 <div class="form-section">
@@ -726,12 +840,6 @@
                     <button type="button" class="submit-btn whatsapp-btn" id="submitWhatsApp">
                         <i class="fab fa-whatsapp"></i> Enviar por WhatsApp
                     </button>
-                    <button type="button" class="submit-btn sms-btn" id="submitSMS">
-                        <i class="fas fa-sms"></i> Enviar por SMS
-                    </button>
-                    <button type="button" class="submit-btn email-btn" id="submitEmail">
-                        <i class="fas fa-envelope"></i> Enviar por Correo
-                    </button>
                 </div>
             </form>
         </div>
@@ -746,13 +854,13 @@
             </div>
             <div class="footer-section">
                 <h3>Contacto</h3>
-                <p><i class="fas fa-phone"></i> +57 3146824438</p>
-                <p><i class="fas fa-envelope"></i> calivalle@qrcontraentrega.com</p>
+                <p><i class="fas fa-phone"></i> +57 3215343562</p>
+                <p><i class="fas fa-envelope"></i> colombia@qrcontraentrega.com</p>
                 <p><i class="fas fa-map-marker-alt"></i> Carrera 16 # 9 - 44, Cali, Colombia</p>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/share/17Dmzvi5ei/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
-                    <a href="instagram.com/calivalle_qrcontraentrega"><i class="fab fa-instagram"></i></a>
-                    <a href="wa.me/573146824438"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://instagram.com/colombia_qrcontraentrega"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/573215343562"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="footer-section">
@@ -772,14 +880,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Plan selection functionality
             const planOptions = document.querySelectorAll('.plan-option');
-            const planEmprendedor = document.getElementById('emprendedor-details');
-            const planEmpresa = document.getElementById('empresa-details');
+            const planBronce = document.getElementById('bronce-details');
+            const planPlata = document.getElementById('plata-details');
+            const planOro = document.getElementById('oro-details');
+            const planPlatino = document.getElementById('platino-details');
             const selectedPlanInput = document.getElementById('selectedPlan');
             
-            // Select Plan Empresa by default
-            document.querySelector('[data-plan="empresa"]').classList.add('selected');
-            planEmpresa.classList.add('active');
-            selectedPlanInput.value = 'Plan Empresa - $750.000/año';
+            // Select Plan Plata by default
+            document.querySelector('[data-plan="plata"]').classList.add('selected');
+            planPlata.classList.add('active');
+            selectedPlanInput.value = 'Plan Plata - $300.000/año';
             
             planOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -791,15 +901,25 @@
                     // Add selected class to clicked option
                     this.classList.add('selected');
                     
+                    // Hide all plan details
+                    planBronce.classList.remove('active');
+                    planPlata.classList.remove('active');
+                    planOro.classList.remove('active');
+                    planPlatino.classList.remove('active');
+                    
                     // Show the corresponding plan details
-                    if (planType === 'emprendedor') {
-                        planEmprendedor.classList.add('active');
-                        planEmpresa.classList.remove('active');
-                        selectedPlanInput.value = 'Plan Emprendedor - $250.000/año';
-                    } else {
-                        planEmprendedor.classList.remove('active');
-                        planEmpresa.classList.add('active');
-                        selectedPlanInput.value = 'Plan Empresa - $750.000/año';
+                    if (planType === 'bronce') {
+                        planBronce.classList.add('active');
+                        selectedPlanInput.value = 'Plan Bronce - $100.000/año';
+                    } else if (planType === 'plata') {
+                        planPlata.classList.add('active');
+                        selectedPlanInput.value = 'Plan Plata - $300.000/año';
+                    } else if (planType === 'oro') {
+                        planOro.classList.add('active');
+                        selectedPlanInput.value = 'Plan Oro - $800.000/año';
+                    } else if (planType === 'platino') {
+                        planPlatino.classList.add('active');
+                        selectedPlanInput.value = 'Plan Platino - Precio a cotizar';
                     }
                 });
             });
@@ -810,22 +930,7 @@
             document.getElementById('submitWhatsApp').addEventListener('click', function() {
                 if (validateForm()) {
                     const message = generateWhatsAppMessage();
-                    window.open(`https://wa.me/573146824438?text=${encodeURIComponent(message)}`, '_blank');
-                }
-            });
-            
-            document.getElementById('submitSMS').addEventListener('click', function() {
-                if (validateForm()) {
-                    const message = generateSMSMessage();
-                    window.open(`sms:+573146824438?body=${encodeURIComponent(message)}`, '_blank');
-                }
-            });
-            
-            document.getElementById('submitEmail').addEventListener('click', function() {
-                if (validateForm()) {
-                    const subject = 'Solicitud de Afiliación - ' + document.getElementById('businessName').value;
-                    const message = generateEmailMessage();
-                    window.open(`mailto:calivalle@qrcontraentrega.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`, '_blank');
+                    window.open(`https://wa.me/573215343562?text=${encodeURIComponent(message)}`, '_blank');
                 }
             });
             
@@ -922,46 +1027,6 @@
                 message += `• Teléfono: ${document.getElementById('contactPhone').value}\n`;
                 message += `• Email: ${document.getElementById('contactEmail').value}\n`;
                 message += `• Color preferido: ${document.querySelector('input[name="colorPreference"]:checked').value}\n`;
-                
-                return message;
-            }
-            
-            function generateSMSMessage() {
-                let message = "Solicitud de Afiliación:\n";
-                
-                message += `Plan: ${selectedPlanInput.value}\n`;
-                message += `Negocio: ${document.getElementById('businessName').value}\n`;
-                message += `Representante: ${document.getElementById('legalName').value}\n`;
-                message += `Tel: ${document.getElementById('contactPhone').value}\n`;
-                message += `Email: ${document.getElementById('contactEmail').value}`;
-                
-                return message;
-            }
-            
-            function generateEmailMessage() {
-                let message = "SOLICITUD DE AFILIACIÓN\n\n";
-                
-                message += `Plan seleccionado: ${selectedPlanInput.value}\n\n`;
-                
-                message += "INFORMACIÓN DEL NEGOCIO:\n";
-                message += `• Nombre comercial: ${document.getElementById('businessName').value}\n`;
-                message += `• Descripción: ${document.getElementById('businessDescription').value}\n`;
-                message += `• País: ${document.getElementById('businessCountry').value}\n`;
-                message += `• Departamento: ${document.getElementById('businessDepartment').value}\n`;
-                message += `• Ciudad: ${document.getElementById('businessCity').value}\n`;
-                message += `• Dirección: ${document.getElementById('businessAddress').value}\n\n`;
-                
-                message += "INFORMACIÓN DEL REPRESENTANTE LEGAL:\n";
-                message += `• Nombre: ${document.getElementById('legalName').value}\n`;
-                message += `• Tipo de identificación: ${document.querySelector('input[name="idType"]:checked').value}\n`;
-                message += `• Número de identificación: ${document.getElementById('idNumber').value}\n\n`;
-                
-                message += "INFORMACIÓN DE CONTACTO:\n";
-                message += `• Teléfono: ${document.getElementById('contactPhone').value}\n`;
-                message += `• Email: ${document.getElementById('contactEmail').value}\n`;
-                message += `• Color preferido: ${document.querySelector('input[name="colorPreference"]:checked').value}\n\n`;
-                
-                message += "FECHA: " + new Date().toLocaleDateString('es-CO');
                 
                 return message;
             }
