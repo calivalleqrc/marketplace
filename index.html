@@ -286,6 +286,7 @@
     let googleSatelliteLayer;
     let currentLayer;
     let clusters;
+    let ubicacionActivada = false;
 
     // Datos de ubicaciones en Cali (solo socios)
     const UBICACIONES = [
@@ -453,9 +454,6 @@
       if(marcadoresOriginales.length > 0) {
         mapa.fitBounds(clusters.getBounds().pad(0.3));
       }
-
-      // Solicitar ubicación al cargar la página
-      obtenerUbicacionUsuario();
     }
 
     // Función para abrir afiliado en nueva pestaña
@@ -711,13 +709,15 @@
     // Función para centrar el mapa en la ubicación actual
     function centrarMapa() {
       if (userMarker) {
+        // Si ya tenemos marcador de usuario, centrar en él
         mapa.setView(userMarker.getLatLng(), 17);
       } else {
+        // Si no tenemos marcador, obtener ubicación
         obtenerUbicacionUsuario();
       }
     }
 
-    // Función para obtener ubicación del usuario
+    // Función para obtener ubicación del usuario (SOLO CUANDO SE SOLICITA EXPLÍCITAMENTE)
     function obtenerUbicacionUsuario() {
       return new Promise((resolve, reject) => {
         if (navigator.geolocation) {
@@ -754,16 +754,19 @@
                 
               // Centrar mapa en la ubicación del usuario avec zoom cercano
               mapa.setView([latitude, longitude], 17);
+              ubicacionActivada = true;
               resolve();
             },
             (error) => {
               console.log(`Error al obtener ubicación: ${error.message}`);
+              alert('No se pudo obtener tu ubicación. Asegúrate de haber permitido el acceso a la ubicación.');
               reject();
             },
-            { enableHighAccuracy: true }
+            { enableHighAccuracy: true, timeout: 10000 }
           );
         } else {
           console.log("Tu navegador no soporta geolocalización.");
+          alert('Tu navegador no soporta geolocalización.');
           reject();
         }
       });
