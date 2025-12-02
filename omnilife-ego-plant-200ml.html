@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Auriculares Inalámbricos Premium | CaliValle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-blanco: #ffffff;
+            --color-negro: #000000;
+            --color-gris-claro: #f5f5f5;
+            --color-gris-medio: #e0e0e0;
+            --color-gris-oscuro: #333333;
+            --color-verde: #25D366;
+            --color-azul: #3498db;
+            --color-rojo: #e74c3c;
+            --color-morado: #9b59b6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Libre Baskerville', serif;
+            background-color: var(--color-blanco);
+            color: var(--color-negro);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .logo-img {
+            height: 40px;
+            width: auto;
+            max-width: 100%;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: var(--color-gris-oscuro);
+        }
+        
+        .breadcrumb a {
+            color: var(--color-gris-oscuro);
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Product Detail */
+        .product-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .product-gallery {
+            position: relative;
+        }
+        
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .thumbnail-container {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+        }
+        
+        .thumbnail.active {
+            border-color: var(--color-negro);
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--color-gris-oscuro);
+        }
+        
+        .product-description {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            color: var(--color-gris-oscuro);
+        }
+        
+        .product-features {
+            margin-bottom: 1.5rem;
+        }
+        
+        .product-features ul {
+            padding-left: 1.5rem;
+        }
+        
+        .product-features li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Botón de WhatsApp */
+        .whatsapp-buy-button {
+            padding: 1.2rem 2rem;
+            background-color: var(--color-verde);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            width: 100%;
+        }
+        
+        .whatsapp-buy-button:hover {
+            background-color: #128C7E;
+        }
+        
+        /* Estilos para videos */
+        .video-container {
+            margin: 2rem 0;
+        }
+        
+        .video-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-gris-oscuro);
+            border-bottom: 2px solid var(--color-gris-medio);
+            padding-bottom: 0.5rem;
+        }
+        
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-wrapper.shorts {
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 177.78%; /* Relación 9:16 para vertical */
+        }
+        
+        .video-wrapper.normal {
+            padding-bottom: 56.25%; /* Relación 16:9 para horizontal */
+        }
+        
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Modal para compra por WhatsApp */
+        .whatsapp-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .whatsapp-content {
+            background-color: var(--color-blanco);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 8px;
+            padding: 2rem;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .whatsapp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .close-whatsapp {
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .whatsapp-product {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--color-gris-medio);
+        }
+        
+        .whatsapp-product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            margin-right: 1rem;
+            border-radius: 4px;
+        }
+        
+        .whatsapp-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .whatsapp-info .product-price {
+            margin-bottom: 0;
+        }
+        
+        /* Shipping Options */
+        .shipping-options {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--color-gris-claro);
+            border-radius: 8px;
+        }
+        
+        .shipping-options h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .shipping-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border: 2px solid var(--color-gris-medio);
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .shipping-option:hover {
+            border-color: var(--color-negro);
+        }
+        
+        .shipping-option.selected {
+            border-color: var(--color-negro);
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .shipping-option:last-child {
+            margin-bottom: 0;
+        }
+        
+        .shipping-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .shipping-name {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .shipping-description {
+            font-size: 0.9rem;
+            color: var(--color-gris-oscuro);
+            margin-top: 0.3rem;
+        }
+        
+        .shipping-price {
+            font-weight: 700;
+        }
+        
+        .shipping-free {
+            color: var(--color-verde);
+        }
+        
+        .shipping-radio {
+            margin-right: 0.8rem;
+        }
+        
+        /* Customer Info Form */
+        .customer-info {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--color-gris-claro);
+            border-radius: 8px;
+        }
+        
+        .customer-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--color-gris-medio);
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 16px;
+        }
+        
+        .checkout-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .checkout-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .whatsapp-btn {
+            background-color: var(--color-verde);
+            color: white;
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+        }
+        
+        .whatsapp-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .continue-shopping {
+            background-color: var(--color-gris-medio);
+            color: var(--color-negro);
+        }
+        
+        .continue-shopping:hover {
+            background-color: var(--color-gris-oscuro);
+            color: var(--color-blanco);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            margin-bottom: 0.5rem;
+            color: var(--color-gris-medio);
+            text-decoration: none;
+            display: block;
+        }
+        
+        .footer-section a:hover {
+            color: var(--color-blanco);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            font-size: 1.5rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-gris-oscuro);
+            color: var(--color-gris-medio);
+        }
+        
+        /* Responsive */
+        @media (max-width: 968px) {
+            .product-detail {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-image {
+                height: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-title {
+                font-size: 1.8rem;
+            }
+            
+            .product-price {
+                font-size: 1.5rem;
+            }
+            
+            .whatsapp-content {
+                width: 95%;
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container {
+                flex-direction: row;
+            }
+            
+            .product-title {
+                font-size: 1.5rem;
+            }
+            
+            .product-price {
+                font-size: 1.3rem;
+            }
+            
+            .whatsapp-buy-button {
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            .thumbnail {
+                width: 60px;
+                height: 60px;
+            }
+        }
+        
+        /* Notificación */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--color-negro);
+            color: var(--color-blanco);
+            padding: 10px 20px;
+            border-radius: 4px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="catalogo.html" class="logo">
+                <img src="img/c.jpg" alt="Logo CaliValle" class="logo-img">
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="catalogo.html">Catálogo</a> > <a href="catalogo.html?category=tecnologia">Tecnología</a> > Auriculares Inalámbricos Premium - @salentoquindio
+        </div>
+        
+        <!-- Product Detail -->
+        <div class="product-detail">
+            <div class="product-gallery">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                     alt="Auriculares Inalámbricos Premium" class="main-image" id="mainImage">
+                <div class="thumbnail-container">
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Auriculares Inalámbricos Premium - Vista 1" class="thumbnail active" data-image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Auriculares Inalámbricos Premium - Vista 2" class="thumbnail" data-image="https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80">
+                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         alt="Auriculares Inalámbricos Premium - Vista 3" class="thumbnail" data-image="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80">
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h1 class="product-title" id="productTitle">Auriculares Inalámbricos Premium @salento</h1>
+                <p class="product-price">$249.900</p>
+                
+                <!-- Botón de WhatsApp -->
+                <button class="whatsapp-buy-button" id="whatsappBuyButton">
+                    <i class="fab fa-whatsapp"></i> COMPRAR POR WHATSAPP
+                </button>
+                
+                <div class="product-description">
+                    <p>Experimenta el sonido como nunca antes con nuestros auriculares inalámbricos de última generación. Con cancelación de ruido activa, podrás sumergirte completamente en tu música favorita sin distracciones del mundo exterior.</p>
+                </div>
+                
+                <div class="product-features">
+                    <h3>Características principales:</h3>
+                    <ul>
+                        <li>Cancelación de ruido activa de última generación</li>
+                        <li>Hasta 30 horas de batería con carga rápida</li>
+                        <li>Conexión Bluetooth 5.2 estable y de baja latencia</li>
+                        <li>Resistencia al agua IPX5</li>
+                        <li>Micrófono incorporado con cancelación de ruido para llamadas claras</li>
+                        <li>Controles táctiles intuitivos y asistente de voz</li>
+                        <li>Sonido Hi-Fi con graves profundos y agudos cristalinos</li>
+                    </ul>
+                </div>
+                
+                <!-- Videos de YouTube -->
+                <div class="video-container">
+                    <div class="video-title">Video demostrativo en YouTube Shorts:</div>
+                    <div class="video-wrapper shorts">
+                        <iframe src="https://www.youtube.com/embed/hL2-t5baPSg" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    
+                    <div class="video-title">Video tutorial completo:</div>
+                    <div class="video-wrapper normal">
+                        <iframe src="https://www.youtube.com/embed/kxj3ft_o-vs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Purchase Modal -->
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="whatsapp-content">
+            <div class="whatsapp-header">
+                <h2>Compar Producto</h2>
+                <button class="close-whatsapp" id="closeWhatsapp">&times;</button>
+            </div>
+            
+            <div class="whatsapp-product" id="whatsappProduct">
+                <!-- Información del producto se cargará dinámicamente -->
+            </div>
+            
+            <!-- Método de Pago -->
+            <div class="shipping-options">
+                <h3>Método de Pago</h3>
+                <div class="shipping-option selected" data-payment="contraentrega">
+                    <input type="radio" id="whatsapp-payment-cash" name="whatsapp-payment" class="shipping-radio" checked>
+                    <div class="shipping-info">
+                        <span class="shipping-name">
+                            Pago Contraentrega
+                        </span>
+                        <span class="shipping-description">Paga cuando recibas tu pedido</span>
+                    </div>
+                </div>
+                <div class="shipping-option" data-payment="anticipado">
+                    <input type="radio" id="whatsapp-payment-advance" name="whatsapp-payment" class="shipping-radio">
+                    <div class="shipping-info">
+                        <span class="shipping-name">
+                            Pago Anticipado
+                        </span>
+                        <span class="shipping-description">Tarjetas, PSE, Bancolombia, Nequi, cuotas sin intereses, Lightning Network</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Opción de Envío -->
+            <div class="shipping-options">
+                <h3>Opción de Envío</h3>
+                <div class="shipping-option selected" data-shipping="0">
+                    <input type="radio" id="whatsapp-shipping-standard" name="whatsapp-shipping" class="shipping-radio" checked>
+                    <div class="shipping-info">
+                        <span class="shipping-name">
+                            QRContraentrega Logística
+                        </span>
+                        <span class="shipping-description">Tu pedido será enviado a tu dirección de manera inmediata. Envío gratis</span>
+                    </div>
+                    <span class="shipping-price shipping-free">Gratis</span>
+                </div>
+            </div>
+            
+            <!-- Customer Information Form -->
+            <div class="customer-info">
+                <h3>Información de Envío</h3>
+                <div class="form-group">
+                    <label for="whatsappCustomerName">Nombre Completo *</label>
+                    <input type="text" id="whatsappCustomerName" placeholder="Ingresa tu nombre completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsappCustomerPhone">Teléfono *</label>
+                    <input type="tel" id="whatsappCustomerPhone" placeholder="Ingresa tu número de teléfono" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsappCustomerAddress">Dirección de Envío *</label>
+                    <input type="text" id="whatsappCustomerAddress" placeholder="Ingresa tu dirección completa" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsappCustomerCity">Ciudad *</label>
+                    <input type="text" id="whatsappCustomerCity" placeholder="Ingresa tu ciudad" required>
+                </div>
+            </div>
+            
+            <div class="checkout-buttons">
+                <button class="checkout-btn whatsapp-btn" id="sendWhatsappBtn" disabled>
+                    <i class="fab fa-whatsapp"></i> Enviar pedido por WhatsApp
+                </button>
+                <button class="checkout-btn continue-shopping" id="cancelWhatsapp">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Acerca de Nosotros</h3>
+                <p>Somos Contraentrega. La revolución en logística y comercio electrónico de Colombia. Conectamos vendedores y compradores con una red de entrega confiable y el sistema de pago contraentrega más seguro.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-phone"></i> +57 3215343562</p>
+                <p><i class="fas fa-envelope"></i> calivalle@qrcontraentrega.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Carrera 16 # 9 - 44, Cali, Colombia</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/share/14T4jNLh1Dw/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
+                    <a href="https://instagram.com/calivalle_qrcontraentrega"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/573215343562"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <a href="https://qrcontraentrega.com/afiliacion-colombia">Afiliarse</a>
+                <a href="https://qrcontraentrega.com/solicitar-envio-colombia">Logística</a>
+                <a href="https://qrcontraentrega.com/terminos-y-condiciones-colombia">Términos y Condiciones</a>
+                <a href="https://qrcontraentrega.com/calivalle-mapa">Mapa</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; Contraentrega. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Variables globales
+        let selectedShipping = 0; // Costo de envío seleccionado
+        let selectedPayment = "contraentrega"; // Método de pago seleccionado
+        
+        // Elementos del DOM
+        const whatsappModal = document.getElementById('whatsappModal');
+        const whatsappProduct = document.getElementById('whatsappProduct');
+        const closeWhatsapp = document.getElementById('closeWhatsapp');
+        const whatsappCustomerName = document.getElementById('whatsappCustomerName');
+        const whatsappCustomerPhone = document.getElementById('whatsappCustomerPhone');
+        const whatsappCustomerAddress = document.getElementById('whatsappCustomerAddress');
+        const whatsappCustomerCity = document.getElementById('whatsappCustomerCity');
+        const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
+        const cancelWhatsapp = document.getElementById('cancelWhatsapp');
+        const whatsappBuyButton = document.getElementById('whatsappBuyButton');
+        const productTitle = document.getElementById('productTitle');
+        
+        // Información del producto actual
+        const currentProduct = {
+            id: 1,
+            title: "Auriculares Inalámbricos Premium",
+            price: 249900,
+            description: "Auriculares con cancelación de ruido activa y 30h de batería",
+            image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+        };
+
+        // Función para formatear precios en formato COP
+        function formatPrice(price) {
+            return 'COP $' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Funcionalidad para cambiar imágenes al hacer clic en miniaturas
+        const thumbnails = document.querySelectorAll('.thumbnail');
+        const mainImage = document.getElementById('mainImage');
+        
+        thumbnails.forEach(thumbnail => {
+            thumbnail.addEventListener('click', () => {
+                // Remover clase active de todas las miniaturas
+                thumbnails.forEach(t => t.classList.remove('active'));
+                
+                // Agregar clase active a la miniatura clickeada
+                thumbnail.classList.add('active');
+                
+                // Cambiar la imagen principal
+                mainImage.src = thumbnail.getAttribute('data-image');
+                
+                // Actualizar la imagen del producto en el modal
+                currentProduct.image = thumbnail.getAttribute('data-image');
+            });
+        });
+
+        // Actualizar opciones de envío visualmente
+        function updateShippingOptions() {
+            document.querySelectorAll('.shipping-option').forEach(option => {
+                option.classList.remove('selected');
+                const radio = option.querySelector('.shipping-radio');
+                if (radio.checked) {
+                    option.classList.add('selected');
+                    if (option.hasAttribute('data-shipping')) {
+                        selectedShipping = parseInt(option.getAttribute('data-shipping'));
+                    }
+                    if (option.hasAttribute('data-payment')) {
+                        selectedPayment = option.getAttribute('data-payment');
+                    }
+                }
+            });
+        }
+
+        // Validar si se puede habilitar el botón de WhatsApp
+        function validateWhatsappButton() {
+            const hasName = whatsappCustomerName.value.trim() !== '';
+            const hasPhone = whatsappCustomerPhone.value.trim() !== '';
+            const hasAddress = whatsappCustomerAddress.value.trim() !== '';
+            const hasCity = whatsappCustomerCity.value.trim() !== '';
+            
+            sendWhatsappBtn.disabled = !(hasName && hasPhone && hasAddress && hasCity);
+        }
+
+        // Mostrar notificación
+        function showNotification(message) {
+            // Eliminar notificación existente si hay una
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
+        }
+
+        // Generar mensaje de WhatsApp para compra
+        function generateWhatsAppMessage() {
+            // Obtener el título actual del producto
+            const currentTitle = productTitle.textContent;
+            
+            let message = "¡Hola! Quiero comprar el siguiente producto:\n\n";
+            
+            message += `- ${currentTitle}: ${formatPrice(currentProduct.price)}\n`;
+            
+            // Añadir método de pago
+            if (selectedPayment === "contraentrega") {
+                message += `- Método de Pago: Pago Contraentrega\n`;
+            } else {
+                message += `- Método de Pago: Pago Anticipado\n`;
+            }
+            
+            // Añadir costo de envío
+            if (selectedShipping > 0) {
+                message += `- Envío: ${formatPrice(selectedShipping)}\n`;
+            } else {
+                message += `- Envío: Gratis\n`;
+            }
+            
+            const total = currentProduct.price + selectedShipping;
+            message += `\nTotal: ${formatPrice(total)}`;
+            message += `\n\nMi información de envío es:\n`;
+            message += `Nombre: ${whatsappCustomerName.value}\n`;
+            message += `Teléfono: ${whatsappCustomerPhone.value}\n`;
+            message += `Dirección: ${whatsappCustomerAddress.value}\n`;
+            message += `Ciudad: ${whatsappCustomerCity.value}`;
+            
+            return encodeURIComponent(message);
+        }
+
+        // Abrir modal para compra por WhatsApp
+        function openWhatsappPurchase() {
+            // Obtener el título actual del producto
+            const currentTitle = productTitle.textContent;
+            
+            // Actualizar el título del producto en el modal
+            document.querySelector('.whatsapp-header h2').textContent = "Compar Producto";
+            
+            // Mostrar información del producto en el modal
+            whatsappProduct.innerHTML = `
+                <div class="whatsapp-info">
+                    <h3>${currentTitle}</h3>
+                    <p class="product-price">${formatPrice(currentProduct.price)}</p>
+                </div>
+            `;
+            
+            // Limpiar formulario
+            whatsappCustomerName.value = '';
+            whatsappCustomerPhone.value = '';
+            whatsappCustomerAddress.value = '';
+            whatsappCustomerCity.value = '';
+            sendWhatsappBtn.disabled = true;
+            
+            // Resetear opciones
+            document.getElementById('whatsapp-shipping-standard').checked = true;
+            document.getElementById('whatsapp-payment-cash').checked = true;
+            selectedShipping = 0;
+            selectedPayment = "contraentrega";
+            updateShippingOptions();
+            
+            // Mostrar modal
+            whatsappModal.style.display = 'flex';
+        }
+
+        // Event Listeners para WhatsApp
+        closeWhatsapp.addEventListener('click', () => {
+            whatsappModal.style.display = 'none';
+        });
+
+        cancelWhatsapp.addEventListener('click', () => {
+            whatsappModal.style.display = 'none';
+        });
+
+        sendWhatsappBtn.addEventListener('click', () => {
+            const message = generateWhatsAppMessage();
+            window.open(`https://wa.me/573215343562?text=${message}`, '_blank');
+        });
+
+        // Botón principal de WhatsApp
+        whatsappBuyButton.addEventListener('click', () => {
+            openWhatsappPurchase();
+        });
+
+        // Event listeners para opciones de envío
+        document.querySelectorAll('.shipping-option').forEach(option => {
+            option.addEventListener('click', (e) => {
+                const radio = option.querySelector('.shipping-radio');
+                radio.checked = true;
+                updateShippingOptions();
+            });
+        });
+
+        // Validar formulario de WhatsApp cuando cambian los campos
+        whatsappCustomerName.addEventListener('input', validateWhatsappButton);
+        whatsappCustomerPhone.addEventListener('input', validateWhatsappButton);
+        whatsappCustomerAddress.addEventListener('input', validateWhatsappButton);
+        whatsappCustomerCity.addEventListener('input', validateWhatsappButton);
+
+        // Cerrar modal al hacer clic fuera de él
+        window.addEventListener('click', (e) => {
+            if (e.target === whatsappModal) {
+                whatsappModal.style.display = 'none';
+            }
+        });
+
+        // Función para actualizar el producto dinámicamente
+        function updateProduct(newTitle, newPrice, newImage) {
+            // Actualizar título
+            productTitle.textContent = newTitle;
+            document.querySelector('.breadcrumb a:last-child').textContent = newTitle;
+            
+            // Actualizar precio
+            document.querySelector('.product-price').textContent = '$' + newPrice.toLocaleString();
+            
+            // Actualizar imagen principal
+            mainImage.src = newImage;
+            
+            // Actualizar primera miniatura
+            thumbnails[0].src = newImage;
+            thumbnails[0].setAttribute('data-image', newImage);
+            
+            // Actualizar producto actual
+            currentProduct.title = newTitle;
+            currentProduct.price = newPrice;
+            currentProduct.image = newImage;
+        }
+
+        // Ejemplo de cómo cambiar el producto
+        // updateProduct("Nuevo Producto", 189900, "https://ejemplo.com/nueva-imagen.jpg");
+    </script>
+</body>
+</html>
